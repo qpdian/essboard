@@ -8,7 +8,7 @@ import { NotificationsService, SimpleNotificationsComponent, Options } from 'ang
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../auth.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -21,12 +21,6 @@ export class LoginComponent implements OnInit {
     this.credential = this.loginForm.value;
     this.service.login(this.loginForm.value);
     console.log(this.loginForm.value);
-  }
-  addHero() {
-    this.credential = new Credential();
-    this.buildForm();
-    this.active = false;
-    setTimeout(() => this.active = true, 0);
   }
   constructor(public service: AuthService, private _service: NotificationsService, private fb: FormBuilder) { }
   ngOnInit(): void {

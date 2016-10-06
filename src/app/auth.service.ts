@@ -32,4 +32,14 @@ export class AuthService {
     public get user(): any {
         return JSON.parse(window.localStorage.getItem('user'));
     }
+    public signup(user : any){
+        this._app.service('users').create({
+            email: user.email,
+            password: user.password
+        }).then( (result) => {
+            this.login(user);
+        }).catch(function (error) {
+            console.error('Error create user!', error);
+        });
+    }
 }

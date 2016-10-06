@@ -1,3 +1,23 @@
-<p>
-  signup works!
-</p>
+<div class="auth">
+  <img src="/assets/img/logos/logo-horizontal.png" alt="Essboard">
+   <md-card class="content">
+    <md-card-content>
+       <form [formGroup]="signupForm" *ngIf="active" (ngSubmit)="onSubmit()">
+        <md-input type="email" formControlName="email" class="full-width" placeholder="Correo electrónico" required dividerColor="{{ formErrors.email ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="formErrors.email" align="end">
+            <span>{{ formErrors.email  }}</span>
+          </md-hint>
+        </md-input>
+        <md-input type="password" formControlName="password" class="full-width" placeholder="Contraseña" required dividerColor="{{ formErrors.password ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="formErrors.password" align="end">
+            <span>{{ formErrors.password  }}</span>
+          </md-hint>
+        </md-input>
+        <button type="submit" [disabled]="!signupForm.valid" md-raised-button class="main">Registrate</button>   
+        <div class="more-options">
+          <span><a>Ya tienes una cuenta</a></span>
+        </div>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>

@@ -1,0 +1,13 @@
+<md-sidenav-layout>
+    <md-sidenav #start mode="side" class="small">
+        <md-nav-list>
+            <a *ngFor="let view of itemsOfMenu" [routerLink]="[view.route]" md-list-item>
+                <md-icon md-list-icon>{{view.icon}}</md-icon>
+                <span md-line>{{view.name}}</span>
+                <span md-line class="secondary">{{view.description}}</span>
+            </a>
+        </md-nav-list>
+    </md-sidenav>
+    <header [isLoggin]=true (onToggle)="start.toggle()"></header>
+        <router-outlet></router-outlet>
+</md-sidenav-layout>
