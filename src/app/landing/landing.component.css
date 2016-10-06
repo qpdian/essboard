@@ -49,7 +49,12 @@
 .menu-options button{
   background-color: transparent;
 }
-
+[md-icon-button]{
+  background-color: transparent;
+}
+[md-menu-item]{
+   background-color: white;
+}
 /* after header*/
 
 .after-header {
@@ -92,12 +97,7 @@
 .container-icons{
     margin-top: 35px;
 }
-[md-icon-button]{
-  background-color: transparent;
-}
-[md-menu-item]{
-   background-color: white;
-}
+
 
 .icons {
     display: flex;

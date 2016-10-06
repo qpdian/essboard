@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
 import { GuardService } from '../../guard.service';
 import { LayoutComponent, DeveloperComponent } from './index';
+import { ProjectListComponent, ProjectDetailComponent } from '../../modules/projects/index';
 
 export const DeveloperRoutes: Route[] = [
   {
@@ -10,7 +11,9 @@ export const DeveloperRoutes: Route[] = [
     component: LayoutComponent,
     canActivate: [GuardService],
     children: [
-      { path: '', component: DeveloperComponent }
+      { path: '', component: DeveloperComponent },
+      { path: 'projects', component: ProjectListComponent },
+      { path: 'projects/:id', component: ProjectDetailComponent },
     ]
   }];
 

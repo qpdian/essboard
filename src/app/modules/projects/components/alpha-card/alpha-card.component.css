@@ -1,0 +1,77 @@
+/* alpha-card*/
+.alpha-card md-card {
+	width: 180px;
+	height: 265px;
+	border-style: groove;
+	padding: 0;
+}
+.alpha-card md-card-content {
+	background: white;
+}
+.alpha-card md-card-title{
+	text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 19px;
+    height: 30px;
+    padding: 2% 0 2% 0;
+}
+.alpha-card .alpha-name {
+	border-style: groove;
+	border-radius: 5px;
+	text-align: center;
+	margin: 5px 30px;
+	padding: 7px;
+}
+.alpha-card .state {
+    text-align: center;
+	padding: 1px 3px 0px 3px;
+	cursor: pointer;
+}
+.alpha-card .state p{
+	margin: 0 0 5px;
+}
+.alpha-card .customer p{
+	border-style : solid;
+	border-color: #c1ecc1;
+}
+.alpha-card .solution p{
+	border-style : solid;
+	border-color: #ffff99;
+}
+.alpha-card .endeavor p{
+	border-style : solid;
+	border-color: #d4e6f0;
+}
+.alpha-card .customer p:hover{
+	border-style : solid;
+	background-color: #c1ecc1;
+}
+.alpha-card .solution p:hover{
+	border-style : solid;
+	background-color: #ffff99;
+}
+.alpha-card .endeavor p:hover{
+	border-style : solid;
+	background-color: #d4e6f0;
+}
+.solution .achieved{
+   	border-style : solid;
+	background-color: #ffff99;
+}
+.customer .achieved{
+    border-style : solid;
+	background-color: #c1ecc1;
+}
+.endeavor .achieved{
+    border-style : solid;
+	background-color: #d4e6f0;
+}
+
+.noAchieved{
+    background-color: transparent;
+}
+.selected{
+	background-color: red;
+}
+

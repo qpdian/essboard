@@ -1,0 +1,19 @@
+<div class="state-card  wrapper">
+  <div class="checkpoints">
+    <table class="table table-bordered">
+      <tr>
+        <th>¿Que debo hacer?</th>
+        <th>POR HACER</th>
+        <th>HACIENDO</th>
+        <th>HECHO</th>
+      </tr>
+      <tr *ngFor="let workItem of workItems">
+        <td>{{workItem.description}}
+        </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+      </tr>
+    </table>
+  </div>
+</div>

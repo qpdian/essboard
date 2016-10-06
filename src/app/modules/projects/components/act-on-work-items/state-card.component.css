@@ -1,0 +1,36 @@
+
+.checkpoints{
+	width: 620px;
+	text-align: center;
+}
+.checkpoints table{
+	    background-color: white;
+		border: 2px solid #a5d2b1;
+		margin:10px auto auto auto;
+		width: 98%;
+}
+.checkpoints button{
+	margin:auto;
+}
+
+ .checkpoint {
+	width: 12%;
+    display: inline-block;
+}
+ .check-name{
+	width: 88%;
+    display: inline-block;
+
+}
+.w-700{
+	width: 700px;
+}
+.c-name {
+	width:30%;
+}
+.c-description {
+	width:70%;
+}
+
+
+

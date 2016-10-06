@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="achieved">
+        <div class="wrapper">
+            <state-card-view *ngFor="let state of dimension.statesFulfilled" [state]="state"   [classCSS]="'small'" (click)="select(state)" [className]="isPosibleToSelect(state)? 'active' : 'disabled' "></state-card-view>
+        </div>
+    </div>
+    <div [ngClass] = "{'separator':true,'container-selected':isForSelected}">
+        <p *ngIf="!selected" >Hacer click en un estado y se visualizara aqui</p>
+        <state-card-view  *ngIf="selected" [state]="selected" [classCSS]="'small'" ></state-card-view>
+    </div>
+    <div class="no-achieved">
+        <div class="wrapper">   
+            <state-card-view *ngFor="let state of dimension.statesUnfulfilled" [state]="state"  [classCSS]="'small'" (click)="select(state)" [className]="isPosibleToSelect(state) ? 'active' : 'disabled' " ></state-card-view>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="state-card  wrapper">
+  <state-card-view *ngIf="state" [state]="state" [classCSS]="'normal'"></state-card-view>
+  <div class="checkpoints">
+    <button md-raised-button (click)="add()">
+            <md-icon class="md-24"  >add</md-icon>
+    </button>
+    <table class="table table-bordered">
+      <tr>
+        <th>¿Que debo hacer?</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let workItem of workItems">
+        <td><input [(ngModel)]="workItem.description" (keyup.enter)="save(workItem)">
+        </td>
+        <td> <button md-icon-button>
+            <md-icon class="md-24" (click)="delete(workItem)" >delete_forever</md-icon>
+        </button></td>
+      </tr>
+    </table>
+    <!--
+       <table [hidden]="hiddenTable" class="table table-bordered">
+      <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+      </tr>
+      <tr *ngFor="let checkpoint of selectedCheckpoints">
+        <td class="c-name">{{checkpoint.info.name}}</td>
+        <td clas="c-description">{{checkpoint.info.description}}</td>
+      </tr>
+    </table>-->
+    <button md-raised-button (click)="send()">Enviar</button>
+  </div>
+</div>

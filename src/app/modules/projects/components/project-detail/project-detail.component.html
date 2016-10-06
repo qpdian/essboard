@@ -1,0 +1,51 @@
+<div *ngIf="project">
+    <md-sidenav-layout>
+        <md-sidenav #start mode="side" (open)="true">
+            <div class="menu-vertical">
+                <button md-icon-button #mybutton  class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
+                <div class="title-menu">Proyecto</div>
+                <div class="option selectable"  md-tooltip="Estado general" (click)="showNetStates()">
+                    <p>
+                        <md-icon class="md-24">visibility</md-icon>
+                    </p>
+                </div>
+                <div class="title-menu">Sesiones</div>
+                <button md-icon-button class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
+                <div class="option selectable" md-tooltip="Sesion: {{session.num}}"   *ngFor="let session of project.sessions" (click)="showSessionDetail(session)">
+                    <p>
+                        <md-icon class="md-24">{{session.getIcon()}}</md-icon>
+                    </p>
+                </div>
+            </div>
+        </md-sidenav>
+        <md-toolbar class="project-detail">
+            <button md-icon-button md-tooltip="Ver las opciones" (click)="start.toggle()">
+                  <md-icon class="md-24">chevron_right</md-icon>
+            </button>
+            <span> Proyecto:</span>
+            <input md-tooltip="Edita el nomber de tu proyecto" [value]="project.name" #name (keyup.enter)="editName(name.value)" (blur)="edit(name.value,description.value);">
+            <span>Descripcion:</span>
+            <input [value]="project.description" #description (keyup.enter)="editDescription(description.value)" (blur)="edit(name.value,description.value);">
+            <span> {{ project.createdAt | date:'d/M/y' }}  </span>
+            <span class="fill-remaining"></span>
+            <button md-icon-button>
+            <md-icon class="md-24"  md-tooltip="Elimina este proyecto"  (click)="delete()" >delete_forever</md-icon>
+        </button>
+            <button md-icon-button (click)="join()">
+            <md-icon class="md-24">update</md-icon>
+        </button>
+        </md-toolbar>
+        <div class="content">
+            <div>
+                <session *ngIf="selectedSession" [session]="selectedSession" [hidden]="hiddenSession" (sessionAsCurrent)="saveAsCurrent($event)">
+                </session>
+                <div [hidden]="hiddenNetStates">
+                    <div class="content">
+                        <h2 class="title">Tu proyecto holisticamente</h2>
+                        <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-sidenav-layout>
+</div>

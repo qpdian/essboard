@@ -1,0 +1,101 @@
+
+
+.main{
+    background-color: #7cb987;
+    color: white;
+    margin:auto;
+}
+.project-detail span{
+    margin-right: 10px;
+}
+.message-create {
+    margin-left: 10px;
+    border-bottom-style: solid;
+    border-color: #ddd;
+}
+.dimension-name{
+    border: 2px solid;
+    border-color: #87ce84;
+    margin: 5px;
+    padding: 3px;
+    width: 140px;
+    background-color: white;
+    color: #403e3e;
+    height: 50px;
+}
+.dimension-name md-card-title{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+
+
+
+
+/*arrow*/
+
+button {
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline:0;
+}
+
+svg {
+  padding: 5px;
+}
+
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -45px;
+  margin-left: -35px;
+  width: 70px;
+  height: 90px;
+}
+
+.left {
+  left: 42%;
+}
+
+.right {
+  left: 58%;
+}
+
+.left:hover polyline,
+.left:focus polyline {
+  stroke-width: 3;
+}
+
+.left:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+.right:hover polyline,
+.right:focus polyline {
+  stroke-width: 3;
+}
+
+.right:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+polyline {
+  transition: all 250ms ease-in-out;
+}
+/* size ofr section : in a wrapper */ 
+alpha-card{
+    width: 200px;
+    background-color: #d9d9e1;
+}
+state-card{
+    width: 850px;
+    margin: 10px 5px 5px 5px;
+}

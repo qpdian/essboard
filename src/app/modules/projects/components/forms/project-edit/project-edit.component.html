@@ -1,0 +1,9 @@
+<md-toolbar class="project-detail">
+  <form *ngIf="active" (ngSubmit)="onSubmit()" #projectEdit="ngForm">
+    <md-input placeholder="Nombre" required [(ngModel)]="model.name" name="name" #name="ngModel">
+    </md-input>
+    <md-input placeholder="Descripcion" required [(ngModel)]="model.description" name="description" #description="ngModel">
+    </md-input>
+    <button type="submit" [disabled]="!projectEdit.form.valid" md-raised-button class="md-raised">Guardar</button>
+  </form>
+</md-toolbar>

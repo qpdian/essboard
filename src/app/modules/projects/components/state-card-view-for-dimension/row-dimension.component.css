@@ -1,0 +1,8 @@
+.separator { 
+    width: 350px;
+    height: auto;
+    margin: 0px 5px 20px 5px;
+}
+.container-selected{
+    border: dashed;
+}

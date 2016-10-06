@@ -8,6 +8,8 @@
             </a>
         </md-nav-list>
     </md-sidenav>
-    <header [isLoggin]=true (onToggle)="start.toggle()"></header>
+    <div class="sidenav-content">
+        <header [isLoggin]=true (onToggle)="start.toggle()"></header>
         <router-outlet></router-outlet>
+    </div>
 </md-sidenav-layout>

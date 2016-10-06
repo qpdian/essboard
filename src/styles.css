@@ -5,6 +5,23 @@
 .full-width {
     width: 100%;
 }
+.selectable{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.selectable:hover {
+    border-bottom: solid #82e1c2;
+    opacity: 1;
+    box-shadow: 0px 0px 1px #aabe8e;
+}
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+      margin-bottom: 20px;
+}
+.item-wrapper{
+  margin : 10px 5px 5px 5px;
+}
 
 /** Material 2 : The overlay-container is an invisible element which contains all individual overlays. */
 .md-overlay-container {
@@ -50,4 +67,14 @@ md-input.ng-invalid {
 }
 md-input.ng-pristine {
     color: #91b270;
+}
+.md-sidenav-content{
+  overflow:initial;
+}
+.content-app{
+    min-height : 320px;
+}
+/*background*/
+.white{
+    background: white;
 }

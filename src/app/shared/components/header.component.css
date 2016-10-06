@@ -47,3 +47,14 @@
 .menu-options button{
   background-color: transparent;
 }
+[md-icon-button]{
+  background-color: transparent;
+}
+[md-menu-item]{
+   background-color: white;
+}
+
+.sidenav {
+    background-color: transparent;
+    border:none;
+}

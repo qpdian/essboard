@@ -1,0 +1,22 @@
+<div class="state-card  wrapper">
+  <state-card-view  *ngIf="state" [state]="state" [classCSS]="'normal'"></state-card-view>
+  <div  class="checkpoints">
+    <button md-raised-button (click)="showTableCheckpoints()">Selecciona los puntos de chequeo</button>
+    <table [hidden]="hiddenTable" class="table table-bordered">
+      <tr>
+        <th>¿Lo realizaste?</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+      </tr>
+      <tr *ngFor="let checkpoint of selectedCheckpoints">
+        <td>
+          <md-slide-toggle color="primary" [(ngModel)]="checkpoint.isAchaived" >
+          </md-slide-toggle>
+        </td>
+        <td class="c-name">{{checkpoint.info.name}}</td>
+        <td clas="c-description">{{checkpoint.info.description}}</td>
+      </tr>
+    </table>
+    <button md-raised-button (click)="save()">Guarde</button>
+  </div>
+</div>
