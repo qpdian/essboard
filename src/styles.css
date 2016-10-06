@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+.fill-remaining {
+     flex: 1 1 auto;
+}
+.full-width {
+    width: 100%;
+}
+
+/** Material 2 : The overlay-container is an invisible element which contains all individual overlays. */
+.md-overlay-container {
+  position: absolute;
+  pointer-events: none;
+  top: 40px;
+  left: 0;
+  height: 100%;
+  width: 100%; 
+}
+/** A single overlay pane. */
+.md-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000; 
+}
+button{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+}
+* {
+    font-family: Roboto, sans-serif;
+}
+
+md-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+md-hint {
+    position: absolute;
+    font-size: 75%;
+    bottom: -0.5em;
+}
+
+/*TODO remove this in an angular 2 material future release*/
+md-input.ng-invalid {
+    color: #f44336;
+}
+md-input.ng-pristine {
+    color: #91b270;
+}
