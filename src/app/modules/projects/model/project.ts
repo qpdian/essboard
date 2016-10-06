@@ -6,11 +6,11 @@ export class Project {
   public currentKernel: Kernel;
   public createdAt: Date;
   public sessions: Session[];
-  public id: number;
+  public id: string;
   public name: string;
   public description: string;
   public percent: number;
-  constructor(id: number, name: string, description: string, createdAt: Date) {
+  constructor(id: string, name: string, description: string, createdAt: Date) {
     this.name = name;
     this.description = description;
     this.id = id;

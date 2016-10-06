@@ -32,7 +32,8 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       this.project = item;
     });
     this.sub = this.route.params.subscribe(params => {
-      let id = +this.route.snapshot.params['id'];
+      let id = this.route.snapshot.params['id'];
+      console.log("idd",id);
       this.service.getProject(id);
     });
   }

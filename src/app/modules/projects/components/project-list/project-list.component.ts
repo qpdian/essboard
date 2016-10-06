@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs';
 export class ProjectListComponent implements OnInit {
     title = 'Mis proyectos';
     hideForm: boolean = true;
-    projects : Project[];
+    _isEmpty : boolean;
+    projects : Project[] = [];
     private subscription: Subscription;
     constructor(private router: Router, private projectService: ProjectService
     ) { }
@@ -30,6 +31,7 @@ export class ProjectListComponent implements OnInit {
     }
 
     isEmpty(){
+        console.log(this.projects.length );
         return this.projects.length == 0; 
     }
     onSelect(project: Project): void {

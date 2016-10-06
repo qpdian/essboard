@@ -7,7 +7,7 @@ import { ProjectService } from '../../../services/project.service';
     styleUrls: ['form.component.css']
 })
 export class ProjectFormComponent {
-    model = new Project(1,'','',new Date());
+    model = new Project("",'','',new Date());
     submitted = false;
     active = true;
     constructor(private projectService: ProjectService) { }
@@ -18,7 +18,7 @@ export class ProjectFormComponent {
         this.newProject();
     }
     newProject() {
-        this.model = new Project(1,'','',new Date());
+        this.model = new Project("",'','',new Date());
         this.active = false;
         setTimeout(() => this.active = true, 0);
     }

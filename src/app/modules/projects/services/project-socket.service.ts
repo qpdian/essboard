@@ -45,14 +45,13 @@ export class ProjectSocketService extends ProjectService {
             this.service.find({
             }, (err, items: any) => {
                 if (err) return console.error(err);
-                this.projects = items.data.map((x) => new Project(x.id, x.name, x.description, x.createdAt));
+                this.projects = items.data.map((x) => new Project(x._id, x.name, x.description, x.createdAt));
                 this.projectsObserver.next(this.projects);
             })
         });
 
     }
     add(project: Project) {
-        console.log('saving');
         this._app.authenticate().then(data => {
             this.service.create({ name: project.name, description: project.description })
                 .then((result) => {
@@ -63,7 +62,7 @@ export class ProjectSocketService extends ProjectService {
                 })
         });
     }
-    getProject(id: number | string) {
+    getProject(id: string) {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
@@ -78,7 +77,7 @@ export class ProjectSocketService extends ProjectService {
     }
     delete() {
         const id = this.project.id;
-        this.projects.splice(id, 1);
+        this.projects.splice(this.getIndex(id), 1);
         this.projectsObserver.next(this.projects);
         this.service.remove(id)
             .then((result) => {
@@ -99,7 +98,7 @@ export class ProjectSocketService extends ProjectService {
                 console.log(error, "Error al editar  tu proyecto");
             });
     }
-    private getIndex(id: number): number {
+    private getIndex(id: string): number {
         let foundIndex = -1;
         for (let i = 0; i < this.projects.length; i++) {
             if (this.projects[i].id === id) {
