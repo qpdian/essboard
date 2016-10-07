@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { Project, Session,Kernel } from '../../model/project';
 import { Dimension, State  } from '../../model/project-kernel';
 import { ProjectService } from '../../services/project.service';
+import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
@@ -25,7 +26,8 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ProjectService) {
+    private service: ProjectService,
+    private sessionService : SessionService ) {
   }
   ngOnInit() {
     this.subscription = this.service.currentProject.subscribe((item: Project) => {
@@ -33,7 +35,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     });
     this.sub = this.route.params.subscribe(params => {
       let id = this.route.snapshot.params['id'];
-      console.log("idd",id);
       this.service.getProject(id);
     });
   }
@@ -43,7 +44,9 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   addSession() {
     if( !this.project.getLastSession().isComplete){
-      this.service.addSession();
+      //this.service.addSession();
+      console.log('project id',this.project.id);
+      this.sessionService.add(this.project.id);
     }
     alert('Aun no has concluido con la sesion anterior');
   }

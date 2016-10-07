@@ -23,8 +23,7 @@ export class SessionSocketService extends SessionService {
     constructor(public socketService: SocketService, private router: Router) {
         super();
         this._app = this.socketService.init();
-        this.service = this._app.service('projects');
-        //listening events CRUD
+        this.service = this._app.service('sessions');
         this.service.on('created', (newItem) => this.onCreated(newItem));
         this.service.on('updated', (updatedItem) => this.onUpdated(updatedItem));
         this.service.on('removed', (removedItem) => this.onRemoved(removedItem));
@@ -41,16 +40,23 @@ export class SessionSocketService extends SessionService {
             this.service.find({
             }, (err, items: any) => {
                 if (err) return console.error(err);
-                this.sessions = items.data.map((x) => new Session(x.id, x.name, x.description, x.createdAt));
+                this.sessions = items.data.map((x) => new Session(x.nroOrder, x.createdAt));
                 this.sessionsObserver.next(this.sessions);
             })
         });
 
     }
-    add(session: Session) {
-        console.log('saving');
+    add(idProject) {
+        console.log('saving',idProject);
         this._app.authenticate().then(data => {
-            this.service.create({ name: session.name, description: session.description })
+            this.service.create({
+                _project: idProject,
+                nroOrder: 1,
+                isComplete: false,
+                isTouched: false,
+                percent: 0,
+                dimensions: []
+            })
                 .then((result) => {
                 })
                 .catch(function (error) {
@@ -63,7 +69,7 @@ export class SessionSocketService extends SessionService {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
-                let p = new Session(item.id, item.name, item.description, item.createdAt);
+                let p = new Session(item.nroOrder,item.cretedAt);
                 //FIX 
                 //p.addSession(new Session(1, new Date()));
                 this.session = p;
@@ -87,12 +93,12 @@ export class SessionSocketService extends SessionService {
     update(session: Session) {
         const id = this.session.id;
         this.sessionObserver.next(this.session);
-        this.service.patch(id,{name:session.name,description:session.description,percent:session.percent})
+        this.service.patch(id, { percent: session.percent })
             .then((result) => {
                 alert('Proyecto editado');
             })
             .catch(function (error) {
-                console.log(error,"Error al editar  tu proyecto");
+                console.log(error, "Error al editar  tu proyecto");
             });
     }
     private getIndex(id: number): number {
@@ -108,14 +114,12 @@ export class SessionSocketService extends SessionService {
         console.log('Someone created a message', newItem);
         //TODO: add notifications 
         alert('Nuevo proyecto');
-        this.sessions.unshift(new Session(newItem.id, newItem.name, newItem.description, newItem.createdAt));
-        this.sessionsObserver.next(this.sessions);
+       // this.sessions.unshift(new Session(newItem.nroOrder,newItem.cretedAt));
+       // this.sessionsObserver.next(this.sessions);
     }
 
     private onUpdated(updatedItem: any) {
         const index = this.getIndex(updatedItem.id);
-        this.sessions[index].name = updatedItem.name;
-        this.sessions[index].description = updatedItem.description;
         this.sessions[index].percent = updatedItem.percent;
         this.sessionsObserver.next(this.sessions);
         this.sessionObserver.next(this.sessions[index]);
@@ -131,6 +135,6 @@ export class SessionSocketService extends SessionService {
     addAllDimensions(project: Session) {
 
     }
-  
+
 
 }

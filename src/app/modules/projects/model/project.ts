@@ -34,6 +34,7 @@ export class Project {
 }
 
 export class Session {
+  public id;
   public kernel: Kernel;
   public date: Date;
   public percent : number;

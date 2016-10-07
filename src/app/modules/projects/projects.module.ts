@@ -26,7 +26,8 @@ import { RowDimensionComponent } from './components/state-card-view-for-dimensio
 
 import { ProjectService } from './services/project.service';
 import { ProjectSocketService } from './services/project-socket.service';
-
+import { SessionService } from './services/session.service';
+import { SessionSocketService } from './services/session-socket.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -41,7 +42,8 @@ import { ProjectSocketService } from './services/project-socket.service';
     StateCardView,StateBoardComponent,RowDimensionComponent
   ],
   providers: [
-    { provide: ProjectService, useClass: ProjectSocketService } 
+    { provide: ProjectService, useClass: ProjectSocketService } ,
+    { provide: SessionService, useClass: SessionSocketService }
   ],
   exports: [ProjectListComponent,ProjectDetailComponent,AlphaConectionsComponent]
 })

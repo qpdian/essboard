@@ -66,7 +66,7 @@ export class ProjectSocketService extends ProjectService {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
-                let p = new Project(item.id, item.name, item.description, item.createdAt);
+                let p = new Project(item._id, item.name, item.description, item.createdAt);
                 //FIX 
                 p.addSession(new Session(1, new Date()));
                 this.project = p;
