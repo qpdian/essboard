@@ -1,33 +1,39 @@
 
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'search-user',
     templateUrl: 'search.component.html',
-    styleUrls: ['searchs.component.css']
+    styleUrls: ['search.component.css']
 })
 export class SearchComponent implements OnInit {
-    email : string = "";
-    users : User[];
+
+    @Output() onSelect = new EventEmitter<string>();
+    email: string = "";
+    users: User[];
 
     private subscription: Subscription;
-    
-    constructor( private userService: UserService
+
+    constructor(private userService: UserService
     ) { }
-    
+
     ngOnInit(): void {
         this.subscription = this.userService.usersOb.subscribe((users: User[]) => {
             this.users = users;
         });
-       this.userService.search(this.email);
+        this.userService.search(this.email);
     }
-
-    
-   search(){
-       this.userService.search(this.email);
-       alert(this.users);
-   }
+    onKey(event: any) {
+        this.userService.search(this.email);
+    }
+    search() {
+        this.userService.search(this.email);
+        alert(this.users);
+    }
+    select(user){
+        this.onSelect.emit(user.email);
+    }
 }

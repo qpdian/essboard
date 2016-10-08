@@ -30,10 +30,12 @@ import { ProjectService } from './services/project.service';
 import { ProjectSocketService } from './services/project-socket.service';
 import { SessionService } from './services/session.service';
 import { SessionSocketService } from './services/session-socket.service';
+import { UsersModule } from '../users/index.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    UsersModule,
     MaterialModule,DragulaModule
   ],
   declarations: [

@@ -59,7 +59,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   //add confirmation esperar modal
   delete() {
-    this.service.delete();
+   // this.service.delete();
   }
   edit(name: string, description: string) {
     if (description && name) {

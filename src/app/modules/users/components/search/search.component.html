@@ -1,9 +1,14 @@
 <md-card>
     <md-card-title>Busca tu usuario</md-card-title>
     <md-card-content>
-        <md-input [(ngModel)]="email" placeholder="Aqui escribe el correo" value="value"></md-input>
+        <md-input [(ngModel)]="email" (keyup)="onKey($event)" placeholder="Aqui escribe el correo" value="value"></md-input>
         <button class="main" (click)="search()">
           Buscar
      </button>
+            <md-list>
+                <md-list-item *ngFor="let user of users" (click)="select(user)">
+                    {{user.email}}
+                </md-list-item>
+            </md-list>
     </md-card-content>
 </md-card>

@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
-import { md5 } from '../../../../shared/models/md5';
+//import { md5 } from '../../../../shared/models/md5';
 
 @Component({
   selector: 'my-user-detail',
@@ -44,10 +44,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     this.service.delete(this.user.id);
   }
   viewIcon(){
-      return md5('ffffff') ;
+     // return md5('ffffff') ;
   }
    onKey(event:any) {
-    this.hash = md5(event.target.value);
+    //this.hash = md5(event.target.value);
     //this.hash= event.target.value;
   }
 

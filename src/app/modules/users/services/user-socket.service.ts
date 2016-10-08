@@ -8,7 +8,6 @@ import { SocketService } from '../../../shared/services/socket-io';
 @Injectable()
 export class UserSocketService extends UserService {
 
-
     usersObserver: any;
     userObserver: any;
     userOb: Observable<any>;

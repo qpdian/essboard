@@ -2,6 +2,7 @@
   <md-card>
     <md-card-title>Comparte tu proyecto a tus amigos</md-card-title>
     <md-card-content>
+      <search-user></search-user>
       <md-input [(ngModel)]="invitedsEmail" placeholder="Aqui escribe el correo" value="value"></md-input>
       <button  class="main" (click)="send()">
           Invitar
