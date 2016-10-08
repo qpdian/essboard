@@ -1,7 +1,7 @@
 
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,16 +24,20 @@ export class SearchComponent implements OnInit {
         this.subscription = this.userService.usersOb.subscribe((users: User[]) => {
             this.users = users;
         });
-        this.userService.search(this.email);
+        //this.userService.search(this.email);
     }
     onKey(event: any) {
-        this.userService.search(this.email);
+        if (this.email != "") {
+            this.userService.search(this.email);
+        }
     }
     search() {
-        this.userService.search(this.email);
-        alert(this.users);
+        if (this.email != "") {
+            alert('f');
+            this.userService.search(this.email);
+        }
     }
-    select(user){
+    select(user) {
         this.onSelect.emit(user.email);
     }
 }
