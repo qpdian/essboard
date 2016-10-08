@@ -3,8 +3,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { Project, Session,Kernel } from '../../model/project';
-import { Dimension, State  } from '../../model/project-kernel';
+import { Project, Session, Kernel } from '../../model/project';
+import { Dimension, State } from '../../model/project-kernel';
 import { ProjectService } from '../../services/project.service';
 import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -17,6 +17,7 @@ import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/k
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
   project: Project;
+  showShare: boolean = false;
   selectedSession: Session;
   hiddenNetStates = false;
   hiddenSession = true;
@@ -27,7 +28,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private service: ProjectService,
-    private sessionService : SessionService ) {
+   /* private sessionService : SessionService*/) {
   }
   ngOnInit() {
     this.subscription = this.service.currentProject.subscribe((item: Project) => {
@@ -43,12 +44,15 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   }
 
   addSession() {
-    if( !this.project.getLastSession().isComplete){
-      //this.service.addSession();
-      console.log('project id',this.project.id);
-      this.sessionService.add(this.project.id);
+    if (!this.project.canCreateNewSession()) {
+      // this.sessionService.add(this.project);
     }
-    alert('Aun no has concluido con la sesion anterior');
+  }
+  share() {
+    this.showShare = true;
+  }
+  closeSharedForm(hide){
+    this.showShare = hide;
   }
 
 
@@ -75,10 +79,10 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.hiddenSession = false;
     this.selectedSession = session;
   }
-  saveAsCurrent(session:Session){
+  saveAsCurrent(session: Session) {
     this.project.currentKernel = session.kernel;
   }
-  join(){
+  join() {
     this.service.join();
   }
 

@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class ProjectListComponent implements OnInit {
     title = 'Mis proyectos';
     hideForm: boolean = true;
+    hideFormShare :boolean = true;
     _isEmpty : boolean;
     projects : Project[] = [];
     private subscription: Subscription;
@@ -23,22 +24,9 @@ export class ProjectListComponent implements OnInit {
             this.projects = items;
            // this.ref.markForCheck();
         });
-      /*  this.projectService.getProjects().subscribe((items: Project[]) => {
-            this.projects = items;
-        });*/
-
         this.getProjects();
     }
-
-    isEmpty(){
-        console.log(this.projects.length );
-        return this.projects.length == 0; 
-    }
-    onSelect(project: Project): void {
-        this.router.navigate(['/user/projects', project.id]);
-    }
     getProjects(): void {
-        // this.projectService.getProjects().then(projects => this.projects = projects);
         this.projectService.getProjects();
     }
     showForm(): void {

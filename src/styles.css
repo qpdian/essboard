@@ -78,3 +78,13 @@ md-input.ng-pristine {
 .white{
     background: white;
 }
+
+/*icons*/
+[md-icon-button]{
+  background-color: transparent;
+}
+/* buttons*/
+.main{
+    background-color: #7cb987;
+    color: white;
+}

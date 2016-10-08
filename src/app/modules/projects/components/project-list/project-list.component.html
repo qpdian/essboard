@@ -19,22 +19,10 @@
         </div>
         <div *ngIf="!(projects.length == 0)">
             <div class="wrapper">
-                <div class="selectable project" *ngFor="let project of projects" (click)="onSelect(project)">
-                    <md-card>
-                        <md-card-title>{{project.name}} </md-card-title>
-                        <md-card-content>
-                            <md-progress-bar mode="determinate" value={{project.percent}}></md-progress-bar>
-                        </md-card-content>
-                        <md-card-actions>
-                            <button md-button>Comparte</button>
-                        </md-card-actions>
-                    </md-card>
+                <div class="selectable project" *ngFor="let project of projects">
+                    <project-card [project]="project"></project-card>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 </div>

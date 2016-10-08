@@ -13,10 +13,8 @@ export class ProjectSocketService extends ProjectService {
     items: Observable<any>;
     projectsObserver: any;
     projectObserver: any;
-
     project: Project;
     projects: Project[];
-
     _app: any;
     service: any;
     otherService: any;
@@ -25,17 +23,11 @@ export class ProjectSocketService extends ProjectService {
         super();
         this._app = this.socketService.init();
         this.service = this._app.service('projects');
-        this.otherService = this._app.service('IsLogin');
-        //listening events CRUD
         this.service.on('created', (newItem) => this.onCreated(newItem));
         this.service.on('updated', (updatedItem) => this.onUpdated(updatedItem));
         this.service.on('removed', (removedItem) => this.onRemoved(removedItem));
-
-        this.otherService.on('created', (newItem) => this.onOtherCreated(newItem));
-
         this.items = new Observable(observer => this.projectsObserver = observer).share();
         this.currentProject = new Observable(observer => this.projectObserver = observer).share();
-
         this.project = null;
         this.projects = [];
     }
@@ -63,14 +55,17 @@ export class ProjectSocketService extends ProjectService {
         });
     }
     getProject(id: string) {
-        this.service.get(id,
+        this.service.get(id,{},
             (err, item: any) => {
                 if (err) return console.error(err);
                 let p = new Project(item._id, item.name, item.description, item.createdAt);
-                //FIX 
-                p.addSession(new Session(1, new Date()));
+                let order = item.sessions.length;
+                for(let session of item.sessions){
+                    p.addSession(new Session(session._id,order,session.createdAt));
+                    console.log(session);
+                    order--;
+                }
                 this.project = p;
-                //
                 this.projectObserver.next(this.project);
                 console.log("item of server ", item);
             });
@@ -108,19 +103,12 @@ export class ProjectSocketService extends ProjectService {
         return foundIndex;
     }
     private onCreated(newItem: any) {
-        console.log('Someone created a message', newItem);
-        //TODO: add notifications 
-        alert('Nuevo proyecto');
-        this.projects.unshift(new Project(newItem.id, newItem.name, newItem.description, newItem.createdAt));
+        console.log('Someone created a project', newItem);
+        this.projects.unshift(new Project(newItem._id, newItem.name, newItem.description, newItem.createdAt));
         this.projectsObserver.next(this.projects);
     }
-    private onOtherCreated(newItem: any) {
-
-        console.log('creadto user');
-
-    }
-
     private onUpdated(updatedItem: any) {
+        console.log('edi');
         const index = this.getIndex(updatedItem.id);
         this.projects[index].name = updatedItem.name;
         this.projects[index].description = updatedItem.description;
@@ -130,7 +118,7 @@ export class ProjectSocketService extends ProjectService {
     }
 
     private onRemoved(removedItem) {
-        // const index = this.getIndex(removedItem.id);
+        const index = this.getIndex(removedItem.id);
 
         //this.dataStore.checks.splice(index, 1);
 
@@ -141,7 +129,7 @@ export class ProjectSocketService extends ProjectService {
     }
     addSession() {
         let num = this.project.sessions.length + 1;
-        this.project.addSession(new Session(num, new Date()));
+       // this.project.addSession(new Session(num, new Date()));
         let sessionService = this._app.service('sessions');
         sessionService.create({
             project: 1,
@@ -160,17 +148,8 @@ export class ProjectSocketService extends ProjectService {
     }
     join() {
 
-        console.log('join ', this._app.get('user'));
-        /*
-        this._app.authenticate().then(data => {
-            this.otherService.create({ })
-                .then((result) => {
-                })
-                .catch(function (error) {
-                   console.log('Error saving!', error);
-                   // alert("Error al crear tu proyecto");
-                })
-        });*/
+    
+       
     }
 
 }

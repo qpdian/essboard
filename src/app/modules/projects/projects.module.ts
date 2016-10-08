@@ -6,8 +6,10 @@ import { DragulaModule,DragulaService } from 'ng2-dragula/ng2-dragula';
 
 import { ProjectListComponent }    from './components/project-list/project-list.component';
 import { ProjectDetailComponent }  from './components/project-detail/project-detail.component';
+import { ProjectCardComponent }  from './components/project-list/project-card/project-card.component';
 /* forms*/
 import { ProjectFormComponent }  from './components/forms/project-form/project-form.component';
+import { SharedFormComponent }  from './components/forms/shared-form/shared-form.component';
 /*views */
 import { ProjectViewHolistic } from './components/views-project-kernel/project-view-holistic/project-view-holistic.component';
 import { AlphaConectionsComponent } from './components/views-project-kernel/alpha-conections/alpha-conections.component';
@@ -36,8 +38,11 @@ import { SessionSocketService } from './services/session-socket.service';
   ],
   declarations: [
     ProjectListComponent,
+    ProjectCardComponent,
     ProjectDetailComponent,
-    ProjectFormComponent,SessionComponent,ProjectViewHolistic,
+    ProjectFormComponent,
+    SharedFormComponent,
+    SessionComponent,ProjectViewHolistic,
     StateCard,AlphaCard,AlphaConectionsComponent,HowReachGoals,ActOnWorkItems,
     StateCardView,StateBoardComponent,RowDimensionComponent
   ],

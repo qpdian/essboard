@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Session } from '../model/project';
+import { Session,Project } from '../model/project';
 import { Observable } from 'rxjs';
 import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
 import { Dimension } from '../model/project-kernel';
@@ -13,10 +13,8 @@ export class SessionSocketService extends SessionService {
     items: Observable<any>;
     sessionsObserver: any;
     sessionObserver: any;
-
     session: Session;
     sessions: Session[];
-
     _app: any;
     service: any;
 
@@ -38,24 +36,24 @@ export class SessionSocketService extends SessionService {
     getSessions() {
         this._app.authenticate().then(data => {
             this.service.find({
+                  
             }, (err, items: any) => {
                 if (err) return console.error(err);
-                this.sessions = items.data.map((x) => new Session(x.nroOrder, x.createdAt));
+               // this.sessions = items.data.map((x) => new Session(x.nroOrder, x.createdAt));
                 this.sessionsObserver.next(this.sessions);
             })
         });
 
     }
-    add(idProject) {
-        console.log('saving',idProject);
+    add(project:Project) {
         this._app.authenticate().then(data => {
+            console.log(project);
+            const backId = project.getLastSessionId();
+            console.log(backId);
             this.service.create({
-                _project: idProject,
-                nroOrder: 1,
-                isComplete: false,
-                isTouched: false,
-                percent: 0,
-                dimensions: []
+                _project: project.id,
+                idLastSession : backId,
+                nroOrder: project.sessions.length + 1,
             })
                 .then((result) => {
                 })
@@ -69,10 +67,10 @@ export class SessionSocketService extends SessionService {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
-                let p = new Session(item.nroOrder,item.cretedAt);
+                //let p = new Session(item.nroOrder,item.cretedAt);
                 //FIX 
                 //p.addSession(new Session(1, new Date()));
-                this.session = p;
+                //this.session = p;
                 //
                 this.sessionObserver.next(this.session);
                 console.log("item of server ", item);
@@ -80,7 +78,7 @@ export class SessionSocketService extends SessionService {
     }
     delete() {
         const id = this.session.id;
-        this.sessions.splice(id, 1);
+       // this.sessions.splice(id, 1);
         this.sessionsObserver.next(this.sessions);
         this.service.remove(id)
             .then((result) => {
@@ -101,7 +99,7 @@ export class SessionSocketService extends SessionService {
                 console.log(error, "Error al editar  tu proyecto");
             });
     }
-    private getIndex(id: number): number {
+    private getIndex(id: string): number {
         let foundIndex = -1;
         for (let i = 0; i < this.sessions.length; i++) {
             if (this.sessions[i].id === id) {

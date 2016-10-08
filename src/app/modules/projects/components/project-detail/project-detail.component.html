@@ -2,16 +2,16 @@
     <md-sidenav-layout>
         <md-sidenav #start mode="side" (open)="true">
             <div class="menu-vertical">
-                <button md-icon-button #mybutton  class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
+                <button md-icon-button #mybutton class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
                 <div class="title-menu">Proyecto</div>
-                <div class="option selectable"  md-tooltip="Estado general" (click)="showNetStates()">
+                <div class="option selectable" md-tooltip="Estado general" (click)="showNetStates()">
                     <p>
                         <md-icon class="md-24">visibility</md-icon>
                     </p>
                 </div>
                 <div class="title-menu">Sesiones</div>
                 <button md-icon-button class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
-                <div class="option selectable" md-tooltip="Sesion: {{session.num}}"   *ngFor="let session of project.sessions" (click)="showSessionDetail(session)">
+                <div class="option selectable" md-tooltip="Sesion: {{session.num}}" *ngFor="let session of project.sessions" (click)="showSessionDetail(session)">
                     <p>
                         <md-icon class="md-24">{{session.getIcon()}}</md-icon>
                     </p>
@@ -26,17 +26,14 @@
             <input md-tooltip="Edita el nomber de tu proyecto" [value]="project.name" #name (keyup.enter)="editName(name.value)" (blur)="edit(name.value,description.value);">
             <span>Descripcion:</span>
             <input [value]="project.description" #description (keyup.enter)="editDescription(description.value)" (blur)="edit(name.value,description.value);">
-            <span> {{ project.createdAt | date:'d/M/y' }}  </span>
+            <span>Lo he creado el : {{ project.createdAt | date:'d/M/y' }}  </span>
             <span class="fill-remaining"></span>
-            <button md-icon-button>
-            <md-icon class="md-24"  md-tooltip="Elimina este proyecto"  (click)="delete()" >delete_forever</md-icon>
-        </button>
-            <button md-icon-button (click)="join()">
-            <md-icon class="md-24">update</md-icon>
-        </button>
+            <button md-icon-button md-tooltip="Elimina este proyecto" (click)="delete()"><md-icon class="md-24"  >delete_forever</md-icon></button>
+            <button md-icon-button  md-tooltip="Comparte este proyecto" (click)="share()"><md-icon class="md-24">share</md-icon></button>
         </md-toolbar>
         <div class="content">
             <div>
+                <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
                 <session *ngIf="selectedSession" [session]="selectedSession" [hidden]="hiddenSession" (sessionAsCurrent)="saveAsCurrent($event)">
                 </session>
                 <div [hidden]="hiddenNetStates">

@@ -6,7 +6,7 @@ export abstract class SessionService {
     items: Observable<any>;
     currentSession: Observable<any>;
     abstract getSessions() ;
-    abstract add(idProject);
+    abstract add(project);
     abstract getSession(id: number | string);
     abstract delete();
     abstract update(session: Session);

@@ -5,9 +5,10 @@ import { MaterialModule } from '@angular/material';
 import { HeaderComponent } from '../../shared/components/header.component';
 import { developerRouting } from './developer.routes';
 import { ProjectsModule } from '../../modules/projects/projects.module';
+import { UsersModule } from '../../modules/users/index.module';
 @NgModule({
   imports: [
-    CommonModule,MaterialModule.forRoot(),ProjectsModule,developerRouting
+    CommonModule,MaterialModule.forRoot(),ProjectsModule,developerRouting,UsersModule
   ],
   declarations: [LayoutComponent,DeveloperComponent,HeaderComponent]
 })
