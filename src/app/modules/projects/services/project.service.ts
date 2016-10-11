@@ -15,4 +15,5 @@ export abstract class ProjectService {
     abstract delete();
     abstract update(project: Project);
     abstract join();
+    abstract inviteTo(project : Project, emailUser);
 }

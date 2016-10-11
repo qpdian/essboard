@@ -5,7 +5,7 @@ import { CanActivate, Router, } from '@angular/router';
 export class GuardService implements CanActivate {
   constructor(private router: Router) { }
   canActivate() {
-    if (!!window.localStorage.getItem('user')) {
+    if (!!window.localStorage.getItem('user') && !!window.localStorage.getItem('feathers-jwt')) {
       return true;
     } else {
       this.router.navigate(['/login']);

@@ -1,4 +1,4 @@
-import { Component, OnInit,Output, Input,EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Project } from '../../../model/project';
 import { ProjectService } from '../../../services/project.service';
 
@@ -8,9 +8,9 @@ import { ProjectService } from '../../../services/project.service';
 })
 export class SharedFormComponent implements OnInit {
     @Output() onCloseForm = new EventEmitter<boolean>();
-    @Input() project:Project;
+    @Input() project: Project;
     public invitedsEmail: any;
-    public message : String;
+    public message: String;
     public inviteds: any;
     constructor(private projectService: ProjectService) { }
     ngOnInit() {
@@ -19,21 +19,30 @@ export class SharedFormComponent implements OnInit {
         this.message = "";
     }
     send() {
-        if (this.existsInUsers(this.invitedsEmail)){
+        if (this.existsInUsers(this.invitedsEmail)) {
             this.inviteds.push(this.invitedsEmail);
 
-        }else{
+        } else {
             this.message = "Ups . No encontramos este correo";
         }
 
     }
-    existsInUsers(email){
+    existsInUsers(email) {
         return true;
     }
-    delete(any){
+    delete(any) {
 
     }
-    close(){
+    close() {
         this.onCloseForm.emit(false);
+    }
+    getSelect(user) {
+        if (!this.project.haveThisMember(user)) {
+            this.inviteTo(user);
+        }
+    }
+    inviteTo(user) {
+        this.projectService.inviteTo(this.project, user);
+        this.inviteds.push(user);
     }
 }

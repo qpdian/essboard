@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class SearchComponent implements OnInit {
 
     @Output() onSelect = new EventEmitter<string>();
-    email: string = "";
+    keyToSearch: string = "";
     users: User[];
 
     private subscription: Subscription;
@@ -27,17 +27,14 @@ export class SearchComponent implements OnInit {
         //this.userService.search(this.email);
     }
     onKey(event: any) {
-        if (this.email != "") {
-            this.userService.search(this.email);
-        }
-    }
-    search() {
-        if (this.email != "") {
-            alert('f');
-            this.userService.search(this.email);
+        if (this.keyToSearch != "") {
+            this.userService.search(this.keyToSearch);
         }
     }
     select(user) {
-        this.onSelect.emit(user.email);
+        console.log(user,"user" );
+        this.onSelect.emit(user);
+        this.users = [];
+        this.keyToSearch = "";
     }
 }

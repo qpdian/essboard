@@ -54,21 +54,25 @@ export class ProjectSocketService extends ProjectService {
                 })
         });
     }
+    //problems al agregar auth
     getProject(id: string) {
-        this.service.get(id,{},
-            (err, item: any) => {
-                if (err) return console.error(err);
-                let p = new Project(item._id, item.name, item.description, item.createdAt);
-                let order = item.sessions.length;
-                for(let session of item.sessions){
-                    p.addSession(new Session(session._id,order,session.createdAt));
-                    console.log(session);
-                    order--;
-                }
-                this.project = p;
-                this.projectObserver.next(this.project);
-                console.log("item of server ", item);
-            });
+            this.service.get(id, {},
+                (err, item: any) => {
+                    if (err) return console.error(err);
+                    let p = new Project(item._id, item.name, item.description, item.createdAt);
+                    let order = item.sessions.length;
+                    for (let session of item.sessions) {
+                        p.addSession(new Session(session._id, order, session.createdAt));
+                        console.log(session);
+                        order--;
+                    }
+                    for (let member of item.members) {
+                        p.addMember(member._id,member.email,member.avatar);
+                    }
+                    this.project = p;
+                    this.projectObserver.next(this.project);
+                    console.log("item of server ", item);
+                })
     }
     delete() {
         const id = this.project.id;
@@ -88,6 +92,19 @@ export class ProjectSocketService extends ProjectService {
         this.service.patch(id, { name: project.name, description: project.description, percent: project.percent })
             .then((result) => {
                 alert('Proyecto editado');
+            })
+            .catch(function (error) {
+                console.log(error, "Error al editar  tu proyecto");
+            });
+    }
+    public inviteTo(project: Project, user) {
+        console.log(user.id + "---" + project.id);
+        this.service.patch(
+            project.id, 
+            { $addToSet: { members: user.id }},
+            { query :{ action : 'invite', data : user.id }}
+            ).then((result) => {
+                alert('Invitado');
             })
             .catch(function (error) {
                 console.log(error, "Error al editar  tu proyecto");
@@ -129,7 +146,7 @@ export class ProjectSocketService extends ProjectService {
     }
     addSession() {
         let num = this.project.sessions.length + 1;
-       // this.project.addSession(new Session(num, new Date()));
+        // this.project.addSession(new Session(num, new Date()));
         let sessionService = this._app.service('sessions');
         sessionService.create({
             project: 1,
@@ -148,8 +165,8 @@ export class ProjectSocketService extends ProjectService {
     }
     join() {
 
-    
-       
+
+
     }
 
 }

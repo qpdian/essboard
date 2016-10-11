@@ -4,7 +4,7 @@ import { AlphaMetadata, StateMetadata } from '../../../shared/models/kernel/kern
 import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
 export class Project {
   public currentKernel: Kernel;
-  public members : any;
+  public members : any[];
   public createdAt: Date;
   public sessions: Session[];
   public id: string;
@@ -24,8 +24,18 @@ export class Project {
   addSession(session: Session): void {
     this.sessions.push(session);
   }
-  addMember(member){
-    this.members.push(member);
+  addMember(id,email,avatar){
+    this.members.push(
+      {
+       id:id,
+       email:email,
+       avatar:avatar
+      });
+  }
+  haveThisMember(member):boolean{
+    const index = this.members.map(function(item) { return item.email; }).indexOf(member.email);
+    return index !=-1;
+    
   }
   getLastSession() {
     if (this.sessions.length > 0) {

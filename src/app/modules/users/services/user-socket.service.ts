@@ -94,7 +94,7 @@ export class UserSocketService extends UserService {
                 if (err) return console.error(err);
                 console.log('users', items);
                 this.users = items.data.map((x) =>
-                    new User(x.id, x.email, x.avatar, x.cretedAt));
+                    new User(x._id, x.email, x.avatar, x.cretedAt));
                 this.usersObserver.next(this.users);
             })
         });
