@@ -100,3 +100,7 @@ state-card{
     width: 850px;
     margin: 10px 5px 5px 5px;
 }
+
+.content{
+  min-height:300px;
+}

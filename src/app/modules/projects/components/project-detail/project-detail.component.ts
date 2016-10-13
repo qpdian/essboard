@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 import { Project, Session, Kernel } from '../../model/project';
 import { Dimension, State } from '../../model/project-kernel';
 import { ProjectService } from '../../services/project.service';
-import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
@@ -27,8 +26,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ProjectService,
-    /*private sessionService : SessionService*/) {
+    private service: ProjectService) {
   }
   ngOnInit() {
     this.subscription = this.service.currentProject.subscribe((item: Project) => {

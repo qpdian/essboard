@@ -64,7 +64,11 @@ export class ProjectSocketService extends ProjectService {
     }
     add(project: Project) {
         this._app.authenticate().then(data => {
-            this.service.create({ name: project.name, description: project.description })
+            this.service.create(
+                { name: project.name, 
+                  description: project.description,
+                  currentKernel : Util.getKernelEmpty()
+                })
                 .then((result) => {
                 })
                 .catch(function (error) {
@@ -73,7 +77,6 @@ export class ProjectSocketService extends ProjectService {
                 })
         });
     }
-    //problems al agregar auth
     getProject(id: string) {
         this.service.get(id, {},
             (err, item: any) => {
@@ -85,12 +88,14 @@ export class ProjectSocketService extends ProjectService {
                     console.log(session);
                     order--;
                 }
+                p.setCurrentKernel(Util.buildKernel(item.currentKernel));
                 for (let member of item.members) {
                     p.addMember(member._id, member.email, member.avatar);
                 }
                 this.project = p;
                 this.projectObserver.next(this.project);
                 console.log("item of server ", item);
+                 console.log("project ", this.project);
             });
     }
     delete() {

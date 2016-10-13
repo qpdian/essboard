@@ -6,6 +6,7 @@ import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
 import { Dimension } from '../model/project-kernel';
 import { SessionService } from './session.service';
 import { SocketService } from '../../../shared/services/socket-io';
+import { Util } from '../model/util';
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -67,15 +68,12 @@ export class SessionSocketService extends SessionService {
         });
     }
 
-    getSession(id: number | string) {
+    getSession(id: string) {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
-                //let p = new Session(item.nroOrder,item.cretedAt);
-                //FIX 
-                //p.addSession(new Session(1, new Date()));
-                //this.session = p;
-                //
+                this.session = new Session(item._id,item.nroOrder,item.cretedAt);
+                this.session.setKernel(Util.buildKernel(item.dimensions));
                 this.sessionObserver.next(this.session);
                 console.log("item of server ", item);
             });

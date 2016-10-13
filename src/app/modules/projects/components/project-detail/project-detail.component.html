@@ -2,15 +2,15 @@
     <md-sidenav-layout>
         <md-sidenav #start mode="side" (open)="true">
             <div class="menu-vertical">
-                <button  class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
+                <button class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
                 <div class="title-menu">Proyecto</div>
-                <div class="option selectable"  (click)="showNetStates()">
+                <div class="option selectable" (click)="showNetStates()">
                     <p>
                         <md-icon class="md-24">visibility</md-icon>
                     </p>
                 </div>
                 <div class="title-menu">Sesiones</div>
-                <button  class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
+                <button class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
                 <div class="option selectable" md-tooltip="Sesion: {{session.num}}" *ngFor="let session of project.sessions" (click)="showSessionDetail(session)">
                     <p>
                         <md-icon class="md-24">{{session.getIcon()}}</md-icon>
@@ -29,19 +29,19 @@
             <span>Lo he creado el : {{ project.createdAt | date:'d/M/y' }}  </span>
             <span class="fill-remaining"></span>
             <button md-icon-button md-tooltip="Elimina este proyecto" (click)="delete()"><md-icon class="md-24"  >delete_forever</md-icon></button>
-            <button md-icon-button  md-tooltip="Comparte este proyecto" (click)="share()"><md-icon class="md-24">share</md-icon></button>
+            <button md-icon-button md-tooltip="Comparte este proyecto" (click)="share()"><md-icon class="md-24">share</md-icon></button>
         </md-toolbar>
         <div class="content">
             <div>
                 <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
-                <session *ngIf="selectedSession" [session]="selectedSession" [hidden]="hiddenSession" (sessionAsCurrent)="saveAsCurrent($event)">
-                </session>
-                <div [hidden]="hiddenNetStates">
+                <div *ngIf="!hiddenNetStates">
                     <div class="content">
                         <h2 class="title">Tu proyecto holisticamente</h2>
                         <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
                     </div>
                 </div>
+                <session *ngIf="selectedSession" [idSession]="selectedSession.id" (sessionAsCurrent)="saveAsCurrent($event)">
+                </session>
             </div>
         </div>
     </md-sidenav-layout>

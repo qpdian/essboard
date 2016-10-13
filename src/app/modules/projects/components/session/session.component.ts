@@ -1,11 +1,11 @@
 
 
-import { Component, OnInit, OnChanges,OnDestroy, Input,Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Project, Session } from '../../model/project';
 import { Dimension, State } from '../../model/project-kernel';
-import { ProjectService } from '../../services/project.service';
+import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
@@ -16,33 +16,32 @@ import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/k
 })
 export class SessionComponent implements OnInit, OnDestroy {
   @Input()
-  session: Session;
+  idSession: string;
   @Output() sessionAsCurrent = new EventEmitter<Session>();
-
 
   dimensionSelect: Dimension;
   selectedState: StateMetadata;
-  statesSelecteds : StateMetadata[];
-  workItems : any[] = [];
-
-
+  statesSelecteds: StateMetadata[];
+  workItems: any[] = [];
+  session: Session;
   private sub: Subscription;
   private subscription: Subscription;
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private service: ProjectService) {
+    private service: SessionService) {
     this.dimensionSelect = null;
     this.selectedState = null;
     this.statesSelecteds = [];
   }
   ngOnInit() {
-
+    this.subscription = this.service.currentSession.subscribe((session: Session) => {
+      this.session = session;
+    });
+    this.service.getSession(this.idSession);
   }
   ngOnDestroy() {
 
   }
-  ngOnChange(){
+  ngOnChange() {
 
   }
 
@@ -55,29 +54,29 @@ export class SessionComponent implements OnInit, OnDestroy {
     if (this.dimensionSelect.isTouched == false) {
       this.dimensionSelect.isTouched = true;
     }
-   
+
     this.selectedState = state;
     this.dimensionSelect.setCurrentState(state);
     console.log(this.session.kernel.dimensions);
   }
-  onSelectedCheckpoints(data){
+  onSelectedCheckpoints(data) {
     let state = this.dimensionSelect.find(data.state);
     state.checklist = data.checks;
     console.log(this.session.kernel.dimensions);
   }
 
-  
-  getStatesGoal(states : StateMetadata[]){
+
+  getStatesGoal(states: StateMetadata[]) {
     this.statesSelecteds = states;
-    console.log('states selected for this sesion',states);
+    console.log('states selected for this sesion', states);
   }
-  getWorkItems(workItems){
+  getWorkItems(workItems) {
     this.workItems = workItems;
   }
-  saveSession(){
+  saveSession() {
     this.sessionAsCurrent.emit(this.session);
   }
-  delete(){
-    
+  delete() {
+
   }
 }

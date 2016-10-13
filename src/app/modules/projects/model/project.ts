@@ -1,4 +1,4 @@
-import { Dimension, State } from '../model/project-kernel';
+import { Dimension, State } from './project-kernel';
 import { CheckpointMetadata } from '../../../shared/models/kernel/kernel';
 import { AlphaMetadata, StateMetadata } from '../../../shared/models/kernel/kernel';
 import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
@@ -17,8 +17,7 @@ export class Project {
     this.description = description;
     this.id = id;
     this.members = [];
-    /*FIX THIIS*/
-    this.currentKernel = new Kernel();
+    this.currentKernel = null;
     this.sessions = [];
     this.createdAt = createdAt;
   }
@@ -78,7 +77,7 @@ export class Session {
     this.id = id;
     this.isComplete = false;
     this.isTouched = false;
-    this.kernel = new Kernel();
+    this.kernel = null;
     this.percent = 0;
   }
 
@@ -88,14 +87,21 @@ export class Session {
     }
     return 'filter_' + this.num;
   }
+  setKernel(kernel : Kernel){
+    this.kernel = kernel;
+  }
 }
 
 export class Kernel {
-  dimensions: Dimension[] = [];
+  dimensions: Dimension[];
   constructor() {
-    for (let alpha of ALPHAS) {
+    this.dimensions = [];
+   /* for (let alpha of ALPHAS) {
       this.dimensions.push(new Dimension(alpha, false));
-    }
+    }*/
+  }
+  addDimension(dimension){
+    this.dimensions.push(dimension);
   }
 
 }
