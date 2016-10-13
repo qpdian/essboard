@@ -18,10 +18,11 @@
     border-color: #87ce84;
     margin: 5px;
     padding: 3px;
-    width: 140px;
+    text-align: center;
+    width: 130px;
     background-color: white;
     color: #403e3e;
-    height: 50px;
+    height: 40px;
 }
 .dimension-name md-card-title{
     position: relative;
@@ -92,8 +93,8 @@ polyline {
 }
 /* size ofr section : in a wrapper */ 
 alpha-card{
-    width: 200px;
-    background-color: #d9d9e1;
+    width: 180px;
+    background-color: transparent;
 }
 state-card{
     width: 850px;
