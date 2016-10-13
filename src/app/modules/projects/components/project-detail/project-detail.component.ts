@@ -28,7 +28,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private service: ProjectService,
-   /* private sessionService : SessionService*/) {
+    /*private sessionService : SessionService*/) {
   }
   ngOnInit() {
     this.subscription = this.service.currentProject.subscribe((item: Project) => {
@@ -44,8 +44,10 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   }
 
   addSession() {
-    if (!this.project.canCreateNewSession()) {
-      // this.sessionService.add(this.project);
+    if (this.project.canCreateNewSession()) {
+        this.service.addSession();
+    }else{
+      alert('Aun no ha terminado la ultima sesion')
     }
   }
   share() {
@@ -54,12 +56,9 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   closeSharedForm(hide){
     this.showShare = hide;
   }
-
-
-
   //add confirmation esperar modal
   delete() {
-   // this.service.delete();
+    this.service.delete();
   }
   edit(name: string, description: string) {
     if (description && name) {

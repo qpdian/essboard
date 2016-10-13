@@ -11,7 +11,7 @@ export class ProjectCardComponent {
     constructor(private router: Router) { }
 
     select(){
-        this.router.navigate(['/user/projects', this.project.id]);
+        this.router.navigate(['/me/projects', this.project.id]);
     }
 
 }

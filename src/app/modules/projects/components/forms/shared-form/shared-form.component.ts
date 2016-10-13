@@ -30,9 +30,6 @@ export class SharedFormComponent implements OnInit {
     existsInUsers(email) {
         return true;
     }
-    delete(any) {
-
-    }
     close() {
         this.onCloseForm.emit(false);
     }
@@ -44,5 +41,8 @@ export class SharedFormComponent implements OnInit {
     inviteTo(user) {
         this.projectService.inviteTo(this.project, user);
         this.inviteds.push(user);
+    }
+    delete(invited){
+        this.projectService.desinviteTo(this.project,invited);
     }
 }

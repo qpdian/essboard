@@ -85,28 +85,29 @@ export class UserSocketService extends UserService {
     update(user: User) {
     }
     search(email: string) {
+        const key = new RegExp('^' + email, "i");
+       // console.log(key,"ey");
+       // const user = "57f66c52d00b465a84aaacbd";
         this._app.authenticate().then(data => {
             this.service.find({
                 query: {
-                    email: email
+                    email:  { $regex: email , $options: 'igm' }
                 }
             }, (err, items: any) => {
-                if (err) return console.error(err);
-                console.log('users', items);
+                if (err) return console.error("eroo",err);
+                console.log("search",items);
                 this.users = items.data.map((x) =>
                     new User(x._id, x.email, x.avatar, x.cretedAt));
                 this.usersObserver.next(this.users);
             })
         });
     }
-
-
     private onCreated(newItem: any) {
-                console.log('Someone created a message', newItem);
-                //TODO: add notifications 
-                this.users.push(new User(newItem.id, newItem.email, newItem.avatar, newItem.createdAt));
-                this.usersObserver.next(this.users);
-            }
+        console.log('Someone created a message', newItem);
+        //TODO: add notifications 
+        this.users.push(new User(newItem.id, newItem.email, newItem.avatar, newItem.createdAt));
+        this.usersObserver.next(this.users);
+    }
 
 
 }

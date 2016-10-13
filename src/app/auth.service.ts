@@ -19,7 +19,6 @@ export class AuthService {
             this.router.navigate(['/']);
         }).catch(function (error) {
             alert('Error : Email o correo es invalido');
-            console.error('Error authenticating!', error);
         });
     }
     public get isLoggedIn(): boolean {

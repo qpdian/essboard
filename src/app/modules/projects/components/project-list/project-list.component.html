@@ -5,13 +5,14 @@
         <button md-icon-button class="main" (click)="showForm()"><md-icon  >add</md-icon></button>
         <button md-icon-button class="main"><md-icon class="md-24">find_in_page</md-icon></button>
         <button md-icon-button class="main"><md-icon class="md-24">help_outline</md-icon></button>
-        <button (click)="end.toggle()"  md-icon-button class="main"><md-icon class="md-24">folder_shared</md-icon></button>
+        <button (click)="end.toggle()" md-icon-button class="main"><md-icon class="md-24">folder_shared</md-icon></button>
     </md-toolbar>
     <md-sidenav-layout>
         <md-sidenav class="invitation" mode="side" #end align="end">
-            End Side Drawer
-            <br>
-            <button md-button (click)="end.close()">Close</button>
+            <md-nav-list>
+                <h3 md-subheader>Proyectos compartidos conmigo</h3>
+                <a md-list-item href="me/projects/{{shared.id}}" class="selectable" *ngFor="let shared of sharedProjects"> {{shared.name}}</a>
+            </md-nav-list>
         </md-sidenav>
         <div class="main-content">
             <project-form [hidden]="hideForm"></project-form>

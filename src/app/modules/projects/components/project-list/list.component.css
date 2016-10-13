@@ -13,6 +13,7 @@
 	text-align: center;
     margin: auto;
     padding-top: 10px;
+    min-height: 360px;
 }
 .main-content .container{
 	width: 50%;

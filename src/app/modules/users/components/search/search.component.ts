@@ -27,12 +27,15 @@ export class SearchComponent implements OnInit {
         //this.userService.search(this.email);
     }
     onKey(event: any) {
-        if (this.keyToSearch != "") {
+        if (this.keyToSearch == "") {
+            this.users = [];
+        }
+        else {
             this.userService.search(this.keyToSearch);
         }
     }
     select(user) {
-        console.log(user,"user" );
+        console.log(user, "user");
         this.onSelect.emit(user);
         this.users = [];
         this.keyToSearch = "";

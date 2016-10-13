@@ -8,6 +8,6 @@ export abstract class SessionService {
     abstract getSessions() ;
     abstract add(project);
     abstract getSession(id: number | string);
-    abstract delete();
+    abstract deleteSe();
     abstract update(session: Session);
 }

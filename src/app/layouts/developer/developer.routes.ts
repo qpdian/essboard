@@ -7,7 +7,7 @@ import { ProjectListComponent, ProjectDetailComponent } from '../../modules/proj
 
 export const DeveloperRoutes: Route[] = [
   {
-    path: 'user',
+    path: 'me',
     component: LayoutComponent,
     canActivate: [GuardService],
     children: [

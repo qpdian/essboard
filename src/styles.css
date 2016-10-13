@@ -18,6 +18,9 @@
 md-list-item.selectable:hover{
     color: #77a880;
 }
+a.selectable:hover{
+    color: #77a880;
+}
 .wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -91,4 +94,20 @@ md-input.ng-pristine {
 .main{
     background-color: #7cb987;
     color: white;
+}
+
+/* essence color */
+.customer{
+    background: #c1ecc1;
+} 
+.endeavor{
+    background: #d4e6f0;
+} 
+.solution{
+    background : #ffff99;
+}
+/*disables*/
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
 }

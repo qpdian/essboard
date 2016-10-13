@@ -46,6 +46,7 @@ export class SessionSocketService extends SessionService {
 
     }
     add(project:Project) {
+        console.log('sesions save');
         this._app.authenticate().then(data => {
             console.log(project);
             const backId = project.getLastSessionId();
@@ -56,6 +57,8 @@ export class SessionSocketService extends SessionService {
                 nroOrder: project.sessions.length + 1,
             })
                 .then((result) => {
+                   // project.addSession(new );
+                    return project;
                 })
                 .catch(function (error) {
                     console.error('Error saving!', error);
@@ -63,6 +66,7 @@ export class SessionSocketService extends SessionService {
                 })
         });
     }
+
     getSession(id: number | string) {
         this.service.get(id,
             (err, item: any) => {
@@ -76,7 +80,7 @@ export class SessionSocketService extends SessionService {
                 console.log("item of server ", item);
             });
     }
-    delete() {
+    deleteSe() {
         const id = this.session.id;
        // this.sessions.splice(id, 1);
         this.sessionsObserver.next(this.sessions);
