@@ -15,7 +15,7 @@
             </md-nav-list>
         </md-sidenav>
         <div class="main-content">
-            <project-form [hidden]="hideForm"></project-form>
+            <project-form [hidden]="hideForm" (onCloseForm)="closeCreateForm($event)"></project-form>
             <div *ngIf="projects.length == 0" class="empty-proyects">
                 <md-card>
                     <md-card-content>

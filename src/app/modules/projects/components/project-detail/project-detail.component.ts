@@ -43,28 +43,32 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   addSession() {
     if (this.project.canCreateNewSession()) {
-        this.service.addSession();
-    }else{
+      this.service.addSession();
+    } else {
       alert('Aun no ha terminado la ultima sesion')
     }
   }
   share() {
     this.showShare = true;
   }
-  closeSharedForm(hide){
+  closeSharedForm(hide) {
     this.showShare = hide;
   }
   //add confirmation esperar modal
   delete() {
     this.service.delete();
   }
-  edit(name: string, description: string) {
-    if (description && name) {
-      this.project.description = description;
-      this.project.name = name;
-      this.service.update(this.project);
+  setName(name: string) {
+    if (name) {
+      this.service.setName(name);
     }
   }
+  setDescription(description: string) {
+    if (description) {
+      this.service.setDescription(description);
+    }
+  }
+
 
   showNetStates() {
     this.hiddenSession = true;

@@ -23,9 +23,9 @@
                   <md-icon class="md-24">chevron_right</md-icon>
             </button>
             <span> Proyecto:</span>
-            <input md-tooltip="Edita el nomber de tu proyecto" [value]="project.name" #name (keyup.enter)="editName(name.value)" (blur)="edit(name.value,description.value);">
+            <input md-tooltip="Edita el nomber de tu proyecto" [value]="project.name" #name (keyup.enter)="setName(name.value)" (blur)="setName(name.value);">
             <span>Descripcion:</span>
-            <input [value]="project.description" #description (keyup.enter)="editDescription(description.value)" (blur)="edit(name.value,description.value);">
+            <input [value]="project.description" #description (keyup.enter)="setDescription(description.value)" (blur)="setDescription(description.value);">
             <span>Lo he creado el : {{ project.createdAt | date:'d/M/y' }}  </span>
             <span class="fill-remaining"></span>
             <button md-icon-button md-tooltip="Elimina este proyecto" (click)="delete()"><md-icon class="md-24"  >delete_forever</md-icon></button>
@@ -35,10 +35,9 @@
             <div>
                 <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
                 <div *ngIf="!hiddenNetStates">
-                    <div class="content">
-                        <h2 class="title">Tu proyecto holisticamente</h2>
-                        <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
-                    </div>
+                    <h2 class="title">Tu proyecto holisticamente</h2>
+                    <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
+
                 </div>
                 <session *ngIf="selectedSession" [idSession]="selectedSession.id" (sessionAsCurrent)="saveAsCurrent($event)">
                 </session>

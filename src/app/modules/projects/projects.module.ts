@@ -28,6 +28,10 @@ import { RowDimensionComponent } from './components/state-card-view-for-dimensio
 
 import { ProjectService } from './services/project.service';
 import { ProjectSocketService } from './services/project-socket.service';
+
+import { ProjectsService } from './services/projects.service';
+import { ProjectsSocketService } from './services/projects-socket.service';
+
 import { SessionService } from './services/session.service';
 import { SessionSocketService } from './services/session-socket.service';
 import { UsersModule } from '../users/index.module';
@@ -50,6 +54,7 @@ import { UsersModule } from '../users/index.module';
   ],
   providers: [
     { provide: ProjectService, useClass: ProjectSocketService } ,
+    { provide: ProjectsService, useClass: ProjectsSocketService } ,
     { provide: SessionService, useClass: SessionSocketService }
   ],
   exports: [ProjectListComponent,ProjectDetailComponent,AlphaConectionsComponent]

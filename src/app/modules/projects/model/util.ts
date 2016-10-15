@@ -13,7 +13,7 @@ export class Util {
         });
       }
       dimensions.push({
-        concept: alpha.name,
+        concept: 1,
         name: alpha.name,
         currentState: null,
         states: states,

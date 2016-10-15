@@ -39,10 +39,10 @@ export class SharedFormComponent implements OnInit {
         }
     }
     inviteTo(user) {
-        this.projectService.inviteTo(this.project, user);
+        this.projectService.inviteTo(user);
         this.inviteds.push(user);
     }
-    delete(invited){
-        this.projectService.desinviteTo(this.project,invited);
+    delete(invited) {
+        this.projectService.desinviteTo(invited);
     }
 }

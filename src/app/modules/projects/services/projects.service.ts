@@ -4,17 +4,12 @@ import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
 import { Dimension } from '../model/project-kernel';
 import { Observable } from 'rxjs';
 
-export abstract class ProjectService {
+export abstract class ProjectsService {
+    items: Observable<any>;
+    sharedMe: Observable<any>;
     currentProject: Observable<any>;
-    abstract setName (name : string);
-    abstract setDescription(description :string);
-
+    abstract getProjects() ;
+    abstract add(project: Project);
     abstract getProject(id: string);
-    abstract addSession();
-    abstract addAllDimensions(project: Project);
-    abstract delete();
-    abstract join();
-    
-    abstract inviteTo( user);
-    abstract desinviteTo( user);
+    abstract getProjectsSharedMe();
 }
