@@ -14,14 +14,13 @@ export class AlphaCard {
   dimension: Dimension;
   @Input()
   currentState: State;
-  stateSelect: StateMetadata = null;
-  @Output() onChooseState = new EventEmitter<StateMetadata>();
-  select(state: StateMetadata) {
-    // if(this.stateSelect === null)
+  stateSelect: State = null;
+  @Output() onChooseState = new EventEmitter<State>();
+  select(state: State) {
     this.stateSelect = state;
     this.onChooseState.emit(state);
   }
-  isSelected(state: StateMetadata) {
+  isSelected(state: State) {
     return state === this.stateSelect;
   }
 }

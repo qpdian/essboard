@@ -24,7 +24,6 @@ export class SearchComponent implements OnInit {
         this.subscription = this.userService.usersOb.subscribe((users: User[]) => {
             this.users = users;
         });
-        //this.userService.search(this.email);
     }
     onKey(event: any) {
         if (this.keyToSearch == "") {
@@ -35,7 +34,6 @@ export class SearchComponent implements OnInit {
         }
     }
     select(user) {
-        console.log(user, "user");
         this.onSelect.emit(user);
         this.users = [];
         this.keyToSearch = "";

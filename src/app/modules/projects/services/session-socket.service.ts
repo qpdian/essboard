@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Session,Project } from '../model/project';
+import { Session, Project } from '../model/project';
 import { Observable } from 'rxjs';
-import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
-import { Dimension } from '../model/project-kernel';
 import { SessionService } from './session.service';
 import { SocketService } from '../../../shared/services/socket-io';
+import { ToSession } from '../transforms/to-session';
 import { Util } from '../model/util';
 
 @Injectable()
@@ -24,7 +23,7 @@ export class SessionSocketService extends SessionService {
         this._app = this.socketService.init();
         this.service = this._app.service('sessions');
         this.service.on('created', (newItem) => this.onCreated(newItem));
-        this.service.on('updated', (updatedItem) => this.onUpdated(updatedItem));
+        this.service.on('patched', (patchedItem) => this.onPatched(patchedItem));
         this.service.on('removed', (removedItem) => this.onRemoved(removedItem));
 
         this.items = new Observable(observer => this.sessionsObserver = observer).share();
@@ -37,16 +36,16 @@ export class SessionSocketService extends SessionService {
     getSessions() {
         this._app.authenticate().then(data => {
             this.service.find({
-                  
+
             }, (err, items: any) => {
                 if (err) return console.error(err);
-               // this.sessions = items.data.map((x) => new Session(x.nroOrder, x.createdAt));
+                // this.sessions = items.data.map((x) => new Session(x.nroOrder, x.createdAt));
                 this.sessionsObserver.next(this.sessions);
             })
         });
 
     }
-    add(project:Project) {
+    add(project: Project) {
         console.log('sesions save');
         this._app.authenticate().then(data => {
             console.log(project);
@@ -54,11 +53,11 @@ export class SessionSocketService extends SessionService {
             console.log(backId);
             this.service.create({
                 _project: project.id,
-                idLastSession : backId,
+                idLastSession: backId,
                 nroOrder: project.sessions.length + 1,
             })
                 .then((result) => {
-                   // project.addSession(new );
+                    // project.addSession(new );
                     return project;
                 })
                 .catch(function (error) {
@@ -72,15 +71,15 @@ export class SessionSocketService extends SessionService {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
-                this.session = new Session(item._id,item.nroOrder,item.cretedAt);
-                this.session.setKernel(Util.buildKernel(item.dimensions));
+                this.session = ToSession.transformComplete(item);
+                Util.setSource(item.dimensions);
                 this.sessionObserver.next(this.session);
-                console.log("item of server ", item);
+                console.log("Sesion completa ", this.session);
             });
     }
     deleteSe() {
         const id = this.session.id;
-       // this.sessions.splice(id, 1);
+        // this.sessions.splice(id, 1);
         this.sessionsObserver.next(this.sessions);
         this.service.remove(id)
             .then((result) => {
@@ -101,6 +100,25 @@ export class SessionSocketService extends SessionService {
                 console.log(error, "Error al editar  tu proyecto");
             });
     }
+    //update checkpoint
+    patch(sessionId, dimensionId, stateName, checkpointId, condition) {
+        let indexs = Util.getIndexs( dimensionId, stateName);
+        let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
+        let path = base + '.$.isAchaived';
+        let search = base + '.concept';
+        let params = {["query"]: {[search] : checkpointId } };
+        let setData = { [path]: condition };
+        this._app.authenticate().then(() => {
+            this.service.patch(
+                sessionId,
+                { '$set': setData },
+                params)
+                .then((result) => {
+                })
+                .catch(function (error) {
+                })
+        });
+    }
     private getIndex(id: string): number {
         let foundIndex = -1;
         for (let i = 0; i < this.sessions.length; i++) {
@@ -114,15 +132,17 @@ export class SessionSocketService extends SessionService {
         console.log('Someone created a message', newItem);
         //TODO: add notifications 
         alert('Nuevo proyecto');
-       // this.sessions.unshift(new Session(newItem.nroOrder,newItem.cretedAt));
-       // this.sessionsObserver.next(this.sessions);
+        // this.sessions.unshift(new Session(newItem.nroOrder,newItem.cretedAt));
+        // this.sessionsObserver.next(this.sessions);
     }
 
-    private onUpdated(updatedItem: any) {
-        const index = this.getIndex(updatedItem.id);
-        this.sessions[index].percent = updatedItem.percent;
-        this.sessionsObserver.next(this.sessions);
-        this.sessionObserver.next(this.sessions[index]);
+    private onPatched(patchedItem: any) {
+
+        //build para la escucha de otros
+        /*  const index = this.getIndex(patchedItem.id);
+          this.sessions[index].percent = patchedItem.percent;
+          this.sessionsObserver.next(this.sessions);
+          this.sessionObserver.next(this.sessions[index]);*/
     }
 
     private onRemoved(removedItem) {
@@ -132,9 +152,5 @@ export class SessionSocketService extends SessionService {
 
         //this.itemsObserver.next(this.data);
     }
-    addAllDimensions(project: Session) {
-
-    }
-
 
 }

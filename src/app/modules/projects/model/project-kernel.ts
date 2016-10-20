@@ -1,38 +1,43 @@
 
 import { AlphaMetadata, StateMetadata, CheckpointMetadata } from '../../../shared/models/kernel/kernel';
 export class Dimension {
-  public currentState: State;
   public states: State[] = [];
+  public currentState: StateMetadata;
   constructor(
-    public info: AlphaMetadata, public isTouched: boolean
+    public info: AlphaMetadata,
+    public isTouched: boolean,
+    public concept :string
   ) {
-    for (let state of info.states) {
-      this.states.push(new State(state, false));
-    }
-    this.currentState = null;
-    this.isTouched = isTouched;
+  }
+  addStates(states) {
+    this.states = states;
+  }
+  addState(state) {
+    this.states.push(state);
   }
   setCurrentState(state: StateMetadata) {
-    this.currentState = new State(state, true);
-    this.fillPreviousToCurrent();
+    this.currentState = state;
+    if (!!state) {
+      this.fillPreviousToCurrent();
+    }
   }
   fillPreviousToCurrent(): void {
     this.cleanFill();
-    let num = this.currentState.info.num;
+    let num = this.currentState.num;
     for (let i = 0; i <= num; i++) {
-      this.states[i].isAcheived = true;
+      this.states[i].isAchaived = true;
     }
   }
-  cleanFill(){
-    for(let state of this.states){
-      state.isAcheived = false;
+  cleanFill() {
+    for (let state of this.states) {
+      state.isAchaived = false;
     }
   }
   get statesFulfilled(): StateMetadata[] {
     let cursor = this.info.states[0];
     let result = [];
     if (!!this.currentState) {
-      while (cursor !== this.currentState.info && !!cursor) {
+      while (cursor !== this.currentState && !!cursor) {
         result.push(cursor);
         cursor = cursor.next;
       }
@@ -40,10 +45,10 @@ export class Dimension {
     }
     return result;
   }
-  get lastFilled(){
-    return this.statesFulfilled[this.statesFulfilled.length-1];
+  get lastFilled() {
+    return this.statesFulfilled[this.statesFulfilled.length - 1];
   }
-  get firstByFilled(){
+  get firstByFilled() {
     return this.statesUnfulfilled[0];
   }
 
@@ -54,8 +59,6 @@ export class Dimension {
   private diff(a) {
     return this.info.states.filter(function (i) { return a.indexOf(i) < 0; });
   };
-
-
   getCurrentState() {
     return this.currentState;
   }
@@ -87,7 +90,7 @@ export class Dimension {
 
   fulfiledThisState(state: StateMetadata) {
     if (!!this.currentState) {
-      return this.currentState.info === state;
+      return this.currentState === state;
 
 
     } else {
@@ -108,13 +111,20 @@ export class State {
   public checklist: Checkpoint[] = [];
   public percent: number;
   constructor(
-    public info: StateMetadata, public isAcheived: boolean
+    public info: StateMetadata,
+    public isAchaived: boolean,
+    public isWorking: boolean
   ) {
-    this.isAcheived = isAcheived;
-    this.percent = 0;
-    for (let check of info.checkList) {
-      this.checklist.push(new Checkpoint(check, false));
-    }
+  }
+  addCheckpoint(checkpoint: Checkpoint) {
+    this.checklist.push(checkpoint);
+  }
+  getPercent(){
+   this.percent = 100*this.getCheckPointAchaiveds.length/this.checklist.length;
+   return this.percent;
+  }
+  getCheckPointAchaiveds(){
+   this.checklist.find(check => check.isAchaived === true);
   }
 
   getX() {

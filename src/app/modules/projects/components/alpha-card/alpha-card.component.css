@@ -8,6 +8,9 @@
 .alpha-card md-card-content {
 	background: white;
 }
+.state p{
+  color: #878686;
+}
 .alpha-card md-card-title{
 	text-align: center;
     font-size: 20px;
@@ -66,6 +69,18 @@
 .endeavor .achieved{
     border-style : solid;
 	background-color: #d4e6f0;
+}
+.solution .working{
+   	border-style : solid;
+	background-color: #fff000;
+}
+.customer .working{
+    border-style : solid;
+	background-color: #c1eaa0;
+}
+.endeavor .working{
+    border-style : solid;
+	background-color: #d4e6f8;
 }
 
 .noAchieved{

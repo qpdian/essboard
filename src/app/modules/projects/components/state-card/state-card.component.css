@@ -1,36 +1,56 @@
-
-.checkpoints{
-	width: 620px;
-	text-align: center;
+state-card-view{
+    width: 28%;
 }
+.checkpoints{
+	width: 72%;
+}
+
 .checkpoints table{
 	    background-color: white;
 		border: 2px solid #a5d2b1;
-		margin:10px auto auto auto;
+		margin:0px auto auto auto;
 		width: 98%;
+}
+.checkpoints table th{
+	color: #64c0d1;
+}
+.checkpoints table td{
+	color: #a09f9f;
+    font-size: 13px;
+	padding: 15px 0 15px 0;
+
 }
 .checkpoints button{
 	margin:auto;
 }
 
- .checkpoint {
-	width: 12%;
-    display: inline-block;
-}
- .check-name{
-	width: 88%;
-    display: inline-block;
 
-}
+
 .w-700{
 	width: 700px;
 }
-.c-name {
-	width:30%;
+.name {
+	width:25%;
 }
-.c-description {
-	width:70%;
+.description {
+	width:60%;
 }
-
+.check{
+	width:15%;
+	padding: 5%;
+	text-align:center;
+}
+.box-check{
+   border: solid 1px #a5d2b1;
+   height:15px;
+   width:15px;
+   margin :auto;
+}
+.achaived{
+  background-color: #a5d2b1;
+}
+.no-achaived{
+ background-color: #fff;
+}
 
 

@@ -37,10 +37,11 @@
                 <div *ngIf="!hiddenNetStates">
                     <h2 class="title">Tu proyecto holisticamente</h2>
                     <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
-
-                </div>
+                </div>         
                 <session *ngIf="selectedSession" [idSession]="selectedSession.id" (sessionAsCurrent)="saveAsCurrent($event)">
                 </session>
+            
+
             </div>
         </div>
     </md-sidenav-layout>

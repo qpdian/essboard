@@ -65,7 +65,9 @@ export class AlphaConectionsComponent  {
     { name: 'Interesado', hightLight: true },
 
   ];
-  constructor() { }
+  constructor() { 
+
+  }
 
   test() {
     alert('ff');

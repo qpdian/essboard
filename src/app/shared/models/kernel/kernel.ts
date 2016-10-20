@@ -1,5 +1,6 @@
 export class AlphaMetadata {
   constructor(
+    public  identifier:number,
     public area: AreaMetadata,
     public description: string,
     public name: string,
@@ -23,6 +24,9 @@ export class AlphaMetadata {
     this.states.push(state);
     state.dimension = this;
     state.num = tam++;
+  }
+  getState(name:string){
+    return this.states.find( state => state.name == name);
   }
 }
 
@@ -66,6 +70,9 @@ export class StateMetadata {
     }
     this.next = next;
   }
+  getCheckPoint(identifier: string){
+    return this.checkList.find( check => check.concept === identifier);
+  }
   getMainChecklist() {
     let mainChecklist: CheckpointMetadata[] = [];
     for (let check of this.checkList) {
@@ -81,7 +88,7 @@ export class CheckpointMetadata {
     public name: string,
     public description: string,
     public type: string,
-    public code: string,
+    public concept: string,
     public state: StateMetadata
   ) { }
 }

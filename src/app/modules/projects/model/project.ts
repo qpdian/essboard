@@ -1,7 +1,5 @@
-import { Dimension, State } from './project-kernel';
+import { Dimension } from './project-kernel';
 import { CheckpointMetadata } from '../../../shared/models/kernel/kernel';
-import { AlphaMetadata, StateMetadata } from '../../../shared/models/kernel/kernel';
-import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
 export class Project {
   public currentKernel: Kernel;
   public members: any[];
@@ -57,6 +55,7 @@ export class Project {
     this.currentKernel = kernel;
   }
   canCreateNewSession() {
+    return true;//por ahora
     if (this.sessions.length == 0) { return true; }
     if (this.getLastSession().isComplete == true) { return true; }
   }
@@ -96,9 +95,7 @@ export class Kernel {
   dimensions: Dimension[];
   constructor() {
     this.dimensions = [];
-   /* for (let alpha of ALPHAS) {
-      this.dimensions.push(new Dimension(alpha, false));
-    }*/
+
   }
   addDimension(dimension){
     this.dimensions.push(dimension);

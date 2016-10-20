@@ -1,0 +1,14 @@
+
+import { AreaMetadata } from './kernel';
+export const customer = new AreaMetadata(
+  'Cliente',
+  'Persona,grupo, o organizacion que son afectados por el sistema de software',
+  'customer');
+export const solution = new AreaMetadata(
+  'Solucion',
+  'Persona,grupo, o organizacion que son afectados por el sistema de software',
+  'solution');
+export const endeavor = new AreaMetadata(
+  'Esfuerzo',
+  'Persona,grupo, o organizacion que son afectados por el sistema de software',
+  'endeavor');

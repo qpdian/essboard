@@ -6,6 +6,9 @@
             <button md-icon-button>
             <md-icon class="md-24" (click)="delete()" >delete_forever</md-icon>
         </button>
+          <button md-icon-button (click)="testUpdate()">
+            <md-icon class="md-24"  >folder</md-icon>
+        </button>
         </md-toolbar>
         <md-tab-group class="steps-tab-group ">
             <md-tab>
@@ -29,7 +32,7 @@
                     <div class="content">
                         <h2 class="title">Determina el estado de cualquier dimension</h2>
                         <div>
-                            <h4>Pasos : Selecciona una dimension -> Determina el estado que tu crees se encuentra</h4>
+                            <h4 class="subtitle">Pasos : Selecciona una dimension -> Determina el estado que tu crees se encuentra</h4>
                             <!--<p class="subtitle">Selecciona tu dimension a evaluar</p>-->
                             <div class="content-title">
                                 <div class="wrapper">
@@ -39,14 +42,8 @@
                                     </md-card>
                                 </div>
                             </div>
-                            <p *ngIf="dimensionSelect" class="subtitle">Selecciona un estado de tu dimension</p>
-                            <div class="wrapper"> 
-                                <alpha-card class="item-wrapper" *ngIf="dimensionSelect" [dimension]="dimensionSelect" [currentState]="dimensionSelect.currentState"
-                                    (onChooseState)="onSelectedState($event)"></alpha-card>
-                                <state-card class="item-wrapper" *ngIf="selectedState" [state]="selectedState" (onChooseCheckpoints)="onSelectedCheckpoints($event)">
-                                </state-card>
-                            </div>
-                            <button *ngIf="session.isTouched" md-raised-button class="main" (click)="saveSession()">Guarde la sesion</button>
+                            <set-current-state [dimension]="dimensionSelect" [idSession]="session.id"></set-current-state>
+                            
                         </div>
                         <h2 class="title">Observa como va quedando esta sesion</h2>
                         <div>

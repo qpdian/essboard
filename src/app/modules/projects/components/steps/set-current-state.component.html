@@ -1,0 +1,8 @@
+<div class="wrapper">
+    <!--states-->
+    <alpha-card class="item-wrapper" *ngIf="dimension" [dimension]="dimension" [currentState]="dimension.currentState"
+        (onChooseState)="onSelectedState($event)"></alpha-card>
+    <!--a state selected -->
+    <state-card class="item-wrapper" *ngIf="selectedState" [state]="selectedState" (onChooseCheckpoint)="onSelectedCheckpoint($event)">
+    </state-card>
+</div>

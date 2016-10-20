@@ -76,6 +76,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   }
   showSessionDetail(session: Session) {
+    console.log(session);
     this.hiddenNetStates = true;
     this.hiddenSession = false;
     this.selectedSession = session;

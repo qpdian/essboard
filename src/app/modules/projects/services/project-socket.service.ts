@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project, Session } from '../model/project';
-import { Util } from '../model/util';
 import { Observable } from 'rxjs';
 import { ProjectService } from './project.service';
 import { SocketService } from '../../../shared/services/socket-io';
+import { ToProject } from '../transforms/to-project';
+import { Util } from '../model/util';
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
@@ -24,27 +25,12 @@ export class ProjectSocketService extends ProjectService {
         this.currentProject = new Observable(observer => this.projectObserver = observer).share();
         this.project = null;
     }
-    private transformCompleteToProject(obj: any) {
-        let p = new Project(obj._id, obj.name, obj.description, obj.createdAt);
-        for (let session of obj.sessions) {
-            p.addSession(this.transformSourceToSession(session));
-        }
-        p.setCurrentKernel(Util.buildKernel(obj.currentKernel));
-        for (let member of obj.members) {
-            p.addMember(member._id, member.email, member.avatar);
-        }
-        return p;
-    }
-    private transformSourceToSession(obj: any) {
-        return new Session(obj._id, obj.nroOrder, obj.createdAt)
-    }
-
     getProject(id: string) {
         this.service.get(id, {},
             (err, item: any) => {
                 if (err) return console.error(err);
-                console.log(item);
-                this.project = this.transformCompleteToProject(item);
+                this.project = ToProject.transformCompleteToProject(item);
+                console.log("proyecto completo",this.project);
                 this.projectObserver.next(this.project);
             });
     }
@@ -119,7 +105,7 @@ export class ProjectSocketService extends ProjectService {
     }
     private onPatched(patchedItem: any) {
         console.log(patchedItem);
-        this.project = this.transformCompleteToProject(patchedItem);
+        this.project = ToProject.transformCompleteToProject(patchedItem);
         this.projectObserver.next(this.project);
     }
 
@@ -132,10 +118,12 @@ export class ProjectSocketService extends ProjectService {
 
     }
     addSession() {
+        //el otro camino es patched project
         let sessionService = this._app.service('sessions');
         let order = this.project.sessions.length + 1;
         const backId = this.project.getLastSessionId();
         let dimensions = Util.getKernelEmpty();
+        console.log("dimensons",dimensions);
         this._app.authenticate().then(data => {
             sessionService.create({
                 _project: this.project.id,

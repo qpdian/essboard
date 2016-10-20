@@ -4,6 +4,7 @@ import { ProjectsService } from '../../services/projects.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ALPHAS } from '../../../../shared/models/kernel/mock-kernel';
 
 @Component({
     selector: 'my-app',
@@ -36,6 +37,9 @@ export class ProjectListComponent implements OnInit {
     }
     closeCreateForm(){
         this.hideForm = true;
+    }
+    showALPHAS(){
+        console.log(ALPHAS);
     }
 
 }

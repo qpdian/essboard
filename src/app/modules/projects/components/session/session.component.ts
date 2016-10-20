@@ -49,22 +49,6 @@ export class SessionComponent implements OnInit, OnDestroy {
     this.dimensionSelect = dimension;
     this.selectedState = null;
   }
-  onSelectedState(state: StateMetadata) {
-    this.session.isTouched = true;
-    if (this.dimensionSelect.isTouched == false) {
-      this.dimensionSelect.isTouched = true;
-    }
-
-    this.selectedState = state;
-    this.dimensionSelect.setCurrentState(state);
-    console.log(this.session.kernel.dimensions);
-  }
-  onSelectedCheckpoints(data) {
-    let state = this.dimensionSelect.find(data.state);
-    state.checklist = data.checks;
-    console.log(this.session.kernel.dimensions);
-  }
-
 
   getStatesGoal(states: StateMetadata[]) {
     this.statesSelecteds = states;
@@ -73,10 +57,12 @@ export class SessionComponent implements OnInit, OnDestroy {
   getWorkItems(workItems) {
     this.workItems = workItems;
   }
-  saveSession() {
-    this.sessionAsCurrent.emit(this.session);
-  }
+
   delete() {
 
+  }
+  testUpdate(){
+
+    this.service.patch(this.idSession,1,"Reconocido",'1-1-3',true);
   }
 }

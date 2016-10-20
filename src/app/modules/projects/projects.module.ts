@@ -2,6 +2,7 @@ import { NgModule}       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
 import { MaterialModule } from '@angular/material';
+import 'hammerjs' ;
 import { DragulaModule,DragulaService } from 'ng2-dragula/ng2-dragula';
 
 import { ProjectListComponent }    from './components/project-list/project-list.component';
@@ -25,6 +26,7 @@ import { SessionComponent }  from './components/session/session.component';
 import { StateBoardComponent } from  './components/state-board/state-board.component';
 import { StateCardView } from './components/state-card-view-for-dimension/state-card-view.component';
 import { RowDimensionComponent } from './components/state-card-view-for-dimension/row-dimension.component';
+import { SetCurrentStateComponent } from './components/steps/set-current-state.component';
 
 import { ProjectService } from './services/project.service';
 import { ProjectSocketService } from './services/project-socket.service';
@@ -48,6 +50,7 @@ import { UsersModule } from '../users/index.module';
     ProjectDetailComponent,
     ProjectFormComponent,
     SharedFormComponent,
+    SetCurrentStateComponent,
     SessionComponent,ProjectViewHolistic,
     StateCard,AlphaCard,AlphaConectionsComponent,HowReachGoals,ActOnWorkItems,
     StateCardView,StateBoardComponent,RowDimensionComponent
