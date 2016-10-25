@@ -1,7 +1,7 @@
 
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { State, Dimension } from '../../model/project-kernel';
-import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
+
 
 
 @Component({

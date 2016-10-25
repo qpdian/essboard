@@ -100,18 +100,29 @@ export class SessionSocketService extends SessionService {
                 console.log(error, "Error al editar  tu proyecto");
             });
     }
-    //update checkpoint
-    patch(sessionId, dimensionId, stateName, checkpointId, condition) {
-        let indexs = Util.getIndexs( dimensionId, stateName);
+    setStateAsWorking(id,dimensionConcept,stateName){
+        let indexs = Util.getIndexs( dimensionConcept, stateName);
+        let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state;
+        let path = base + '.$.isWorking';
+        let params = {};
+        let setData = { [path]: true };
+        this.patch(id,setData,params);
+
+    }
+    setCheckpointTo(id, dimensionConcept, stateName, checkpointId, condition){
+        let indexs = Util.getIndexs( dimensionConcept, stateName);
         let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
         let path = base + '.$.isAchaived';
         let search = base + '.concept';
         let params = {["query"]: {[search] : checkpointId } };
         let setData = { [path]: condition };
+        this.patch(id,setData,params);
+    }
+    private patch(id,data,params) {
         this._app.authenticate().then(() => {
             this.service.patch(
-                sessionId,
-                { '$set': setData },
+                id,
+                { '$set': data },
                 params)
                 .then((result) => {
                 })

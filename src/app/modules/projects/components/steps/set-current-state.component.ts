@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Dimension, State } from '../../model/project-kernel';
-import { StateMetadata } from '../../../../shared/models/kernel/kernel';
 import { SessionService } from '../../services/session.service';
 @Component({
     selector: 'set-current-state',
@@ -12,21 +11,22 @@ export class SetCurrentStateComponent implements OnInit {
     dimension: Dimension;
     @Input()
     idSession: string;
+
     selectedState: State;
       constructor( private service: SessionService){
   }
 
     ngOnInit() { }
-    onSelectedState(state) {
+    onSelectedState(state : State) {
         if (this.dimension.isTouched == false) {
             this.dimension.isTouched = true;
         }
         this.selectedState = state;
         this.dimension.setCurrentState(state.info);
+        this.service.setStateAsWorking(this.idSession,this.dimension.concept,state.info.name);
     }
     onSelectedCheckpoint(check) {
-        console.log(check);
-        this.service.patch(this.idSession,this.dimension.concept,this.selectedState.info.name,check.info.concept,check.isAchaived);
+        this.service.setCheckpointTo(this.idSession,this.dimension.concept,this.selectedState.info.name,check.info.concept,check.isAchaived);
     }
 
 }

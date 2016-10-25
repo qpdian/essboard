@@ -10,5 +10,6 @@ export abstract class SessionService {
     abstract getSession(id: number | string);
     abstract deleteSe();
     abstract update(session: Session);
-    abstract patch(sessionId,dimensionId,stateId,checkpointId,condition);
+    abstract setCheckpointTo(id,dimensionId,stateId,checkpointId,condition);
+    abstract setStateAsWorking(id,dimensionConcept,stateName);
 }
