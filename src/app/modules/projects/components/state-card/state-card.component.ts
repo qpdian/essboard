@@ -18,7 +18,6 @@ export class StateCard {
   get state() {
     return this._state;
   }
-
   check(checkpoint) {
     checkpoint.isAchaived = !checkpoint.isAchaived;
     this.onChooseCheckpoint.emit(checkpoint);

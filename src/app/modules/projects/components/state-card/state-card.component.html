@@ -1,4 +1,4 @@
-<div class="state-card  wrapper">
+<div *ngIf="state" class="state-card  wrapper">
   <state-card-view *ngIf="state" [state]="state.info" [classCSS]="'normal'"></state-card-view>
   <div class="checkpoints">
         <table class="table table-bordered">
@@ -9,8 +9,6 @@
         </tr>
         <tr *ngFor="let checkpoint of state.checklist">
           <td class="check">
-         <!-- <md-checkbox  [(ngModel)]="checkpoint.isAchaived" (change)="printValue($event)" >
-          </md-checkbox > -->
           <div [className]="checkpoint.isAchaived ? 'box-check achaived':'box-check no-achaived'" (click)="check(checkpoint)" >
           </div>
          </td>

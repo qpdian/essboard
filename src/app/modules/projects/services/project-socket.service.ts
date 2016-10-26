@@ -19,7 +19,6 @@ export class ProjectSocketService extends ProjectService {
         super();
         this._app = this.socketService.init();
         this.service = this._app.service('projects');
-        this.service.on('updated', (updatedItem) => this.onUpdated(updatedItem));
         this.service.on('removed', (removedItem) => this.onRemoved(removedItem));
         this.service.on('patched', (patchedItem) => this.onPatched(patchedItem));
         this.currentProject = new Observable(observer => this.projectObserver = observer).share();
@@ -63,10 +62,10 @@ export class ProjectSocketService extends ProjectService {
         const data = { description: description };
         this.patchData(data);
     }
-    public inviteTo(user) {
+    public inviteTo(project,user) {
         this._app.authenticate().then(() => {
             this.service.patch(
-                this.project.id,
+                project.id,
                 { $addToSet: { members: user.id } }
                 // { query: { action: 'invite', data: user.id } }
             ).then((result) => {
@@ -93,18 +92,7 @@ export class ProjectSocketService extends ProjectService {
         });
     }
 
-    private onUpdated(updatedItem: any) {
-        console.log('edi');
-
-        // const index = this.getIndex(updatedItem.id);
-        /* this.projects[index].name = updatedItem.name;
-         this.projects[index].description = updatedItem.description;
-         this.projects[index].percent = updatedItem.percent;
-         this.projectsObserver.next(this.projects);
-         this.projectObserver.next(this.projects[index]);*/
-    }
     private onPatched(patchedItem: any) {
-        console.log(patchedItem);
         this.project = ToProject.transformCompleteToProject(patchedItem);
         this.projectObserver.next(this.project);
     }
@@ -114,23 +102,17 @@ export class ProjectSocketService extends ProjectService {
         //this.dataStore.checks.splice(index, 1);
         //this.itemsObserver.next(this.data);
     }
-    addAllDimensions(project: Project) {
-
-    }
     addSession() {
-        //el otro camino es patched project
         let sessionService = this._app.service('sessions');
         let order = this.project.sessions.length + 1;
         const backId = this.project.getLastSessionId();
         let dimensions = Util.getKernelEmpty();
-        console.log("dimensons",dimensions);
         this._app.authenticate().then(data => {
             sessionService.create({
                 _project: this.project.id,
                 nroOrder: order,
                 dimensions: dimensions,
             }).then((session) => {
-                console.log('Sesion creada', session);
                 this.project.addSession(new Session(session._id, session.nroOrder, session.createdAt));
                 this.projectObserver.next(this.project);
             }).catch(function (error) {
@@ -138,12 +120,4 @@ export class ProjectSocketService extends ProjectService {
             })
         });
     }
-
-
-    join() {
-
-
-
-    }
-
 }

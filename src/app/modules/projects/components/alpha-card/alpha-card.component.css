@@ -75,8 +75,8 @@
 	background-color: #fff000;
 }
 .customer .working{
-    border-style : solid;
-	background-color: #c1eaa0;
+    border: solid 4px #6dd084;
+    background-color: #d7f5d7;
 }
 .endeavor .working{
     border-style : solid;
@@ -87,6 +87,6 @@
     background-color: transparent;
 }
 .selected{
-	background-color: red;
+	box-shadow: 1px 2px 30px 13px rgba(202,188,188,0.79);
 }
 

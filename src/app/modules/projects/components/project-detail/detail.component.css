@@ -84,5 +84,5 @@ md-toolbar{
      box-shadow: 5px 0px 5px #adb1ae;
 }
 .content {
-    min-height:300px;
+    height:350px;
 }

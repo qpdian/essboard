@@ -9,7 +9,6 @@ export abstract class SessionService {
     abstract add(project);
     abstract getSession(id: number | string);
     abstract deleteSe();
-    abstract update(session: Session);
     abstract setCheckpointTo(id,dimensionId,stateId,checkpointId,condition);
     abstract setStateAsWorking(id,dimensionConcept,stateName);
 }

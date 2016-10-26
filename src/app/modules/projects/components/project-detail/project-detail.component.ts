@@ -84,8 +84,5 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   saveAsCurrent(session: Session) {
     this.project.currentKernel = session.kernel;
   }
-  join() {
-    this.service.join();
-  }
 
 }

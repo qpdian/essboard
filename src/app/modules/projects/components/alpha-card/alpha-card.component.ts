@@ -2,8 +2,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { State, Dimension } from '../../model/project-kernel';
 
-
-
 @Component({
   selector: 'alpha-card',
   templateUrl: 'alpha-card.component.html',

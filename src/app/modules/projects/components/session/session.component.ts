@@ -29,7 +29,6 @@ export class SessionComponent implements OnInit, OnDestroy {
   constructor(
     private service: SessionService) {
     this.dimensionSelect = null;
-    this.selectedState = null;
     this.statesSelecteds = [];
   }
   ngOnInit() {
@@ -47,7 +46,11 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   chooseDimension(dimension: Dimension) {
     this.dimensionSelect = dimension;
-    this.selectedState = null;
+  }
+  refreshDimensionSelected(event){
+    console.log("refreeshh");
+    this.dimensionSelect = this.session.kernel.dimensions.find(dim => dim === this.dimensionSelect);
+    console.log(this.dimensionSelect);
   }
 
   getStatesGoal(states: StateMetadata[]) {
@@ -61,8 +64,5 @@ export class SessionComponent implements OnInit, OnDestroy {
   delete() {
 
   }
-  testUpdate(){
 
-    this.service.patch(this.idSession,1,"Reconocido",'1-1-3',true);
-  }
 }

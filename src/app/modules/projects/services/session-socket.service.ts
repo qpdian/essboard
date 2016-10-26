@@ -71,12 +71,13 @@ export class SessionSocketService extends SessionService {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
-                this.session = ToSession.transformComplete(item);
+                this.session = ToSession.withCompleteTransformation(item);
                 Util.setSource(item.dimensions);
                 this.sessionObserver.next(this.session);
                 console.log("Sesion completa ", this.session);
             });
     }
+
     deleteSe() {
         const id = this.session.id;
         // this.sessions.splice(id, 1);
@@ -89,44 +90,34 @@ export class SessionSocketService extends SessionService {
                 alert("Error al eliminar  tu proyecto");
             });
     }
-    update(session: Session) {
-        const id = this.session.id;
-        this.sessionObserver.next(this.session);
-        this.service.patch(id, { percent: session.percent })
-            .then((result) => {
-                alert('Proyecto editado');
-            })
-            .catch(function (error) {
-                console.log(error, "Error al editar  tu proyecto");
-            });
-    }
-    setStateAsWorking(id,dimensionConcept,stateName){
-        let indexs = Util.getIndexs( dimensionConcept, stateName);
+    setStateAsWorking(id, dimensionConcept, stateName) {
+        let indexs = Util.getIndexs(dimensionConcept, stateName);
         let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state;
-        let path = base + '.$.isWorking';
+        let path = base + '.isWorking';
         let params = {};
         let setData = { [path]: true };
-        this.patch(id,setData,params);
-
+        this.patch(id, setData, params);
     }
-    setCheckpointTo(id, dimensionConcept, stateName, checkpointId, condition){
-        let indexs = Util.getIndexs( dimensionConcept, stateName);
+    setCheckpointTo(id, dimensionConcept, stateName, checkpointId, condition) {
+        let indexs = Util.getIndexs(dimensionConcept, stateName);
         let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
         let path = base + '.$.isAchaived';
         let search = base + '.concept';
-        let params = {["query"]: {[search] : checkpointId } };
+        let params = { ["query"]: { [search]: checkpointId } };
         let setData = { [path]: condition };
-        this.patch(id,setData,params);
+        this.patch(id, setData, params);
     }
-    private patch(id,data,params) {
+    private patch(id, data, params) {
         this._app.authenticate().then(() => {
             this.service.patch(
                 id,
                 { '$set': data },
                 params)
                 .then((result) => {
+                    console.log(result.dimensions);
                 })
                 .catch(function (error) {
+                    console.log(error)
                 })
         });
     }
@@ -148,14 +139,10 @@ export class SessionSocketService extends SessionService {
     }
 
     private onPatched(patchedItem: any) {
-
-        //build para la escucha de otros
-        /*  const index = this.getIndex(patchedItem.id);
-          this.sessions[index].percent = patchedItem.percent;
-          this.sessionsObserver.next(this.sessions);
-          this.sessionObserver.next(this.sessions[index]);*/
+        this.session = ToSession.withCompleteTransformation(patchedItem);
+        Util.setSource(patchedItem.dimensions);
+        this.sessionObserver.next(this.session);
     }
-
     private onRemoved(removedItem) {
         // const index = this.getIndex(removedItem.id);
 

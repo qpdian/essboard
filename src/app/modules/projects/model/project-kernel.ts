@@ -6,7 +6,7 @@ export class Dimension {
   constructor(
     public info: AlphaMetadata,
     public isTouched: boolean,
-    public concept :string
+    public concept: string
   ) {
   }
   addStates(states) {
@@ -14,18 +14,24 @@ export class Dimension {
   }
   addState(state) {
     this.states.push(state);
+    state.setDimension(this);
   }
   setCurrentState(state: StateMetadata) {
     this.currentState = state;
-    if (!!state) {
-      this.fillPreviousToCurrent();
-    }
+    /* if (!!state) {
+       this.fillPreviousToCurrent();
+     }/*/
+  }
+  getState(state:State){
+    if(!!state){return this.states.find(stat => stat.info === state.info);}
+    return null;
+    
   }
   fillPreviousToCurrent(): void {
     this.cleanFill();
     let num = this.currentState.num;
     for (let i = 0; i <= num; i++) {
-      this.states[i].isAchaived = true;
+      this.states[i].isWorking = true;
     }
   }
   cleanFill() {
@@ -33,6 +39,7 @@ export class Dimension {
       state.isAchaived = false;
     }
   }
+  /*
   get statesFulfilled(): StateMetadata[] {
     let cursor = this.info.states[0];
     let result = [];
@@ -44,7 +51,17 @@ export class Dimension {
       result.push(cursor);
     }
     return result;
+  }*/
+  get statesFulfilled(): StateMetadata[] {
+    let result = [];
+    for (let state of this.states) {
+      if (state.isWorking === true) {
+        result.push(state.info);
+      }
+    }
+    return result;
   }
+
   get lastFilled() {
     return this.statesFulfilled[this.statesFulfilled.length - 1];
   }
@@ -53,10 +70,10 @@ export class Dimension {
   }
 
   get statesUnfulfilled(): StateMetadata[] {
-    return this.diff(this.statesFulfilled);
+    return this.diffStatesTo(this.statesFulfilled);
   }
 
-  private diff(a) {
+  private diffStatesTo(a) {
     return this.info.states.filter(function (i) { return a.indexOf(i) < 0; });
   };
   getCurrentState() {
@@ -72,7 +89,6 @@ export class Dimension {
     return this.info.states;
   }
   find(stateToSearch: StateMetadata) {
-    console.log(this.states);
     return this.states.find(state => state.info === stateToSearch);
   }
   //return this.states.find(stat => stat.info === state) ? true : false;
@@ -110,6 +126,7 @@ export class Dimension {
 export class State {
   public checklist: Checkpoint[] = [];
   public percent: number;
+  public _dimension: Dimension;
   constructor(
     public info: StateMetadata,
     public isAchaived: boolean,
@@ -119,20 +136,33 @@ export class State {
   addCheckpoint(checkpoint: Checkpoint) {
     this.checklist.push(checkpoint);
   }
-  getPercent(){
-   this.percent = 100*this.getCheckPointAchaiveds.length/this.checklist.length;
-   return this.percent;
+  getPercent() {
+    this.percent = 100 * this.getCheckPointAchaiveds.length / this.checklist.length;
+    return this.percent;
   }
-  getCheckPointAchaiveds(){
-   this.checklist.find(check => check.isAchaived === true);
+  getCheckPointAchaiveds() {
+    this.checklist.find(check => check.isAchaived === true);
   }
-
   getX() {
     let width = 30;
     return (this.info.num - 1) * width + 55;
   }
   getY() {
     return 60;
+  }
+  get isFirst() {
+    return this.info.dimension.states[0] === this.info;
+  }
+  get stateBackIsAchaived(): Boolean {
+    let backState = this.info.back;
+    if (!!backState) { return this._dimension.find(backState).isWorking === true; }
+    return false;
+  }
+  setDimension(dimension) {
+    this._dimension = dimension;
+  }
+  get dimension(): Dimension {
+    return this._dimension;
   }
 
 }

@@ -89,6 +89,10 @@ export class Session {
   setKernel(kernel : Kernel){
     this.kernel = kernel;
   }
+  getDimension(dimension){
+    if(!!dimension){return this.kernel.dimensions.find(dim => dim.concept === dimension.concept);}
+    return null;
+  }
 }
 
 export class Kernel {
