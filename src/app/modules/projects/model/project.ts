@@ -55,9 +55,8 @@ export class Project {
     this.currentKernel = kernel;
   }
   canCreateNewSession() {
-    return true;//por ahora
-    if (this.sessions.length == 0) { return true; }
-    if (this.getLastSession().isComplete == true) { return true; }
+    if (this.sessions.length === 0) { return true; }
+    if (this.getLastSession().isComplete === true) { return true; }
   }
 }
 

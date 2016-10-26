@@ -50,7 +50,6 @@ export class ProjectSocketService extends ProjectService {
                 .then((result) => {
                 })
                 .catch(function (error) {
-                    console.log(error, "Error al editar  tu proyecto");
                 });
         });
     }
@@ -93,6 +92,7 @@ export class ProjectSocketService extends ProjectService {
     }
 
     private onPatched(patchedItem: any) {
+        console.log("traido",patchedItem);
         this.project = ToProject.transformCompleteToProject(patchedItem);
         this.projectObserver.next(this.project);
     }
