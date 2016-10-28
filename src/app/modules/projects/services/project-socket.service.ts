@@ -29,7 +29,6 @@ export class ProjectSocketService extends ProjectService {
             (err, item: any) => {
                 if (err) return console.error(err);
                 this.project = ToProject.transformCompleteToProject(item);
-                console.log("proyecto completo",this.project);
                 this.projectObserver.next(this.project);
             });
     }
@@ -90,7 +89,6 @@ export class ProjectSocketService extends ProjectService {
                 });
         });
     }
-
     private onPatched(patchedItem: any) {
         console.log("traido",patchedItem);
         this.project = ToProject.transformCompleteToProject(patchedItem);

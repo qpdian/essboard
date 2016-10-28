@@ -1,6 +1,6 @@
 export const env = {
     api:{
-        main : 'http://localhost:3030',
+        main : 'https://essboard-backend-marthur.c9users.io',
         other : '',
     }
 };

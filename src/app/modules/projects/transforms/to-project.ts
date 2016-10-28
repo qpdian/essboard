@@ -7,7 +7,6 @@ export class ToProject {
         for (let session of obj.sessions) {
             p.addSession(this.transformSourceToSession(session));
         }
-        //console.log("kernel",Util.buildKernel(obj.currentKernel));
         p.setCurrentKernel(Util.buildKernel(obj.currentKernel));
         for (let member of obj.members) {
             p.addMember(member._id, member.email, member.avatar);

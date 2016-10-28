@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { env } from '../../env';
-//declare const io;
+
 const feathers = require('feathers-client');
 const io = require('socket.io-client');
 @Injectable()
