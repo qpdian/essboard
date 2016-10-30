@@ -4,7 +4,7 @@ import { RouterModule, Route } from '@angular/router';
 import { GuardService } from '../../guard.service';
 import { LayoutComponent, DeveloperComponent } from './index';
 import { ProjectListComponent, ProjectDetailComponent } from '../../modules/projects/index';
-
+import { PracticesComponent } from '../../modules/practices/index';
 export const DeveloperRoutes: Route[] = [
   {
     path: 'me',
@@ -14,6 +14,7 @@ export const DeveloperRoutes: Route[] = [
       { path: '', component: DeveloperComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/:id', component: ProjectDetailComponent },
+      { path: 'practices', component: PracticesComponent },
     ]
   }];
 

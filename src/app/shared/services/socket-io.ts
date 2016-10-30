@@ -9,7 +9,7 @@ export class SocketService {
     public _app: any;
     public _url: string;
     constructor() {
-        this._url = env.api.main;
+        this._url = env.api.local;
     }
     init() {
         this.socket = io(this._url);
