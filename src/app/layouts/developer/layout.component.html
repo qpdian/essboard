@@ -10,6 +10,8 @@
     </md-sidenav>
     <div class="sidenav-content">
         <header [isLoggin]=true (onToggle)="start.toggle()"></header>
-        <router-outlet></router-outlet>
+        <div class="content-with-overflow">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </md-sidenav-layout>

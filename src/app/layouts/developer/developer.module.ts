@@ -7,6 +7,7 @@ import { developerRouting } from './developer.routes';
 import { ProjectsModule } from '../../modules/projects/projects.module';
 import { PracticesModule } from '../../modules/practices/index.module';
 import { UsersModule } from '../../modules/users/index.module';
+ 
 @NgModule({
   imports: [
     CommonModule,MaterialModule.forRoot(),ProjectsModule,developerRouting,UsersModule,PracticesModule

@@ -1,5 +1,5 @@
-import {CompetencyMetadata,CompetencyLevel } from './kernel';
-import {customer,solution,endeavor} from "./mock-areas";
+import {CompetencyMetadata,CompetencyLevel } from '../kernel';
+import {customer,solution,endeavor} from "../mock-areas";
 
 
 export const level1: CompetencyLevel = new CompetencyLevel(1,'Asistente', 'Demuestra una basica comprension de los conceptops y puede seguir instrucciones', null);

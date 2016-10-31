@@ -18,7 +18,7 @@ export class Util {
           );
         }
         states.push({
-          name: state.name,
+          name: state.identifier,
           percent: 0,
           isAchaived: false,
           isWorking: false,

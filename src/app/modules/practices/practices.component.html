@@ -1,3 +1,10 @@
 <p>
-  practices works!
+  Area Cliente
 </p>
+<div>
+  <h3>Essence Activity Space and Goal State</h3>
+    <canvas class="chart" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="'radar'" (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)" baseChart> </canvas>
+    <!--<canvas class="chart" [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="'line'" baseChart></canvas>-->
+  
+</div>

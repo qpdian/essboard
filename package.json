@@ -23,6 +23,7 @@
     "@angular/router": "~3.0.1",
     "angular2-letter-avatar": "^2.0.8-rc-6",
     "angular2-notifications": "^0.4.4",
+    "chart.js": "^2.3.0",
     "core-js": "^2.4.1",
     "feathers-client": "^1.6.1",
     "flexboxgrid": "^6.3.1",

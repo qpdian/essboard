@@ -1,7 +1,7 @@
 
 
 
-import {  StateMetadata,CheckpointMetadata } from './kernel';
+import {  StateMetadata,CheckpointMetadata } from '../kernel';
 
 export const state76: StateMetadata = new StateMetadata('Retirado', 76, null, []);
 export const state75: StateMetadata = new StateMetadata('Trabajando bien', 75, state76, []);

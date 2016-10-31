@@ -1,12 +1,13 @@
 import { AreaMetadata, AlphaMetadata, CompetencyMetadata, CompetencyLevel } from './kernel';
 import { customer, solution, endeavor } from './mock-areas';
-import { state11, state12, state13, state14, state15, state16 } from './mock-alpha1';
-import { state21, state22, state23, state24, state25, state26 } from './mock-alpha2';
-import { state31, state32, state33, state34, state35, state36 } from './mock-alpha3';
-import { state41, state42, state43, state44, state45, state46 } from './mock-alpha4';
-import { state51, state52, state53, state54, state55 } from './mock-alpha5';
-import { state61, state62, state63, state64, state65, state66 } from './mock-alpha6';
-import { state71, state72, state73, state74, state75, state76 } from './mock-alpha7';
+import { state11, state12, state13, state14, state15, state16 } from './mock-alphas/mock-alpha1';
+import { state21, state22, state23, state24, state25, state26 } from './mock-alphas/mock-alpha2';
+import { state31, state32, state33, state34, state35, state36 } from './mock-alphas/mock-alpha3';
+import { state41, state42, state43, state44, state45, state46 } from './mock-alphas/mock-alpha4';
+import { state51, state52, state53, state54, state55 } from './mock-alphas/mock-alpha5';
+import { state61, state62, state63, state64, state65, state66 } from './mock-alphas/mock-alpha6';
+import { state71, state72, state73, state74, state75, state76 } from './mock-alphas/mock-alpha7';
+
 
 const a1 = new AlphaMetadata(1, customer, '', 'Interesado', [], null, null);
 const a2 = new AlphaMetadata(2, customer, '', 'Oportunidad', [], null, null);
@@ -38,6 +39,7 @@ export const ALPHAS: AlphaMetadata[] = [
 export const AREAS: AreaMetadata[] = [
   customer, solution, endeavor
 ];
+
 
 export const level1: CompetencyLevel = new CompetencyLevel(1, 'Asistente', 'Demuestra una basica comprension de los conceptops y puede seguir instrucciones', null);
 export const level2: CompetencyLevel = new CompetencyLevel(2, 'Aplicante', 'Capaz de aplicar conceptos en contextos simples mediante la aplicacion rutinaria de la experiencia ganada', level1);

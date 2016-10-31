@@ -23,7 +23,7 @@ export class SetCurrentStateComponent implements OnInit {
         this.putDimensionAsTouching();
         this.selectedState = state;
         if (this.isPosiblePutStateAsWorking(state)) {
-            this.service.setStateAsWorking(this.idSession, this.dimension.concept, state.info.name);
+            this.service.setStateAsWorking(this.idSession, this.dimension.concept, state.info.identifier);
         } else {
             alert("Aun no haz iniciado el estado anterior");
         }
@@ -37,6 +37,6 @@ export class SetCurrentStateComponent implements OnInit {
         }
     }
     onSelectedCheckpoint(check) {
-        this.service.setCheckpointTo(this.idSession, this.dimension.concept, this.selectedState.info.name, check.info.concept, check.isAchaived);
+        this.service.setCheckpointTo(this.idSession, this.dimension.concept, this.selectedState.info.identifier, check.info.concept, check.isAchaived);
     }
 }

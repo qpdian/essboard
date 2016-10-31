@@ -121,3 +121,21 @@ md-input.ng-pristine {
 .md-visually-hidden{
   
 }
+.title{
+    color: #87b890;
+    text-align: center;
+}
+.subtitle{
+    color: #64c0d1;
+    margin-left: 10px;
+}
+.row{
+    margin-right: 0rem;
+    margin-left: 0rem;
+}
+.transparent{
+    background-color: transparent;
+}
+.md-tab-active{
+    border-bottom: solid 3px #5bbcce;
+}

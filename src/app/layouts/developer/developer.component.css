@@ -2,3 +2,7 @@
 .sidenav-content{
     overflow: initial;
 }
+.content-with-overflow{
+    overflow: overlay;
+    height: 565px;
+}

@@ -84,5 +84,6 @@ md-toolbar{
      box-shadow: 5px 0px 5px #adb1ae;
 }
 .content {
-    height:350px;
+    height: 500px;
+    overflow: overlay;
 }

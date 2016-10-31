@@ -1,7 +1,7 @@
 
 
 
-import {  StateMetadata,CheckpointMetadata } from './kernel';
+import {  StateMetadata,CheckpointMetadata } from '../kernel';
 
 
 

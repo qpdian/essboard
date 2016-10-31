@@ -1,6 +1,12 @@
-<div *ngIf="state" class="state-card  wrapper">
-  <state-card-view *ngIf="state" [state]="state.info" [classCSS]="'normal'"></state-card-view>
-  <div class="checkpoints">
+<div *ngIf="state" class="state-card  row">
+  <state-card-view *ngIf="state" class="col-xs-12
+                col-sm-12
+                col-md-3
+                col-lg-3" [state]="state.info" [classCSS]="'normal'"></state-card-view>
+  <div class="checkpoints col-xs-12
+                col-sm-12
+                col-md-9
+                col-lg-9">
         <table class="table table-bordered">
         <tr>
           <th>¿Lo realizaste?</th>

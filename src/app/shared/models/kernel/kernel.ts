@@ -1,6 +1,6 @@
 export class AlphaMetadata {
   constructor(
-    public  identifier:number,
+    public identifier:number,
     public area: AreaMetadata,
     public description: string,
     public name: string,
@@ -28,6 +28,9 @@ export class AlphaMetadata {
   getState(name:string){
     return this.states.find( state => state.name == name);
   }
+  getStateByIdentifier(identifier : number){
+    return this.states.find(state => state.identifier === (identifier + this.identifier*10));
+  }
 }
 
 export class AreaMetadata {
@@ -37,13 +40,15 @@ export class AreaMetadata {
   constructor(
     public name: string,
     public description: string,
-    public nameCSSClass: string
+    public nameCSSClass: string,
+    public numberDimension : number
   ) {
     this.dimensions = [];
     this.name = name;
     this.nameCSSClass = nameCSSClass;
     this.description = description;
     this.competences = [];
+    this.activitypaces = [];
   }
   addDimension(dimension: AlphaMetadata) {
     this.dimensions.push(dimension);
@@ -54,6 +59,10 @@ export class AreaMetadata {
   addCompetence(competence: CompetencyMetadata) {
     this.competences.push(competence);
   }
+  getAlpha(identifier:number){
+    return this.dimensions.find(dim => dim.identifier === identifier);
+
+  }
 }
 export class StateMetadata {
   public back: StateMetadata;
@@ -61,7 +70,7 @@ export class StateMetadata {
   public num: number;
   constructor(
     public name: string,
-    public id: number,
+    public identifier: number,
     public next: StateMetadata,
     public checkList: CheckpointMetadata[]
   ) {
@@ -93,14 +102,14 @@ export class CheckpointMetadata {
   ) { }
 }
 export class ActivitySpaceMetadata {
-  objectives: any[];
+  objectives: string[];
   inputs: any[];
   entryCriterias: StateMetadata[];
   completionCriterias: StateMetadata[];
   constructor(
     public area: AreaMetadata,
+    public name: string,
     public description: string,
-    public name: string
   ) {
     area.addActivitySpace(this);
     this.inputs = [];
@@ -108,16 +117,16 @@ export class ActivitySpaceMetadata {
     this.entryCriterias = [];
     this.completionCriterias = [];
   }
-  addObjective(objective) {
-    this.objectives.push(objective);
+  addObjective(... objectives:string[]) {
+    this.objectives = objectives;
   }
-  setInput(input) {
+  addInput(input) {
     this.inputs.push(input);
   }
-  setEntryCriteria(entryCriteria) {
+  addEntryCriteria(entryCriteria) {
     this.entryCriterias.push(entryCriteria);
   }
-  setCompletionCriteria(completionCriteria: StateMetadata) {
+  addCompletionCriteria(completionCriteria: StateMetadata) {
     this.completionCriterias.push(completionCriteria);
   }
 }

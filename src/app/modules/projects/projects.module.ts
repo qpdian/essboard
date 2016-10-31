@@ -37,12 +37,13 @@ import { ProjectsSocketService } from './services/projects-socket.service';
 import { SessionService } from './services/session.service';
 import { SessionSocketService } from './services/session-socket.service';
 import { UsersModule } from '../users/index.module';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UsersModule,
-    MaterialModule,DragulaModule
+    MaterialModule,DragulaModule,ChartsModule
   ],
   declarations: [
     ProjectListComponent,
