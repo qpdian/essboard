@@ -37,9 +37,11 @@ export class AuthService {
         return !!window.localStorage.getItem('user');
     }
     
-    public logout() {
-        this._app.logout().then(() => window.location.href = '/');
-        localStorage.removeItem("user");
+    public logout(): Promise<boolean> {
+        return this._app.logout().then(() => {
+            localStorage.removeItem("user")
+            return true;
+        });
     }
     
     public get user(): User {

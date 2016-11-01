@@ -1,14 +1,14 @@
 <div class="header">
     <md-toolbar>
-        <button class="sidenav" *ngIf="isLoggin" (click)="toggle()">
+        <button class="sidenav" *ngIf="isLoggedIn" (click)="toggle()">
             <md-icon class="md-24">menu</md-icon>
         </button>
         <img src="/assets/img/logos/logo-horizontal.png" alt="Essboard">
-        <div *ngIf="!isLoggin" class="option-isLoggin">
+        <div *ngIf="!isLoggedIn" class="option-isLoggin">
             <button class="menu" routerLink="/login">Ingresa</button>
             <button class="menu" routerLink="/signup">Registrate</button>
         </div>
-        <div *ngIf="isLoggin" class="option-noLoggin">
+        <div *ngIf="isLoggedIn" class="option-noLoggin">
             <button md-icon-button [md-menu-trigger-for]="menu">
         <md-icon>account_circle</md-icon>
       </button>
