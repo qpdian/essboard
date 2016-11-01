@@ -3,7 +3,7 @@ import { AuthService } from '../../auth.service';
 import { Credential } from '../../shared/models/credential';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
-import { NotificationsService, SimpleNotificationsComponent, Options } from 'angular2-notifications';
+import { NotificationsService, SimpleNotificationsComponent } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
