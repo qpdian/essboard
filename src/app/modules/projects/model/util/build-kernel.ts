@@ -1,7 +1,6 @@
 import { ALPHAS } from '../../../../shared/models/kernel/mock-kernel';
 import { Kernel, Alpha, State, Checkpoint } from '../project-kernel';
 export class BuilderKernel {
-  public static source: any;
 
   public static build(alphas: any[]): Kernel {
     if (!!alphas) {
@@ -21,6 +20,7 @@ export class BuilderKernel {
         }
         kernel.addDimension(dimension);
       }
+      return kernel;
     }
     return null;
   }

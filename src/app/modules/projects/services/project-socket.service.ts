@@ -28,7 +28,9 @@ export class ProjectSocketService extends ProjectService {
         this.service.get(id, {},
             (err, item: any) => {
                 if (err) return console.error(err);
+                console.log(item);
                 this.project = ToProject.transformCompleteToProject(item);
+                console.log(this.project);
                 this.projectObserver.next(this.project);
             });
     }
