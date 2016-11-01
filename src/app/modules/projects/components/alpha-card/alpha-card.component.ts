@@ -1,6 +1,6 @@
 
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { State, Dimension } from '../../model/project-kernel';
+import { State, Alpha } from '../../model/project-kernel';
 
 @Component({
   selector: 'alpha-card',
@@ -9,7 +9,7 @@ import { State, Dimension } from '../../model/project-kernel';
 })
 export class AlphaCard {
   @Input()
-  dimension: Dimension;
+  dimension: Alpha;
   @Input()
   currentState: State;
   stateSelect: State = null;

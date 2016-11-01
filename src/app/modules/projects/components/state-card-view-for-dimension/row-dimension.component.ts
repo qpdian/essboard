@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Dimension, State } from '../../model/project-kernel';
+import { Alpha, State } from '../../model/project-kernel';
 import { StateMetadata } from '../../../../shared/models/kernel/kernel';
 
 @Component({
@@ -8,7 +8,7 @@ import { StateMetadata } from '../../../../shared/models/kernel/kernel';
   styleUrls: ['row-dimension.component.css']
 })
 export class RowDimensionComponent {
-  _dimension: Dimension;
+  _dimension: Alpha;
   @Input()
   isForSelected: boolean;
   @Output()
@@ -17,7 +17,7 @@ export class RowDimensionComponent {
   selected: StateMetadata = null;
 
   @Input()
-  set dimension(dimension: Dimension) {
+  set dimension(dimension: Alpha) {
     this._dimension = dimension;
   }
   get dimension() {

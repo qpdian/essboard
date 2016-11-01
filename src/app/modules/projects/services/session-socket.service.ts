@@ -72,7 +72,7 @@ export class SessionSocketService extends SessionService {
             (err, item: any) => {
                 if (err) return console.error(err);
                 this.session = ToSession.withCompleteTransformation(item);
-                Util.setSource(item.dimensions);
+                Util.setSource(item.alphas);
                 this.sessionObserver.next(this.session);
                 console.log("Sesion completa ", this.session);
             });

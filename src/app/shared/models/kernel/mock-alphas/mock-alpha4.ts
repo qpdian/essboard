@@ -13,27 +13,27 @@ export const state41: StateMetadata = new StateMetadata('Con arquitectura selecc
 
 export const checkpointsForState41: CheckpointMetadata[] = [
   {
-     concept: '4-1-1',
+     identifier: '4-1-1',
     name: 'Se selecciono la arquitectura que trata los riesgos tecnicos clave',
     description: 'Los interesados confirman que el nuevo sistema cumple con las expectativas.',
     type: 'abbrev',
     state: state41
   }, {
-     concept: '4-1-2',
+     identifier: '4-1-2',
     name: 'Se acordaron los criterios para seleccionar la arquitectura',
     description: 'Los interesados confirman que el nuevo sistema cumple con las expectativas.',
     type: 'abbrev',
     state: state41
   },
   {
-     concept: '4-1-3',
+     identifier: '4-1-3',
     name: 'Se seleccionaron las plataformas,tecnologias y lenguajes',
     description: 'Las prioridades son claras.',
     type: 'abbrev',
     state: state41
   },
   {
-     concept: '4-1-4',
+     identifier: '4-1-4',
     name: 'Se tomaron las decisiones de compra,construccion y reuso',
     description: 'La solucion que satisface los interesados trata la oportunidad.',
     type: 'abbrev',
@@ -42,20 +42,20 @@ export const checkpointsForState41: CheckpointMetadata[] = [
 ];
 export const checkpointsForState42: CheckpointMetadata[] = [
   {
-     concept: '4-2-1',
+     identifier: '4-2-1',
     name: 'Se demostraron las caracteristicas clave de la arquitectura',
     description: 'Los interesados confirman que el nuevo sistema cumple con las expectativas.',
     type: 'abbrev',
     state: state42
   }, {
-     concept: '4-2-2',
+     identifier: '4-2-2',
     name: 'Los interesados relevantes acordaron que la arquitectura es apropiada',
     description: 'Los interesados confirman que el nuevo sistema cumple con las expectativas.',
     type: 'abbrev',
     state: state42
   },
   {
-     concept: '4-2-3',
+     identifier: '4-2-3',
     name: 'Se ejercieron la interfaz critica y las confiuraciones del sistema',
     description: 'Las prioridades son claras.',
     type: 'abbrev',

@@ -4,7 +4,7 @@ import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Project, Session } from '../../model/project';
-import { Dimension, State } from '../../model/project-kernel';
+import { Alpha, State } from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
@@ -17,9 +17,8 @@ import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/k
 export class SessionComponent implements OnInit, OnDestroy {
   @Input()
   idSession: string;
-  @Output() sessionAsCurrent = new EventEmitter<Session>();
 
-  dimensionSelect: Dimension;
+  dimensionSelect: Alpha;
   selectedState: StateMetadata;
   statesSelecteds: StateMetadata[];
   workItems: any[] = [];
@@ -44,7 +43,7 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   }
 
-  chooseDimension(dimension: Dimension) {
+  chooseDimension(dimension: Alpha) {
     this.dimensionSelect = dimension;
   }
   refreshDimensionSelected(event){

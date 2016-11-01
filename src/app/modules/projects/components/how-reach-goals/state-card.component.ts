@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core';
 import { StateMetadata, CheckpointMetadata } from '../../../../shared/models/kernel/kernel';
-import { Dimension, State } from '../../model/project-kernel';
+import { Alpha, State } from '../../model/project-kernel';
 @Component({
   selector: 'how-reach-goals',
   templateUrl: 'state-card.component.html',

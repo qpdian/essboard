@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PROJECTS } from '../model/mock-projects';
 import { Project,Session} from '../model/project';
 import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
-import { Dimension } from '../model/project-kernel';
+import { Alpha } from '../model/project-kernel';
 
 
 let projectsPromise = Promise.resolve(PROJECTS);
@@ -14,7 +14,7 @@ export class ProjectService {
     }
     add(project: Session) {
         for (let a of ALPHAS) {
-            let dim = new Dimension(a,false);
+            let dim = new Alpha(a,false);
             
         }
         PROJECTS.push(project);

@@ -80,7 +80,7 @@ export class StateMetadata {
     this.next = next;
   }
   getCheckPoint(identifier: string){
-    return this.checkList.find( check => check.concept === identifier);
+    return this.checkList.find( check => check.identifier === identifier);
   }
   getMainChecklist() {
     let mainChecklist: CheckpointMetadata[] = [];
@@ -97,7 +97,7 @@ export class CheckpointMetadata {
     public name: string,
     public description: string,
     public type: string,
-    public concept: string,
+    public identifier: string,
     public state: StateMetadata
   ) { }
 }

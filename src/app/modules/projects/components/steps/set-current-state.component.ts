@@ -1,5 +1,5 @@
 import { Component, OnInit, Input ,EventEmitter,Output} from '@angular/core';
-import { Dimension, State } from '../../model/project-kernel';
+import { Alpha, State } from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class SetCurrentStateComponent implements OnInit {
     @Input()
-    dimension: Dimension;
+    dimension: Alpha;
     @Input()
     idSession: string;
     private sub: Subscription;
@@ -22,10 +22,11 @@ export class SetCurrentStateComponent implements OnInit {
     onSelectedState(state: State) {
         this.putDimensionAsTouching();
         this.selectedState = state;
+        console.log(state);
         if (this.isPosiblePutStateAsWorking(state)) {
-            this.service.setStateAsWorking(this.idSession, this.dimension.concept, state.info.identifier);
+            this.service.setStateAsWorking(this.idSession, this.dimension.metadataId, state.info.name);
         } else {
-            alert("Aun no haz iniciado el estado anterior");
+            alert("Deshabilitado");
         }
     }
     private isPosiblePutStateAsWorking(state: State): Boolean {
@@ -37,6 +38,6 @@ export class SetCurrentStateComponent implements OnInit {
         }
     }
     onSelectedCheckpoint(check) {
-        this.service.setCheckpointTo(this.idSession, this.dimension.concept, this.selectedState.info.identifier, check.info.concept, check.isAchaived);
+        this.service.setCheckpointTo(this.idSession, this.dimension.metadataId, this.selectedState.info.identifier, check.info.concept, check.isAchaived);
     }
 }

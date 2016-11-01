@@ -1,13 +1,8 @@
-
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { Project, Session, Kernel } from '../../model/project';
-import { Dimension, State } from '../../model/project-kernel';
+import { Project, Session } from '../../model/project';
 import { ProjectService } from '../../services/project.service';
 import { Subscription } from 'rxjs/Subscription';
-import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
 @Component({
   selector: 'my-project-detail',
@@ -80,8 +75,4 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.hiddenSession = false;
     this.selectedSession = session;
   }
-  saveAsCurrent(session: Session) {
-    this.project.currentKernel = session.kernel;
-  }
-
 }

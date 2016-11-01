@@ -22,8 +22,10 @@ activitySpace2.addInput(customer.getAlpha(1));
 activitySpace2.addInput(customer.getAlpha(2));
 activitySpace2.addInput(solution.getAlpha(3));
 activitySpace2.addInput(solution.getAlpha(4));
+
 activitySpace2.addEntryCriteria(ALPHAS[3].getStateByIdentifier(1));
 activitySpace2.addEntryCriteria(ALPHAS[4].getStateByIdentifier(3));
+
 activitySpace2.addCompletionCriteria(ALPHAS[3].getStateByIdentifier(2));
 activitySpace2.addCompletionCriteria(ALPHAS[4].getStateByIdentifier(4));
 

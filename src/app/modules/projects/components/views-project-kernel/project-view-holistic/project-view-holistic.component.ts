@@ -2,7 +2,7 @@
 
 import { Component, Input } from '@angular/core';
 import { Project } from '../../../model/project';
-import { Dimension } from '../../../model/project-kernel';
+import { Alpha } from '../../../model/project-kernel';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class ProjectViewHolistic {
   selectDimension: any = null;
   @Input() project: Project;
 
-  showCardStatesOfDimension(dimension : Dimension) {
+  showCardStatesOfDimension(dimension : Alpha) {
     this.selectDimension = dimension;
   }
 

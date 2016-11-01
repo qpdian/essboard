@@ -1,7 +1,7 @@
-import { Dimension } from './project-kernel';
+import { Alpha, Kernel } from './project-kernel';
 import { CheckpointMetadata } from '../../../shared/models/kernel/kernel';
+
 export class Project {
-  public currentKernel: Kernel;
   public members: any[];
   public createdAt: Date;
   public sessions: Session[];
@@ -9,19 +9,30 @@ export class Project {
   public name: string;
   public description: string;
   public percent: number;
- 
+  public lastSession : Session;
+
   constructor(id: string, name: string, description: string, createdAt: Date) {
     this.name = name;
     this.description = description;
     this.id = id;
     this.members = [];
-    this.currentKernel = null;
     this.sessions = [];
     this.createdAt = createdAt;
   }
+
+  public get currentKernel(): Kernel {
+    if (this.lastSession) {
+      return this.lastSession.kernel;
+    } else {
+      return Kernel.empty();
+    }
+  }
+
+
   addSession(session: Session): void {
     this.sessions.push(session);
   }
+
   addMember(id, email, avatar) {
     this.members.push(
       {
@@ -35,12 +46,14 @@ export class Project {
     return index != -1;
 
   }
+  
   getLastSession() {
     if (this.sessions.length > 0) {
       return this.sessions[this.sessions.length - 1];
     }
     return null;
   }
+  
   getLastSessionId() {
     if (this.sessions.length > 0) {
       console.log(this.sessions[this.sessions.length - 1].id);
@@ -48,12 +61,11 @@ export class Project {
     }
     return null;
   }
+
   fulfiledThisCheckpoint(check: CheckpointMetadata) {
     return false;
   }
-  setCurrentKernel(kernel: Kernel) {
-    this.currentKernel = kernel;
-  }
+
   canCreateNewSession() {
     if (this.sessions.length === 0) { return true; }
     if (this.getLastSession().isComplete === true) { return true; }
@@ -68,7 +80,7 @@ export class Session {
   public num: number;
   public isComplete: boolean;
   public isTouched: boolean;
-  public selecteds: Dimension[];
+  public selecteds: Alpha[];
   constructor(id: string, num: number, date: Date) {
     this.date = date;
     this.num = num;
@@ -85,24 +97,11 @@ export class Session {
     }
     return 'filter_' + this.num;
   }
-  setKernel(kernel : Kernel){
+  setKernel(kernel: Kernel) {
     this.kernel = kernel;
   }
-  getDimension(dimension){
-    if(!!dimension){return this.kernel.dimensions.find(dim => dim.concept === dimension.concept);}
+  getDimension(dimension) {
+    if (!!dimension) { return this.kernel.dimensions.find(dim => dim.metadataId === dimension.concept); }
     return null;
   }
 }
-
-export class Kernel {
-  dimensions: Dimension[];
-  constructor() {
-    this.dimensions = [];
-
-  }
-  addDimension(dimension){
-    this.dimensions.push(dimension);
-  }
-
-}
-

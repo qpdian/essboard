@@ -1,12 +1,42 @@
-
 import { AlphaMetadata, StateMetadata, CheckpointMetadata } from '../../../shared/models/kernel/kernel';
-export class Dimension {
+import { ALPHAS } from  '../../../shared/models/kernel/mock-kernel';
+
+export class Kernel {
+  dimensions: Alpha[];
+
+  public static empty(): Kernel {
+    let kernel = new Kernel();
+      for (let alphaMetadata of ALPHAS) {
+        let dimension = new Alpha(alphaMetadata, false,alphaMetadata.identifier );
+        for (let stateMetadata of alphaMetadata.states) {
+          let state = new State(stateMetadata);
+          for (let checkpoint of stateMetadata.checkList) {
+            state.addCheckpoint(new Checkpoint(checkpoint));
+          }
+          dimension.addState(state);
+        }
+        kernel.addDimension(dimension);
+      }
+    return kernel;
+  }
+
+  constructor() {
+    this.dimensions = [];
+  }
+
+  addDimension(dimension) {
+    this.dimensions.push(dimension);
+  }
+}
+
+
+export class Alpha {
   public states: State[] = [];
   public currentState: StateMetadata;
   constructor(
     public info: AlphaMetadata,
     public isTouched: boolean,
-    public concept: string
+    public metadataId: number
   ) {
   }
   addStates(states) {
@@ -36,7 +66,7 @@ export class Dimension {
   }
   cleanFill() {
     for (let state of this.states) {
-      state.isAchaived = false;
+      state.isAchieved = false;
     }
   }
   /*
@@ -126,11 +156,11 @@ export class Dimension {
 export class State {
   public checklist: Checkpoint[] = [];
   public percent: number;
-  public _dimension: Dimension;
+  public _dimension: Alpha;
   constructor(
     public info: StateMetadata,
-    public isAchaived: boolean,
-    public isWorking: boolean
+    public isAchieved = false,
+    public isWorking = false
   ) {
   }
   addCheckpoint(checkpoint: Checkpoint) {
@@ -141,7 +171,7 @@ export class State {
     return this.percent;
   }
   getCheckPointAchaiveds() {
-    this.checklist.find(check => check.isAchaived === true);
+    this.checklist.find(check => check.isAchieved === true);
   }
   getX() {
     let width = 30;
@@ -153,15 +183,19 @@ export class State {
   get isFirst() {
     return this.info.dimension.states[0] === this.info;
   }
+
   get stateBackIsAchaived(): Boolean {
     let backState = this.info.back;
-    if (!!backState) { return this._dimension.find(backState).isWorking === true; }
+    if (backState) { 
+      return this._dimension.find(backState).isWorking === true; 
+    }
     return false;
   }
+
   setDimension(dimension) {
     this._dimension = dimension;
   }
-  get dimension(): Dimension {
+  get dimension(): Alpha {
     return this._dimension;
   }
 
@@ -169,8 +203,8 @@ export class State {
 
 export class Checkpoint {
   constructor(
-    public info: CheckpointMetadata, public isAchaived: boolean
+    public info: CheckpointMetadata, public isAchieved = false
   ) {
-    this.isAchaived = isAchaived;
+    this.isAchieved = isAchieved;
   }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Project, Kernel } from '../../../model/project';
+import { Component, Input } from '@angular/core';
+import { Kernel } from '../../../model/project-kernel';
+
 class SVG {
   positionx: number;
   positiony: number;
@@ -100,7 +101,7 @@ export class AlphaConectionsComponent {
       reverse: false,
       ticks: {
         beginAtZero: true,
-        stepSize:1
+        stepSize: 1
       }
     }
   };

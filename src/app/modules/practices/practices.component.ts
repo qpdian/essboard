@@ -6,7 +6,7 @@ import {ACTIVITY_SPACES } from '../../shared/models/kernel/mock-activity-spaces/
   styleUrls: ['./practices.component.css']
 })
 export class PracticesComponent implements OnInit {
-  activitySpaces[]:any;
+  activitySpaces:any[] = [];
   constructor() { }
 
   ngOnInit() {

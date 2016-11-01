@@ -1,9 +1,9 @@
 import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
-import { Dimension, State,Checkpoint } from './project-kernel';
-import { Kernel } from './project';
+import { Kernel,Alpha, State, Checkpoint } from './project-kernel';
 export class Util {
-  public static source :any;
-  public static getKernelEmpty() {
+  public static source: any;
+
+  public static getKernelEmpty(): any {
     let dimensions = [];
     for (let alpha of ALPHAS) {
       let states = [];
@@ -12,55 +12,57 @@ export class Util {
         for (let check of state.checkList) {
           checklist.push(
             {
-              concept: check.concept,
-              isAchaived: false
+              metadataId: check.identifier,
+              isAchieved: false
             }
           );
         }
         states.push({
           name: state.identifier,
           percent: 0,
-          isAchaived: false,
+          isAchieved: false,
           isWorking: false,
           checklist: checklist
         });
       }
       dimensions.push({
-        concept: alpha.identifier,
+        metadataId: alpha.identifier,
         name: alpha.name,
         currentState: null,
         states: states,
         isTouched: false
       })
     }
+
     return dimensions;
   }
-  public static setSource(dimensions){
+
+  public static setSource(dimensions) {
     this.source = dimensions;
   }
-  public static getIndexs(concept:string,stateName:string){
-    let indexDimension = this.source.map(function (item) { return item.concept; }).indexOf(concept);
+  public static getIndexs(metadataId: string, stateName: string) {
+    let indexDimension = this.source.map(function (item) { return item.metadataId; }).indexOf(metadataId);
     let indexState = this.source[indexDimension].states.map(function (item) { return item.name; }).indexOf(stateName);
     return {
-      'dimension':indexDimension,
-      'state':indexState
+      'dimension': indexDimension,
+      'state': indexState
     }
   }
-   public static getStateIndex(concept:string){
-   return this.source.indexOf({concept : concept});
+  public static getStateIndex(metadataId: string) {
+    return this.source.indexOf({ metadataId: metadataId });
   }
-  public static buildKernel(dimensions): Kernel {
+  public static buildKernel(alphas): Kernel {
     let kernel = new Kernel();
-    if (!!dimensions) {
-      for (let dim of dimensions) {
-        let alphaMetadata = ALPHAS.find(alpha => alpha.identifier === dim.concept);
-        let dimension = new Dimension(alphaMetadata, dim.isTouched,dim.concept);
-        dimension.currentState = dim.currentState;
-        for (let state of dim.states) {
+    if (!!alphas) {
+      for (let alphaRecord of alphas) {
+        let alphaMetadata = ALPHAS.find(alpha => alpha.identifier === alphaRecord.metadataId);
+        let dimension = new Alpha(alphaMetadata, alphaRecord.isTouched, alphaRecord.metadataId);
+        dimension.currentState = alphaRecord.currentState;
+        for (let state of alphaRecord.states) {
           let stateMetadata = alphaMetadata.getState(state.name);
-          let stateReal = new State(stateMetadata, state.isAchaived,state.isWorking);
+          let stateReal = new State(stateMetadata, state.isAchaived, state.isWorking);
           for (let check of state.checklist) {
-            let checkpoint = stateMetadata.getCheckPoint(check.concept);
+            let checkpoint = stateMetadata.getCheckPoint(check.metadataId);
             stateReal.addCheckpoint(new Checkpoint(checkpoint, check.isAchaived));
           }
           dimension.addState(stateReal);

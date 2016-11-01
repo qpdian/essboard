@@ -60,7 +60,7 @@ export class ProjectSocketService extends ProjectService {
         const data = { description: description };
         this.patchData(data);
     }
-    public inviteTo(project,user) {
+    public inviteTo(project, user) {
         this._app.authenticate().then(() => {
             this.service.patch(
                 project.id,
@@ -90,7 +90,7 @@ export class ProjectSocketService extends ProjectService {
         });
     }
     private onPatched(patchedItem: any) {
-        console.log("traido",patchedItem);
+        console.log("traido", patchedItem);
         this.project = ToProject.transformCompleteToProject(patchedItem);
         this.projectObserver.next(this.project);
     }
@@ -100,16 +100,20 @@ export class ProjectSocketService extends ProjectService {
         //this.dataStore.checks.splice(index, 1);
         //this.itemsObserver.next(this.data);
     }
+
     addSession() {
         let sessionService = this._app.service('sessions');
         let order = this.project.sessions.length + 1;
-        const backId = this.project.getLastSessionId();
-        let dimensions = Util.getKernelEmpty();
+        const idLastSession = this.project.getLastSessionId();
+        let alphas = Util.getKernelEmpty();
+        console.log(alphas);
+
         this._app.authenticate().then(data => {
             sessionService.create({
                 _project: this.project.id,
                 nroOrder: order,
-                dimensions: dimensions,
+                alphas: alphas,
+                idLastSession: idLastSession
             }).then((session) => {
                 this.project.addSession(new Session(session._id, session.nroOrder, session.createdAt));
                 this.projectObserver.next(this.project);

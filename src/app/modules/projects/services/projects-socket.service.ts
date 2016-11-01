@@ -77,27 +77,7 @@ export class ProjectsSocketService extends ProjectsService {
                 })
         });
     }
-    getProject(id: string) {
-        this.service.get(id, {},
-            (err, item: any) => {
-                if (err) return console.error(err);
-                let p = new Project(item._id, item.name, item.description, item.createdAt);
-                let order = item.sessions.length;
-                for (let session of item.sessions) {
-                    p.addSession(new Session(session._id, order, session.createdAt));
-                    console.log(session);
-                    order--;
-                }
-                p.setCurrentKernel(Util.buildKernel(item.currentKernel));
-                for (let member of item.members) {
-                    p.addMember(member._id, member.email, member.avatar);
-                }
-                this.project = p;
-                this.projectObserver.next(this.project);
-                console.log("item of server ", item);
-                console.log("project ", this.project);
-            });
-    }
+
     delete() {
         const id = this.project.id;
         this.service.remove(id, {},
@@ -181,26 +161,6 @@ export class ProjectsSocketService extends ProjectsService {
     addAllDimensions(project: Project) {
 
     }
-    addSession() {
-        let sessionService = this._app.service('sessions');
-        let order = this.project.sessions.length + 1;
-        const backId = this.project.getLastSessionId();
-        let dimensions = Util.getKernelEmpty();
-        this._app.authenticate().then(data => {
-            sessionService.create({
-                _project: this.project.id,
-                nroOrder: order,
-                dimensions: dimensions,
-            }).then((session) => {
-                console.log('Sesion creada', session);
-                this.project.addSession(new Session(session._id, session.nroOrder, session.createdAt));
-                this.projectObserver.next(this.project);
-            }).catch(function (error) {
-                console.error('Error saving!', error);
-            })
-        });
-    }
-
 
     join() {
 

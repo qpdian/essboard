@@ -38,7 +38,7 @@
                     <h2 class="title">Tu proyecto holisticamente</h2>
                     <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
                 </div>         
-                <session *ngIf="selectedSession" [idSession]="selectedSession.id" (sessionAsCurrent)="saveAsCurrent($event)">
+                <session *ngIf="selectedSession" [idSession]="selectedSession.id">
                 </session>
             </div>
         </div>
