@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../auth.service';
 import { Credential } from '../../shared/models/credential';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
 import { NotificationsService, SimpleNotificationsComponent } from 'angular2-notifications';
 
@@ -16,16 +18,25 @@ export class LoginComponent implements OnInit {
   credential = new Credential();
   submitted = false;
   active: boolean = true;
-  onSubmit() {
-    this.submitted = true;
-    this.credential = this.loginForm.value;
-    this.service.login(this.loginForm.value);
-    console.log(this.loginForm.value);
-  }
-  constructor(public service: AuthService, private _service: NotificationsService, private fb: FormBuilder) { }
+  
+  constructor(
+    private router: Router, 
+    private auth: AuthService,
+    private _service: NotificationsService,
+    private fb: FormBuilder) { }
+  
   ngOnInit(): void {
     this.buildForm();
   }
+  
+  onSubmit() {
+    this.submitted = true;
+    this.credential = this.loginForm.value;
+    this.auth.login(this.loginForm.value)
+             .then(() => this.router.navigate([this.auth.redirectURL]))
+             .catch((error) => alert(error));
+  }
+  
   buildForm(): void {
     this.loginForm = this.fb.group({
       'email': [this.credential.email, [
