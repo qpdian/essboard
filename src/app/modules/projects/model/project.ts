@@ -100,8 +100,8 @@ export class Session {
   setKernel(kernel: Kernel) {
     this.kernel = kernel;
   }
-  getDimension(dimension) {
-    if (!!dimension) { return this.kernel.dimensions.find(dim => dim.metadataId === dimension.concept); }
+  getDimension(alpha) {
+    if (!!alpha) { return this.kernel.dimensions.find(dim => dim.metadataId === alpha.metadataId); }
     return null;
   }
 }

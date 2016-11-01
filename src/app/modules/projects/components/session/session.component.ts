@@ -45,6 +45,7 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   chooseDimension(dimension: Alpha) {
     this.dimensionSelect = dimension;
+    console.log(dimension);
   }
   refreshDimensionSelected(event){
     console.log("refreeshh");

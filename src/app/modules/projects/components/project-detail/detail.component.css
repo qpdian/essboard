@@ -85,5 +85,5 @@ md-toolbar{
 }
 .content {
     height: 500px;
-    overflow: overlay;
+    overflow: scroll;
 }

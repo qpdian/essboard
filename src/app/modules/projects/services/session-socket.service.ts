@@ -69,20 +69,27 @@ export class SessionSocketService extends SessionService {
                 alert("Error al eliminar  tu proyecto");
             });
     }
-    setStateAsWorking(id, dimensionConcept, stateName) {
-        let indexs = GetKeys.getIndexs(dimensionConcept, stateName);
-        let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state;
+    setStateAsWorking(id, dimensionMetadataId, stateMetadataId) {
+        let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId);
+        //base is equal : alphas.0.states.0 
+        let base = 'alphas.' + indexs.dimension + '.states.' + indexs.state;
         let path = base + '.isWorking';
         let params = {};
         let setData = { [path]: true };
         this.patch(id, setData, params);
     }
-    setCheckpointTo(id, dimensionConcept, stateName, checkpointId, condition) {
-        let indexs = GetKeys.getIndexs(dimensionConcept, stateName);
-        let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
-        let path = base + '.$.isAchaived';
-        let search = base + '.concept';
-        let params = { ["query"]: { [search]: checkpointId } };
+    setCheckpointTo(id, dimensionMetadataId, stateMetadataId, checkpointMetadataId, condition) {
+        let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId);
+        console.log("indices",indexs);
+        console.log("check",checkpointMetadataId);
+        console.log('condition',condition);
+        let base = 'alphas.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
+     
+        let path = base + '.$.isAchieved';
+        console.log("path",path);
+        let search = base + '.metadataId';
+        console.log("search",search);
+        let params = { ["query"]: { [search]: checkpointMetadataId } };
         let setData = { [path]: condition };
         this.patch(id, setData, params);
     }
@@ -93,7 +100,7 @@ export class SessionSocketService extends SessionService {
                 { '$set': data },
                 params)
                 .then((result) => {
-                    console.log(result.dimensions);
+                    console.log("result",result.alphas);
                 })
                 .catch(function (error) {
                     console.log(error)
@@ -118,7 +125,7 @@ export class SessionSocketService extends SessionService {
 
     private onPatched(patchedItem: any) {
         this.session = ToSession.withCompleteTransformation(patchedItem);
-        GetKeys.setSource(patchedItem.dimensions);
+        GetKeys.setSource(patchedItem.alphas);
         this.sessionObserver.next(this.session);
     }
     private onRemoved(removedItem) {

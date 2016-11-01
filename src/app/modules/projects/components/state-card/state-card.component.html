@@ -15,7 +15,7 @@
         </tr>
         <tr *ngFor="let checkpoint of state.checklist">
           <td class="check">
-          <div [className]="checkpoint.isAchaived ? 'box-check achaived':'box-check no-achaived'" (click)="check(checkpoint)" >
+          <div [className]="checkpoint.isAchieved ? 'box-check achieved':'box-check no-achieved'" (click)="check(checkpoint)" >
           </div>
          </td>
           <td class="name">{{checkpoint.info.name}}</td>

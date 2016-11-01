@@ -28,9 +28,7 @@ export class ProjectSocketService extends ProjectService {
         this.service.get(id, {},
             (err, item: any) => {
                 if (err) return console.error(err);
-                console.log(item);
                 this.project = ToProject.transformCompleteToProject(item);
-                console.log(this.project);
                 this.projectObserver.next(this.project);
             });
     }
@@ -84,7 +82,7 @@ export class ProjectSocketService extends ProjectService {
                 { $pull: { members: user.id } },
                 { query: { action: 'desinvite', data: user.id } }
             ).then((result) => {
-                console.log('desinvitado');
+                console.log('Desinvitado');
             })
                 .catch(function (error) {
                     console.log(error, "Error al editar  tu proyecto");
@@ -92,7 +90,6 @@ export class ProjectSocketService extends ProjectService {
         });
     }
     private onPatched(patchedItem: any) {
-        console.log("traido", patchedItem);
         this.project = ToProject.transformCompleteToProject(patchedItem);
         this.projectObserver.next(this.project);
     }

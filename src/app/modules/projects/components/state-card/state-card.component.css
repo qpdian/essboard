@@ -46,10 +46,10 @@ state-card-view{
    width:15px;
    margin :auto;
 }
-.achaived{
+.achieved{
   background-color: #a5d2b1;
 }
-.no-achaived{
+.no-achieved{
  background-color: #fff;
 }
 

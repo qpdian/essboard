@@ -1,5 +1,5 @@
 import { Component, OnInit, Input ,EventEmitter,Output} from '@angular/core';
-import { Alpha, State } from '../../model/project-kernel';
+import { Alpha, State ,Checkpoint} from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -24,7 +24,7 @@ export class SetCurrentStateComponent implements OnInit {
         this.selectedState = state;
         console.log(state);
         if (this.isPosiblePutStateAsWorking(state)) {
-            this.service.setStateAsWorking(this.idSession, this.dimension.metadataId, state.info.name);
+            this.service.setStateAsWorking(this.idSession, this.dimension.metadataId, state.info.identifier);
         } else {
             alert("Deshabilitado");
         }
@@ -37,7 +37,10 @@ export class SetCurrentStateComponent implements OnInit {
             this.dimension.isTouched = true;
         }
     }
-    onSelectedCheckpoint(check) {
-        this.service.setCheckpointTo(this.idSession, this.dimension.metadataId, this.selectedState.info.identifier, check.info.concept, check.isAchaived);
+    onSelectedCheckpoint(checkpoint:Checkpoint) {
+        this.service.setCheckpointTo(this.idSession,
+                                     this.dimension.metadataId, 
+                                     this.selectedState.info.identifier, 
+                                     checkpoint.info.identifier, !checkpoint.isAchieved);
     }
 }
