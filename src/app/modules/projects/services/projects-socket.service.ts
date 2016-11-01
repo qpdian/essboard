@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project, Session } from '../model/project';
-import { Util } from '../model/util';
+import { Project } from '../model/project';
 import { Observable } from 'rxjs';
 import { ProjectsService } from './projects.service';
 import { SocketService } from '../../../shared/services/socket-io';
@@ -66,7 +65,6 @@ export class ProjectsSocketService extends ProjectsService {
                 {
                     name: project.name,
                     description: project.description,
-                    currentKernel: Util.getKernelEmpty(),
                     members : []
                 })
                 .then((result) => {
@@ -99,7 +97,6 @@ export class ProjectsSocketService extends ProjectsService {
             });
     }
     public inviteTo(project: Project, user) {
-        console.log(user.id + "user");
         this.service.patch(
             project.id,
             { $addToSet: { members: user.id } }
@@ -134,7 +131,6 @@ export class ProjectsSocketService extends ProjectsService {
         return foundIndex;
     }
     private onCreated(newItem: any) {
-        console.log('Someone created a project', newItem);
         this.projects.unshift(new Project(newItem._id, newItem.name, newItem.description, newItem.createdAt));
         this.projectsObserver.next(this.projects);
     }
@@ -158,14 +154,6 @@ export class ProjectsSocketService extends ProjectsService {
 
         //this.itemsObserver.next(this.data);
     }
-    addAllDimensions(project: Project) {
 
-    }
-
-    join() {
-
-
-
-    }
 
 }

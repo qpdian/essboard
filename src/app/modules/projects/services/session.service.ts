@@ -6,7 +6,6 @@ export abstract class SessionService {
     items: Observable<any>;
     currentSession: Observable<any>;
     abstract getSessions() ;
-    abstract add(project);
     abstract getSession(id: number | string);
     abstract deleteSe();
     abstract setCheckpointTo(id,dimensionId,stateId,checkpointId,condition);

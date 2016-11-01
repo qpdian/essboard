@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
+
 import { Project } from '../model/project';
-import { ALPHAS } from '../../../shared/models/kernel/mock-kernel';
-import { Alpha } from '../model/project-kernel';
 import { Observable } from 'rxjs';
 
 export abstract class ProjectsService {

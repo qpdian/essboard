@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Session, Project } from '../model/project';
+import { Session } from '../model/project';
 import { Observable } from 'rxjs';
 import { SessionService } from './session.service';
 import { SocketService } from '../../../shared/services/socket-io';
 import { ToSession } from '../transforms/to-session';
-import { Util } from '../model/util';
+import { GetKeys } from '../model/util/get-keys-from-object';
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -45,34 +45,13 @@ export class SessionSocketService extends SessionService {
         });
 
     }
-    add(project: Project) {
-        console.log('sesions save');
-        this._app.authenticate().then(data => {
-            console.log(project);
-            const backId = project.getLastSessionId();
-            console.log(backId);
-            this.service.create({
-                _project: project.id,
-                idLastSession: backId,
-                nroOrder: project.sessions.length + 1,
-            })
-                .then((result) => {
-                    // project.addSession(new );
-                    return project;
-                })
-                .catch(function (error) {
-                    console.error('Error saving!', error);
-                    alert("Error al crear tu proyecto");
-                })
-        });
-    }
-
+ 
     getSession(id: string) {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
                 this.session = ToSession.withCompleteTransformation(item);
-                Util.setSource(item.alphas);
+                GetKeys.setSource(item.alphas);
                 this.sessionObserver.next(this.session);
                 console.log("Sesion completa ", this.session);
             });
@@ -91,7 +70,7 @@ export class SessionSocketService extends SessionService {
             });
     }
     setStateAsWorking(id, dimensionConcept, stateName) {
-        let indexs = Util.getIndexs(dimensionConcept, stateName);
+        let indexs = GetKeys.getIndexs(dimensionConcept, stateName);
         let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state;
         let path = base + '.isWorking';
         let params = {};
@@ -99,7 +78,7 @@ export class SessionSocketService extends SessionService {
         this.patch(id, setData, params);
     }
     setCheckpointTo(id, dimensionConcept, stateName, checkpointId, condition) {
-        let indexs = Util.getIndexs(dimensionConcept, stateName);
+        let indexs = GetKeys.getIndexs(dimensionConcept, stateName);
         let base = 'dimensions.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
         let path = base + '.$.isAchaived';
         let search = base + '.concept';
@@ -131,16 +110,15 @@ export class SessionSocketService extends SessionService {
         return foundIndex;
     }
     private onCreated(newItem: any) {
-        console.log('Someone created a message', newItem);
+        console.log('Someone created a session', newItem);
         //TODO: add notifications 
-        alert('Nuevo proyecto');
         // this.sessions.unshift(new Session(newItem.nroOrder,newItem.cretedAt));
         // this.sessionsObserver.next(this.sessions);
     }
 
     private onPatched(patchedItem: any) {
         this.session = ToSession.withCompleteTransformation(patchedItem);
-        Util.setSource(patchedItem.dimensions);
+        GetKeys.setSource(patchedItem.dimensions);
         this.sessionObserver.next(this.session);
     }
     private onRemoved(removedItem) {

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { ProjectService } from './project.service';
 import { SocketService } from '../../../shared/services/socket-io';
 import { ToProject } from '../transforms/to-project';
-import { Util } from '../model/util';
+import { BuildDataToServer } from '../model/util/build-data-to-server';
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
@@ -105,9 +105,7 @@ export class ProjectSocketService extends ProjectService {
         let sessionService = this._app.service('sessions');
         let order = this.project.sessions.length + 1;
         const idLastSession = this.project.getLastSessionId();
-        let alphas = Util.getKernelEmpty();
-        console.log(alphas);
-
+        let alphas = BuildDataToServer.initDimensions();
         this._app.authenticate().then(data => {
             sessionService.create({
                 _project: this.project.id,

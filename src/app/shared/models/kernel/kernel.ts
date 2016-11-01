@@ -25,8 +25,8 @@ export class AlphaMetadata {
     state.dimension = this;
     state.num = tam++;
   }
-  getState(name:string){
-    return this.states.find( state => state.name == name);
+  getState(identifier:number){
+    return this.states.find( state => state.identifier === identifier);
   }
   getStateByIdentifier(identifier : number){
     return this.states.find(state => state.identifier === (identifier + this.identifier*10));
