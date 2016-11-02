@@ -91,6 +91,26 @@ export class StateMetadata {
     }
     return mainChecklist;
   }
+    isAfterTo(state: StateMetadata) {
+    if (state) {
+      let pivot = state.next;
+      while (pivot) {
+        if (this === pivot) { return true; }
+        pivot = pivot.next;
+      }
+      return false;
+    }else{
+      return true;
+    }
+  }
+  isBeforeOrEqualTo(state: StateMetadata) {
+    let pivot = state;
+    while (pivot) {
+      if (this === pivot) { return true; }
+      pivot = pivot.back;
+    }
+    return false;
+  }
 }
 export class CheckpointMetadata {
   constructor(
@@ -128,6 +148,12 @@ export class ActivitySpaceMetadata {
   }
   addCompletionCriteria(completionCriteria: StateMetadata) {
     this.completionCriterias.push(completionCriteria);
+  }
+    implicaThisState(state: StateMetadata) {
+    let start = this.entryCriterias.find(st => st.dimension === state.dimension);
+    let end = this.completionCriterias.find(st => st.dimension === state.dimension);
+    return state.isAfterTo(start) && state.isBeforeOrEqualTo(end);
+
   }
 }
 export class CompetencyMetadata {

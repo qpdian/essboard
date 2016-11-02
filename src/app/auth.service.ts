@@ -51,12 +51,10 @@ export class AuthService {
         };
     }
 
-    public signup(user: any) {
-        this._app.service('users').create({
+    public signup(user: any): Promise<void> {
+        return this._app.service('users').create({
             email: user.email,
             password: user.password
-        }).then((result) => {
-            this.login(user);
         }).catch(function (error) {
             console.error('Error create user!', error);
         });

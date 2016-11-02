@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { Credential } from '../../shared/models/credential';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
+import { NotificationsService } from 'angular2-notifications';
+import { notificationOptions } from '../../shared/index';
 
 @Component({
   selector: 'app-signup',
@@ -9,56 +13,58 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['../auth.component.css']
 })
 export class SignupComponent implements OnInit {
-  signupForm: FormGroup;
-  credential = new Credential();
-  submitted = false;
-  active: boolean = true;
-  onSubmit() {
-    this.submitted = true;
-    this.credential = this.signupForm.value;
-    this.service.signup(this.signupForm.value);
-  }
-  constructor(public service: AuthService, private fb: FormBuilder) { }
+  private signupForm: FormGroup;
+  errors = new MessageBag();
+  options = notificationOptions;
+  
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private fb: FormBuilder,
+    private notification: NotificationsService,
+    private validation: ValidationMessagesService,) { }
+  
   ngOnInit(): void {
     this.buildForm();
   }
+  
   buildForm(): void {
     this.signupForm = this.fb.group({
-      'email': [this.credential.email, [
+      'email': ['', [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(24),
+        Validators.maxLength(50),
       ]
       ],
-      'password': [this.credential.password]
+      'password': ['', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(50),
+      ]]
     });
-    this.signupForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); // (re)set validation messages now
+    
+    this.validation
+        .seeForErrors(this.signupForm)
+        .subscribe((errors: MessageBag) => this.errors = errors);
   }
-  onValueChanged(data?: any) {
-    if (!this.signupForm) { return; }
-    const form = this.signupForm;
-    for (const field in this.formErrors) {
-      this.formErrors[field] = '';
-      const control = form.get(field);
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
-        }
-      }
-    }
+  
+  onSubmit() {
+    this.auth.signup(this.signupForm.value)
+             .then(() => this.login())
+             .catch((error) => this.onError(error));
   }
-  formErrors = { 'email': '', 'password': '' };
-  validationMessages = {
-    'email': {
-      'required': 'Correo es requerido',
-      'minlength': 'Name must be at least 4 characters long.',
-      'maxlength': 'Name cannot be more than 24 characters long.'
-    },
-    'password': {
-      'required': 'Contraseña es requerida'
-    }
-  };
+  
+  private login() {
+    this.auth.login(this.signupForm.value)
+               .then(() => this.onSuccess())
+               .catch((error) => this.onError(error));
+  }
+  
+  private onSuccess() {
+    this.router.navigate([this.auth.redirectURL]);
+  }
+
+  private onError(error: string) {
+    this.notification.error('Upps!', error);
+  }
 }
