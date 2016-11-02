@@ -1,13 +1,28 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, } from '@angular/router';
+import { AuthService } from './auth.service';
+import { CanActivate, Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from '@angular/router';
 
 @Injectable()
 export class GuardService implements CanActivate {
-  constructor(private router: Router) { }
-  canActivate() {
-    if (!!window.localStorage.getItem('user') && !!window.localStorage.getItem('feathers-jwt')) {
+
+  constructor(private auth: AuthService, private router: Router) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    let url: string = state.url;
+    return this.checkLogin(url);
+  }
+
+  private checkLogin(url: string): boolean {
+    if (this.auth.isLoggedIn) {
       return true;
     } else {
+      // Store the attempted URL for redirecting
+      this.auth.redirectURL = url;
+      console.log(url);
+      // Navigate to the login page with extras
       this.router.navigate(['/login']);
       return false;
     }
