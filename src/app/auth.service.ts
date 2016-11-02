@@ -7,11 +7,11 @@ export class AuthService {
     // store the URL so we can redirect after logging in
     private _redirectURL: string;
     private _app: any;
-    
+
     constructor(public socketService: SocketService) {
         this._app = this.socketService.init();
     }
-    
+
     set redirectURL(URL: string) {
         this._redirectURL = URL;
     }
@@ -19,7 +19,7 @@ export class AuthService {
     get redirectURL() {
         return this._redirectURL ? this._redirectURL : '/me/projects';
     }
-    
+
     public login(credentials: Credential): Promise<User> {
         return this._app.authenticate({
             type: 'local',
@@ -32,25 +32,25 @@ export class AuthService {
             throw 'Error : Email o correo es invalido';
         });
     }
-    
+
     public get isLoggedIn(): boolean {
         return !!window.localStorage.getItem('user');
     }
-    
+
     public logout(): Promise<boolean> {
         return this._app.logout().then(() => {
-            localStorage.removeItem("user")
+            localStorage.removeItem('user');
             return true;
         });
     }
-    
+
     public get user(): User {
         return {
             credentials: JSON.parse(window.localStorage.getItem('user'))
         };
     }
-    
-    public signup(user : any) {
+
+    public signup(user: any) {
         this._app.service('users').create({
             email: user.email,
             password: user.password

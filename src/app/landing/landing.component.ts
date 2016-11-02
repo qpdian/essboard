@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,16 +6,5 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
-
-  constructor(public service: AuthService) {}
-  ngOnInit() {
-  }
-  isLoggin() {
-    return !!this.service.user;
-  }
-  logout(){
-    this.service.logout();
-  }
-
+  ngOnInit() { }
 }

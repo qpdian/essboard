@@ -10,8 +10,8 @@
         </div>
         <div *ngIf="isLoggedIn" class="option-noLoggin">
             <button md-icon-button [md-menu-trigger-for]="menu">
-        <md-icon>account_circle</md-icon>
-      </button>
+                <md-icon>account_circle</md-icon>
+            </button>
             <md-menu class="menu-options" x-position="after" y-position="below" #menu="mdMenu">
                 <button md-menu-item routerLink="/me/projects"> Mis proyectos  </button>
                 <button md-menu-item routerLink="/me/projects"> Mis competencias </button>

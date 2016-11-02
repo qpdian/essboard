@@ -1,3 +1,4 @@
+<!--TODO: refactor this, move to one common layout-->
 <md-sidenav-layout>
     <md-sidenav #start mode="side" class="small">
         <md-nav-list>
@@ -9,9 +10,7 @@
         </md-nav-list>
     </md-sidenav>
     <div class="sidenav-content">
-        <header [isLoggin]=true (onToggle)="start.toggle()"></header>
-        <div class="content-with-overflow">
-            <router-outlet></router-outlet>
-        </div>
+        <layout-header (onToggle)="start.toggle()"></layout-header>
+        <router-outlet></router-outlet>
     </div>
 </md-sidenav-layout>
