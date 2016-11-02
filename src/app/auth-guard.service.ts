@@ -6,7 +6,7 @@ import { CanActivate, Router,
 } from '@angular/router';
 
 @Injectable()
-export class GuardService implements CanActivate {
+export class AuthGuardService implements CanActivate {
 
   constructor(private auth: AuthService, private router: Router) { }
 

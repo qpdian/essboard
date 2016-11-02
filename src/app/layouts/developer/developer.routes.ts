@@ -1,15 +1,15 @@
-
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
-import { GuardService } from '../../guard.service';
+import { AuthGuardService } from '../../auth-guard.service';
 import { LayoutComponent, DeveloperComponent } from './index';
 import { ProjectListComponent, ProjectDetailComponent } from '../../modules/projects/index';
 import { PracticesComponent } from '../../modules/practices/index';
+
 export const DeveloperRoutes: Route[] = [
   {
     path: 'me',
     component: LayoutComponent,
-    canActivate: [GuardService],
+    canActivate: [ AuthGuardService ],
     children: [
       { path: '', component: DeveloperComponent },
       { path: 'projects', component: ProjectListComponent },

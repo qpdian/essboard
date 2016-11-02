@@ -3,15 +3,15 @@
   <p class="intro-message">Ingresa con tus credenciales</p>
   <md-card class="content">
     <md-card-content>
-      <form [formGroup]="loginForm" *ngIf="active" (ngSubmit)="onSubmit()">
-        <md-input type="email" formControlName="email" class="full-width" placeholder="Correo electrónico" required dividerColor="{{ formErrors.email ? 'warn' : 'primary' }}">
-          <md-hint *ngIf="formErrors.email" align="end">
-            <span>{{ formErrors.email  }}</span>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <md-input type="email" formControlName="email" class="full-width" placeholder="Correo electrónico" required dividerColor="{{ errors.email ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="errors.email" align="end">
+            <span>{{ errors.email  }}</span>
           </md-hint>
         </md-input>
-        <md-input type="password" formControlName="password" class="full-width" placeholder="Contraseña" required dividerColor="{{ formErrors.password ? 'warn' : 'primary' }}">
-          <md-hint *ngIf="formErrors.password" align="end">
-            <span>{{ formErrors.password  }}</span>
+        <md-input type="password" formControlName="password" class="full-width" placeholder="Contraseña" required dividerColor="{{ errors.password ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="errors.password" align="end">
+            <span>{{ errors.password  }}</span>
           </md-hint>
         </md-input>
         <button type="submit" [disabled]="!loginForm.valid" md-raised-button class="main">Ingresa</button>
@@ -24,40 +24,4 @@
     </md-card-content>
   </md-card>
 </div>
-
-
-<form>
-  <div>
-    <label>Type</label>
-    <p>The type of the notification.</p>
-    <select [(ngModel)]="type" name="type">
-                    <option value="success" selected>Success</option>
-                    <option value="error">Error</option>
-                    <option value="alert">Alert</option>
-                    <option value="info">Info</option>
-                    <option value="bare">Bare</option>
-                </select>
-  </div>
-  <button (click)="create()">Create Notification</button>
-</form>
-<simple-notifications [options]="options" (onCreate)="onCreate($event)" (onDestroy)="onDestroy($event)"></simple-notifications>
-<!--
-<div class="login">
-  <img src="/assets/img/logos/logo-horizontal.png" alt="Essboard">
-  <p class="intro-message">Ingresa con tus credenciales</p>
-  <md-card class="">
-    <md-card-content>
-      <form *ngIf="active" (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <md-input class="full-width" placeholder="Correo" required [(ngModel)]="credentials.name" name="name" #name="ngModel">
-        </md-input>
-        <md-input class="full-width" placeholder="Contraseña" type= "password" value="" [(ngModel)]="credentials.password" name="password" #password="ngModel">
-        </md-input>
-        <button type="submit" [disabled]="!loginForm.form.valid" md-raised-button class="main">Ingresa</button>
-        <div class="more-options">
-          <span><a>Olvidaste la contraseña</a></span><span><a>No tienes una cuenta</a></span>
-        </div>
-      </form>
-    </md-card-content>
-  </md-card>
-</div>
--->
+<simple-notifications [options]="options"></simple-notifications>

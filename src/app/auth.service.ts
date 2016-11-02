@@ -29,7 +29,8 @@ export class AuthService {
             window.localStorage.setItem('user', JSON.stringify(result.data));
             return this.user;
         }).catch(function (error) {
-            throw 'Error : Email o correo es invalido';
+            throw `Lo sentimos, Essboard no renoce
+                   a un usuario para esas credenciales.`;
         });
     }
 

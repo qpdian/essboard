@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AuthService } from './auth.service';
-import { GuardService } from './guard.service';
+import { AuthGuardService } from './auth-guard.service';
 import { SocketService } from './shared/services/socket-io';
 import { AppComponent } from './app.component';
 import { LandingModule } from './landing/landing.module';
@@ -26,7 +26,7 @@ import { MaterialModule } from '@angular/material';
     DeveloperModule
 
   ],
-  providers: [ AuthService,GuardService,SocketService],
+  providers: [ AuthService, AuthGuardService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
