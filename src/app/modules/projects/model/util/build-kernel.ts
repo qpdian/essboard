@@ -14,7 +14,10 @@ export class BuilderKernel {
           let state = new State(stateMetadata, stateRecord.isAchieved, stateRecord.isWorking);
           for (let checkpointRecord of stateRecord.checklist) {
             let checkpointMetadata = stateMetadata.getCheckPoint(checkpointRecord.metadataId);
-            state.addCheckpoint(new Checkpoint(checkpointMetadata, checkpointRecord.isAchieved));
+            let check= new Checkpoint(checkpointMetadata, checkpointRecord.isAchieved);
+            check.addVotes("arthur",true);
+            check.addVotes("diana",false);
+            state.addCheckpoint(check);
           }
           dimension.addState(state);
         }

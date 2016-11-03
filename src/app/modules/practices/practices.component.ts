@@ -9,6 +9,7 @@ import { AREAS } from '../../shared/models/kernel/mock-kernel';
 export class PracticesComponent implements OnInit {
 
   areas: any = [];
+  activitySpaces: any = [];
   constructor() { }
 
   ngOnInit() {

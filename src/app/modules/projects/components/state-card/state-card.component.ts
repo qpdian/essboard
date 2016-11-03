@@ -22,6 +22,12 @@ export class StateCard {
     checkpoint.isAchaived = !checkpoint.isAchaived;
     this.onChooseCheckpoint.emit(checkpoint);
   }
+  public options: any = {
+    size: 20,
+    fontColor: '#FFFFFF',
+    border: "1px solid #d3d3d3",
+    isSquare: true,
+  };
 }
 
 

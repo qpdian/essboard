@@ -1,6 +1,7 @@
 export const env = {
     api:{
-        main : 'https://essboard-backend-marthur.c9users.io',
+        second : 'https://essboard-backend-marthur.c9users.io',
         local : 'http://localhost:8080',
+        main : 'https://essboard-backend.herokuapp.com/',
     }
 };

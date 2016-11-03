@@ -202,9 +202,14 @@ export class State {
 }
 
 export class Checkpoint {
+  votes : any[];
   constructor(
     public info: CheckpointMetadata, public isAchieved = false
   ) {
     this.isAchieved = isAchieved;
+    this.votes = [];
+  }
+  addVotes(member,content){
+    this.votes.push({"member":member,"content":content});
   }
 }

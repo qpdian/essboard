@@ -2,14 +2,15 @@
   <state-card-view *ngIf="state" class="col-xs-12
                 col-sm-12
                 col-md-3
-                col-lg-3" [state]="state.info" [classCSS]="'normal'"></state-card-view>
+                col-lg-2" [state]="state.info" [classCSS]="'normal'"></state-card-view>
   <div class="checkpoints col-xs-12
                 col-sm-12
                 col-md-9
-                col-lg-9">
+                col-lg-10">
         <table class="table table-bordered">
         <tr>
           <th>¿Lo realizaste?</th>
+          <th>¿Lo realizamos?</th>
           <th>Nombre</th>
           <th>Descripcion</th>
         </tr>
@@ -17,6 +18,8 @@
           <td class="check">
           <div [className]="checkpoint.isAchieved ? 'box-check achieved':'box-check no-achieved'" (click)="check(checkpoint)" >
           </div>
+           <td class="check">
+          <avatar-letter *ngFor="let vote of checkpoint.votes"  [text]="vote.member" [isOpaque]="vote.content" [options]="options">  </avatar-letter>
          </td>
           <td class="name">{{checkpoint.info.name}}</td>
           <td clas="description">{{checkpoint.info.description}}</td>

@@ -17,7 +17,7 @@ state-card-view{
 .checkpoints table td{
 	color: #a09f9f;
     font-size: 13px;
-	padding: 15px 0 15px 0;
+	padding-top: 10px;
 
 }
 .checkpoints button{
@@ -37,7 +37,6 @@ state-card-view{
 }
 .check{
 	width:15%;
-	padding: 5%;
 	text-align:center;
 }
 .box-check{
@@ -45,6 +44,7 @@ state-card-view{
    height:15px;
    width:15px;
    margin :auto;
+   display: inline-block;
 }
 .achieved{
   background-color: #a5d2b1;

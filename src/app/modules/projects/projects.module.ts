@@ -37,6 +37,8 @@ import { ProjectsSocketService } from './services/projects-socket.service';
 import { SessionService } from './services/session.service';
 import { SessionSocketService } from './services/session-socket.service';
 import { UsersModule } from '../users/index.module';
+
+import { AvatarLetterComponent }  from  '../../shared/components/avatar-letter/index.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 @NgModule({
   imports: [
@@ -54,7 +56,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     SetCurrentStateComponent,
     SessionComponent,ProjectViewHolistic,
     StateCard,AlphaCard,AlphaConectionsComponent,HowReachGoals,ActOnWorkItems,
-    StateCardView,StateBoardComponent,RowDimensionComponent
+    StateCardView,StateBoardComponent,RowDimensionComponent,
+    AvatarLetterComponent
   ],
   providers: [
     { provide: ProjectService, useClass: ProjectSocketService } ,
