@@ -5,7 +5,7 @@
   </div>
 
   <div class="" *ngFor="let dimension of kernel.dimensions">
-    <row-dimension [dimension]="dimension" [isForSelected]="isForSelected" (onChooseStateGoal)="getStatesGoal($event)">
-    </row-dimension>
+    <row-alpha-states [dimension]="dimension" [isForSelected]="isForSelected" (onChooseStateGoal)="getStatesGoal($event)">
+    </row-alpha-states>
   </div>
 </div>
