@@ -19,7 +19,7 @@
                 <template md-tab-content>
                     <div class="content">
                         <h2 class="title">Mira las conecciones </h2>
-                        <alpha-conections *ngIf="session" [kernel]="session.kernel"></alpha-conections>
+                        <alpha-connections *ngIf="session" [kernel]="session.kernel"></alpha-connections>
                     </div>
                 </template>
             </md-tab>
@@ -43,11 +43,10 @@
                                 </div>
                             </div>
                             <set-current-state [dimension]="session.getDimension(dimensionSelect)" [idSession]="session.id" ></set-current-state>
-                            
                         </div>
                         <h2 class="title">Observa como va quedando esta sesion</h2>
                         <div>
-                            <state-board [session]="session" [isForSelected]=false></state-board>
+                            <state-board [kernel]="session.kernel" [isForSelected]=false></state-board>
                         </div>
 
 

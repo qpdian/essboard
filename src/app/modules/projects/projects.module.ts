@@ -5,28 +5,25 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs' ;
 import { DragulaModule,DragulaService } from 'ng2-dragula/ng2-dragula';
 
+import { KernelModule } from '../../shared/modules/kernel/kernel.module';
+import { UsersModule } from '../users/index.module';
+
 import { ProjectListComponent }    from './components/project-list/project-list.component';
 import { ProjectDetailComponent }  from './components/project-detail/project-detail.component';
+import { SessionComponent }  from './components/session/session.component';
 import { ProjectCardComponent }  from './components/project-list/project-card/project-card.component';
+
 /* forms*/
 import { ProjectFormComponent }  from './components/forms/project-form/project-form.component';
 import { SharedFormComponent }  from './components/forms/shared-form/shared-form.component';
-/*views */
-import { ProjectViewHolistic } from './components/views-project-kernel/project-view-holistic/project-view-holistic.component';
-import { AlphaConectionsComponent } from './components/views-project-kernel/alpha-conections/alpha-conections.component';
-/* kernel*/
+
+/* steps for use essence*/
 import { StateCard } from './components/state-card/state-card.component';
 import { HowReachGoals } from './components/how-reach-goals/state-card.component';
 import { ActOnWorkItems } from './components/act-on-work-items/state-card.component';
- 
-import { AlphaCard } from './components/alpha-card/alpha-card.component';
-import { SessionComponent }  from './components/session/session.component';
-
-
-import { StateBoardComponent } from  './components/state-board/state-board.component';
-import { StateCardView } from './components/state-card-view-for-dimension/state-card-view.component';
-import { RowDimensionComponent } from './components/state-card-view-for-dimension/row-dimension.component';
 import { SetCurrentStateComponent } from './components/steps/set-current-state.component';
+
+import { AvatarLetterComponent }  from  '../../shared/components/avatar-letter/index.component';
 
 import { ProjectService } from './services/project.service';
 import { ProjectSocketService } from './services/project-socket.service';
@@ -36,16 +33,15 @@ import { ProjectsSocketService } from './services/projects-socket.service';
 
 import { SessionService } from './services/session.service';
 import { SessionSocketService } from './services/session-socket.service';
-import { UsersModule } from '../users/index.module';
 
-import { AvatarLetterComponent }  from  '../../shared/components/avatar-letter/index.component';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UsersModule,
-    MaterialModule,DragulaModule,ChartsModule
+    KernelModule,
+    MaterialModule,
+    DragulaModule
   ],
   declarations: [
     ProjectListComponent,
@@ -54,9 +50,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ProjectFormComponent,
     SharedFormComponent,
     SetCurrentStateComponent,
-    SessionComponent,ProjectViewHolistic,
-    StateCard,AlphaCard,AlphaConectionsComponent,HowReachGoals,ActOnWorkItems,
-    StateCardView,StateBoardComponent,RowDimensionComponent,
+    SessionComponent,
+    StateCard,
+    HowReachGoals,
+    ActOnWorkItems,
     AvatarLetterComponent
   ],
   providers: [
@@ -64,6 +61,9 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     { provide: ProjectsService, useClass: ProjectsSocketService } ,
     { provide: SessionService, useClass: SessionSocketService }
   ],
-  exports: [ProjectListComponent,ProjectDetailComponent,AlphaConectionsComponent]
+  exports: [
+    ProjectListComponent,
+    ProjectDetailComponent
+  ]
 })
 export class ProjectsModule {}

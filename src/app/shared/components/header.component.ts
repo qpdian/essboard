@@ -8,17 +8,10 @@ import { AuthService } from '../../auth.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-    @Output() onToggle = new EventEmitter<boolean>();
-    init = false;
-    
     constructor(private auth: AuthService, private router: Router) { }
     
     get isLoggedIn(): boolean {
         return this.auth.isLoggedIn;
-    }
-    
-    toggle() {
-        this.onToggle.emit(!this.init);
     }
     
     logout() {

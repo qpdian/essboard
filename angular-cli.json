@@ -20,7 +20,7 @@
       ],
       "scripts": [
         "../node_modules/chart.js/dist/Chart.bundle.js",
-          "../node_modules/color-hash/dist/color-hash.js"
+        "../node_modules/color-hash/dist/color-hash.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

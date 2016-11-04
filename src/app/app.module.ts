@@ -1,17 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+
+import { LandingModule } from './layouts/landing/landing.module';
+import { DeveloperModule } from './layouts/developer/developer.module';
+
+import { EssboardFrontedRoutingModule } from './app-routing.module';
+
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { SocketService } from './shared/services/socket-io';
+
 import { AppComponent } from './app.component';
-import { LandingModule } from './landing/landing.module';
-import { DeveloperModule } from './layouts/developer/developer.module';
-import { EssboardFrontedRoutingModule } from './app-routing.module';
-import { MaterialModule } from '@angular/material';
-
-
 
 @NgModule({
   declarations: [
@@ -25,7 +28,6 @@ import { MaterialModule } from '@angular/material';
     EssboardFrontedRoutingModule,
     LandingModule,
     DeveloperModule
-
   ],
   providers: [ AuthService, AuthGuardService, SocketService],
   bootstrap: [AppComponent]

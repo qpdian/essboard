@@ -4,4 +4,5 @@
 
 declare var System: any;
 declare var require: any;
+declare module 'color-hash';
 

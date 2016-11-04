@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Kernel } from '../../../model/project-kernel';
+import { Kernel } from '../../../model/kernel';
 
 class SVG {
   positionx: number;
@@ -25,14 +25,13 @@ class LineView extends SVG {
   }
 
 }
+
 @Component({
-  selector: 'alpha-conections',
-  templateUrl: 'alpha-conections.component.html',
-  styleUrls: ['alpha-conections.component.css']
+  selector: 'alpha-connections',
+  templateUrl: 'index.component.html',
+  styleUrls: ['index.component.css']
 })
-
-
-export class AlphaConectionsComponent {
+export class AlphaConnections {
   @Input()
   kernel: Kernel;
 

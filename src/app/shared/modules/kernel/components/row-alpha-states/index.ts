@@ -1,13 +1,13 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Alpha, State } from '../../model/project-kernel';
-import { StateMetadata } from '../../../../shared/models/kernel/kernel';
+import { Alpha, State } from '../../model/kernel';
+import { StateMetadata } from '../../../../models/kernel/kernel';
 
 @Component({
-  selector: 'row-dimension',
-  templateUrl: 'row-dimension.component.html',
-  styleUrls: ['row-dimension.component.css']
+  selector: 'row-alpha-states',
+  templateUrl: 'index.html',
+  styleUrls: ['index.css']
 })
-export class RowDimensionComponent {
+export class RowAlphaStates {
   _dimension: Alpha;
   @Input()
   isForSelected: boolean;

@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-
+import * as ColorHash from 'color-hash';
 
 
 @Component({

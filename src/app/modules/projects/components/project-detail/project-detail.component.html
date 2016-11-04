@@ -36,7 +36,7 @@
                 <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
                 <div *ngIf="!hiddenNetStates">
                     <h2 class="title">Tu proyecto holisticamente</h2>
-                    <alpha-conections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-conections>
+                    <alpha-connections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-connections>
                 </div>         
                 <session *ngIf="selectedSession" [idSession]="selectedSession.id">
                 </session>

@@ -33,6 +33,7 @@ for (let state of states4) { a4.addState(state); }
 for (let state of states5) { a5.addState(state); }
 for (let state of states6) { a6.addState(state); }
 for (let state of states7) { a7.addState(state); }
+
 export const ALPHAS: AlphaMetadata[] = [
    a1, a2, a3, a4, a5, a6, a7
 ];

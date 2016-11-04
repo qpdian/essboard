@@ -1,8 +1,5 @@
 <div class="header">
     <md-toolbar>
-        <button class="sidenav" *ngIf="isLoggedIn" (click)="toggle()">
-            <md-icon class="md-24">menu</md-icon>
-        </button>
         <img src="/assets/img/logos/logo-horizontal.png" alt="Essboard">
         <div *ngIf="!isLoggedIn" class="option-isLoggin">
             <button class="menu" routerLink="/login">Ingresa</button>

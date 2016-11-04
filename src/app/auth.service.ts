@@ -30,7 +30,7 @@ export class AuthService {
             return this.user;
         }).catch(function (error) {
             throw `Lo sentimos, Essboard no renoce
-                   a un usuario para esas credenciales.`;
+                   a estas credenciales como un usuario.`;
         });
     }
 
