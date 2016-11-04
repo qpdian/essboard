@@ -6,9 +6,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StateCardView } from './components/state-card-view/index';
 import { AlphaCard } from './components/alpha-card/index';
 import { RowAlphaStates } from './components/row-alpha-states/index';
-import { KernelViewHolistic,
-         AlphaConnections } from './components/kernel-views/index';
-import { StateBoard } from  './components/state-board/index';
+import {
+  KernelViewHolistic,
+  AlphaConnections
+} from './components/kernel-views/index';
+import { StateBoard } from './components/state-board/index';
 
 @NgModule({
   imports: [
@@ -17,6 +19,14 @@ import { StateBoard } from  './components/state-board/index';
     ChartsModule
   ],
   declarations: [
+    StateCardView,
+    AlphaCard,
+    RowAlphaStates,
+    KernelViewHolistic,
+    AlphaConnections,
+    StateBoard
+  ],
+  exports: [
     StateCardView,
     AlphaCard,
     RowAlphaStates,

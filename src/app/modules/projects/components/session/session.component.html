@@ -72,7 +72,7 @@
                     <span>Establece las metas</span>
                 </template>
                 <template md-tab-content>
-                    <state-board [session]="session" [isForSelected]=true (onChooseStatesGoal)="getStatesGoal($event)"></state-board>
+                    <state-board [kernel]="session.kernel" [isForSelected]=true (onChooseStatesGoal)="getStatesGoal($event)"></state-board>
                 </template>
             </md-tab>
             <md-tab>

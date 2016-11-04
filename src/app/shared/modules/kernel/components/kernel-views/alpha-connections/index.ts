@@ -27,7 +27,7 @@ class LineView extends SVG {
 }
 
 @Component({
-  selector: 'alpha-connections',
+  selector: 'alpha-connections', 
   templateUrl: 'index.html',
   styleUrls: ['index.css']
 })
