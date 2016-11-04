@@ -1,11 +1,10 @@
-<div *ngIf="session">
-  <p class="subtitle">Tablero de estados</p>
-  <div class="info-board" *ngIf="!isForSelected">
-    <span class="left">Logrados</span><span class="right">No logrados</span>
-  </div>
-
-  <div class="" *ngFor="let dimension of kernel.dimensions">
-    <row-alpha-states [dimension]="dimension" [isForSelected]="isForSelected" (onChooseStateGoal)="getStatesGoal($event)">
-    </row-alpha-states>
-  </div>
+<div *ngIf="kernel">
+    <p class="subtitle">Tablero de estados</p>
+    <div class="info-board" *ngIf="!isForSelected">
+        <span class="left">Logrados</span><span class="right">No logrados</span>
+    </div>
+    <div *ngFor="let dimension of kernel.dimensions">
+        <row-alpha-states [dimension]="dimension" [isForSelected]="isForSelected" (onChooseStateGoal)="getStatesGoal($event)">
+        </row-alpha-states>
+    </div>
 </div>
