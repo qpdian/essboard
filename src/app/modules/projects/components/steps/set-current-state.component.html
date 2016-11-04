@@ -1,12 +1,9 @@
-<div class="row">
-    <alpha-card class="col-xs-12
+<alpha-card class="col-xs-12
                 col-sm-12
-                col-md-2
-                col-lg-2" *ngIf="dimension" [dimension]="dimension" 
-        (onChooseState)="onSelectedState($event)"></alpha-card>
-    <state-card class="col-xs-12
+                col-md-6
+                col-lg-6" *ngIf="dimension" [dimension]="dimension" (onChooseState)="onSelectedState($event)"></alpha-card>
+<state-card class="col-xs-12
                 col-sm-12
                 col-md-10
-                col-lg-10"  *ngIf="selectedState" [state]="dimension.getState(selectedState)" (onChooseCheckpoint)="onSelectedCheckpoint($event)">
-    </state-card>
-</div>
+                col-lg-10" *ngIf="selectedState" [state]="dimension.getState(selectedState)" (onChooseCheckpoint)="onSelectedCheckpoint($event)">
+</state-card>
