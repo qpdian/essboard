@@ -3,7 +3,7 @@ import { Kernel, Alpha } from '../../../model/kernel';
 
 @Component({
   selector: 'kernel-view-holistic',
-  templateUrl: 'index.component.html',
+  templateUrl: 'index.html',
 })
 export class KernelViewHolistic {
   selectDimension: any = null;

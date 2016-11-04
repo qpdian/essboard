@@ -3,8 +3,8 @@ import { State, Alpha } from '../../model/kernel';
 
 @Component({
   selector: 'alpha-card',
-  templateUrl: 'index.component.html',
-  styleUrls: ['index.component.css']
+  templateUrl: 'index.html',
+  styleUrls: ['index.css']
 })
 export class AlphaCard {
   @Input()

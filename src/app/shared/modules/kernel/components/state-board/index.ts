@@ -4,8 +4,8 @@ import { StateMetadata } from '../../../../models/kernel/kernel';
 
 @Component({
   selector: 'state-board',
-  templateUrl: 'index.component.html',
-  styleUrls: ['index.component.css']
+  templateUrl: 'index.html',
+  styleUrls: ['index.css']
 })
 export class StateBoard {
   @Input()

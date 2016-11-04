@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StateCardView } from './components/state-card-view/index';
@@ -12,6 +13,7 @@ import { StateBoard } from  './components/state-board/index';
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule.forRoot(),
     ChartsModule
   ],
   declarations: [
