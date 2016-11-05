@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ValidationMessagesModule, ValidationMessagesLoader } from 'ng2-custom-validation';
-import { messageLoaderFactory } from './shared/messages/loader';
+import { messageLoaderFactory } from './shared/messages/validation';
 
 import { LandingModule } from './layouts/landing/landing.module';
 import { DeveloperModule } from './layouts/developer/developer.module';
