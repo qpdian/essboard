@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
-import { SimpleNotificationsModule } from 'angular2-notifications';
 import { SharedModule } from '../../shared/shared.module';
 import { landingRouting } from './landing.routes';
 
@@ -12,7 +11,6 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   imports: [
     DragulaModule,
-    SimpleNotificationsModule,
     SharedModule,
     landingRouting,
   ],
