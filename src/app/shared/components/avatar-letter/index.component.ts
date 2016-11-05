@@ -1,5 +1,4 @@
-import { Component, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, Input, OnInit, OnChanges } from '@angular/core';
 import * as ColorHash from 'color-hash';
 
 
@@ -7,7 +6,7 @@ import * as ColorHash from 'color-hash';
     selector: 'avatar-letter',
     templateUrl: 'index.component.html'
 })
-export class AvatarLetterComponent {
+export class AvatarLetterComponent implements OnInit, OnChanges {
 
     @Input('options') options: any;
     @Input('text') text: any;

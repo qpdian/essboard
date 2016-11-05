@@ -21,7 +21,12 @@
     align-items: center;
     padding-right: 120px;
 } */
-.header img {
+
+.header .brand {
+   height:100%;
+}
+
+.header .brand img {
    height:100%;
 }
 
