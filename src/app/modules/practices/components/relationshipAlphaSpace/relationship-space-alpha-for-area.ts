@@ -14,7 +14,6 @@ export class RelationshipSpaceAlpha implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.area.activitypaces);
     this.activitySpaces = this.area.activitypaces;
     this.statesForAlpha = this.stateForEachAlpha();
   }
@@ -29,10 +28,16 @@ export class RelationshipSpaceAlpha implements OnInit {
   }
   getActivyAlphasRelationshipFor(activitySpace : ActivitySpaceMetadata) {
     let states = this.stateForEachAlpha();
-    let options: Boolean[] = [];
+    let options: any[] = [];
     for (let state of states) {
-      options.push(activitySpace.implicaThisState(state));
+      options.push({
+        "condition" : activitySpace.implicaThisState(state),
+        "state": state,
+        "spcaeActivity": activitySpace});
     }
     return options;
+  }
+  showPractices(item){
+    console.log("item",item);
   }
 }

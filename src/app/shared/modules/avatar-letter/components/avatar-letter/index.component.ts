@@ -11,7 +11,7 @@ export class AvatarLetterComponent {
 
     @Input('options') options: any;
     @Input('text') text: any;
-    @Input('isOpaque') isOpaque: any;
+    @Input('isOpaque') isOpaque: Boolean = false;
     letterSrc: string;
     background: string = 'red';
     fontSize: number = 49;

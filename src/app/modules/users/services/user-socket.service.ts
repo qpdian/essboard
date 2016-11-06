@@ -65,11 +65,25 @@ export class UserSocketService extends UserService {
             this.service.get(id,
                 (err, x: any) => {
                     if (err) return console.error(err);
-                    this.user = new User(x.id, x.email, x.avatar, x.cretedAt);
+                    this.user = new User(x.id, x.email, x.avatar, x.createdAt);
                     this.userObserver.next(this.user);
                     console.log("item of server ", x);
                 })
         });
+    }
+    getByUsername(username: string) {
+        this.service.find({
+            query: {
+                email: username,
+                $limit: 1
+            }
+        }, (err, item: any) => {
+            if (err) return console.error("error", err);
+            console.log(item);
+            this.user = new User(item.data[0]._id, item.data[0].email, item.data[0].avatar, item.data[0].cretedAt);
+            this.userObserver.next(this.user);
+        })
+
     }
     delete(id: number | number) {
         this.users.splice(id, 1);
@@ -86,16 +100,16 @@ export class UserSocketService extends UserService {
     }
     search(email: string) {
         const key = new RegExp('^' + email, "i");
-       // console.log(key,"ey");
-       // const user = "57f66c52d00b465a84aaacbd";
+        // console.log(key,"ey");
+        // const user = "57f66c52d00b465a84aaacbd";
         this._app.authenticate().then(data => {
             this.service.find({
                 query: {
-                    email:  { $regex: email , $options: 'igm' }
+                    email: { $regex: email, $options: 'igm' }
                 }
             }, (err, items: any) => {
-                if (err) return console.error("eroo",err);
-                console.log("search",items);
+                if (err) return console.error("eroo", err);
+                console.log("search", items);
                 this.users = items.data.map((x) =>
                     new User(x._id, x.email, x.avatar, x.cretedAt));
                 this.usersObserver.next(this.users);

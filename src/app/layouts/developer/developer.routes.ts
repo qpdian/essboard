@@ -4,18 +4,25 @@ import { AuthGuardService } from '../../auth-guard.service';
 import { LayoutComponent, DeveloperComponent } from './index';
 import { ProjectListComponent, ProjectDetailComponent } from '../../modules/projects/index';
 import { PracticesComponent } from '../../modules/practices/index';
+import { ProfileUserComponent } from '../../modules/users/index'
 
 export const DeveloperRoutes: Route[] = [
   {
     path: 'me',
     component: LayoutComponent,
-    canActivate: [ AuthGuardService ],
+    canActivate: [AuthGuardService],
     children: [
       { path: '', component: DeveloperComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'projects/:id', component: ProjectDetailComponent },
-      { path: 'practices', component: PracticesComponent },
+      { path: 'practices', component: PracticesComponent }
     ]
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'people/:username', component: ProfileUserComponent }]
   }];
 
 export const developerRouting: ModuleWithProviders = RouterModule.forChild(DeveloperRoutes);
