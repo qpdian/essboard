@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../auth.service';
 import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
 import { NotificationsService } from 'angular2-notifications';
-import { notificationOptions } from '../../../../shared/index';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +14,6 @@ import { notificationOptions } from '../../../../shared/index';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errors = new MessageBag();
-  options = notificationOptions;
 
   constructor(
     private router: Router,
