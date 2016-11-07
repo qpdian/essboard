@@ -3,10 +3,12 @@ export class User {
     email: string;
     id: string;
     createdAt: Date;
-    constructor(id: string,email: string,avatar: string, createdAt : Date) {
+    username : string
+    constructor(id: string,username,email: string,avatar: string, createdAt : Date) {
         this.avatar = avatar;
         this.email = email;
         this.id = id;
         this.createdAt = createdAt;
+        this.username = username;
     }
 }

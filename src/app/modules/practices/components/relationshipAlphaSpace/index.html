@@ -1,4 +1,4 @@
-<div class="csstransforms no-csstransforms">
+<div class="col-md-6 csstransforms no-csstransforms">
   <table class="table table-header-rotated">
     <thead>
       <tr>
@@ -15,10 +15,13 @@
     <tbody>
       <tr *ngFor="let activitySpace of activitySpaces">
         <th class="row-header">{{activitySpace.name}}</th>
-        <td [ngClass]="{'completion':item,
-                    'no-completion': !item}"
-                     *ngFor="let item of getActivyAlphasRelationshipFor(activitySpace)"></td>
+        <td *ngFor="let item of getActivyAlphasRelationshipFor(activitySpace)" 
+        [ngClass]="{'completion':item.condition,
+                    'no-completion': !item.condition}" (click)="showPractices(item)">
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="col-md-6">  
 </div>

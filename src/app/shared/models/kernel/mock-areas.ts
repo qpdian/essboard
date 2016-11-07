@@ -12,3 +12,5 @@ export const endeavor = new AreaMetadata(
   'Esfuerzo',
   'Persona,grupo, o organizacion que son afectados por el sistema de software',
   'endeavor',3);
+
+ export const  AREAS = [ customer,solution,endeavor];

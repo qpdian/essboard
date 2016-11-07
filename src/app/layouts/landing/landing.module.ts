@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { SharedModule } from '../../shared/shared.module';
 import { landingRouting } from './landing.routes';

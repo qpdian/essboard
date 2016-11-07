@@ -1,0 +1,22 @@
+<div *ngIf="user">
+    <div class="row">
+        <div class="col-md-4">
+            <avatar-letter [text]="user.email" [options]="options">
+            </avatar-letter>
+            <p>{{user.email}}</p>
+            <p>Unido : {{user.createdAt}}</p>
+        </div>
+        <div class="col-md-8">
+            <md-progress-bar mode="determinate" value=40></md-progress-bar>
+            <md-progress-bar mode="indeterminate"></md-progress-bar>
+            <md-progress-bar mode="buffer" value=40 bufferValue="myBufferValue"></md-progress-bar>
+            <md-progress-bar mode="query"></md-progress-bar>
+            <md-slider></md-slider>
+            <md-slider min="1" max="5"></md-slider>
+            <md-slider min="1" max="5"></md-slider>
+            <md-slider step="5" value="25"></md-slider>
+            <md-slider step="5"></md-slider>
+
+        </div>
+    </div>
+</div>
