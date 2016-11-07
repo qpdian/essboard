@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ACTIVITY_SPACES } from '../../shared/models/kernel/mock-activity-spaces/mock';
-import { AREAS } from '../../shared/models/kernel/mock-kernel';
+import { AREAS } from '../../shared/models/kernel/mock-areas';
+import { KernelService} from '../../shared/services/kernel.service';
 @Component({
   selector: 'practices',
   templateUrl: './practices.component.html',
@@ -9,12 +9,15 @@ import { AREAS } from '../../shared/models/kernel/mock-kernel';
 export class PracticesComponent implements OnInit {
 
   areas: any = [];
-  activitySpaces: any = [];
-  constructor() { }
+  areaChoosen : any = null;
+  constructor( public kernelService:KernelService) { }
 
   ngOnInit() {
-    this.activitySpaces = ACTIVITY_SPACES;
     this.areas = AREAS;
+  }
+  getAreChoosen(value){
+    this.areaChoosen = this.kernelService.getArea(value);
+    console.log(this.areaChoosen);
   }
 
 

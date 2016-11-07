@@ -2,15 +2,13 @@
   <div>
     <div class="center">
       <span>Escoja una area de interes : </span>
-      <select name="test" id="test" class="area-select">
-      <option *ngFor="let area of areas" class ="option-select" value="{{area.name}}" selected="selected">{{area.name}}</option>
-  </select>
+      <select class="area-select" #cho (change)="getAreChoosen($event.target.value)">
+        <option *ngFor="let area of areas" class ="option-select" >{{area.name}}</option>
+      </select>
     </div>
     <h3>Essence Activity Space and Goal State</h3>
-    <div *ngFor="let area of areas">
-      <div class="row">
-        <rel-space-alpha-for-area [area]="area"> </rel-space-alpha-for-area>
-      </div>
+    <div class="row">
+      <rel-space-alpha-for-area *ngIf="areaChoosen" [area]="areaChoosen"> </rel-space-alpha-for-area>
     </div>
     <!-- TODO : CHANGE THIS FOR IMAGES
   <svg height="210" width="400">

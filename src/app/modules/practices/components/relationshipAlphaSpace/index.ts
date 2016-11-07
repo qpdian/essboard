@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivitySpaceMetadata } from  '../../../../shared/models/kernel/kernel';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { ActivitySpaceMetadata } from '../../../../shared/models/kernel/kernel';
 @Component({
   selector: 'rel-space-alpha-for-area',
   templateUrl: 'index.html',
   styleUrls: ['index.scss']
 })
-export class RelationshipSpaceAlpha implements OnInit {
+export class RelationshipSpaceAlpha implements OnInit, OnChanges {
   @Input()
   area: any;
   activitySpaces: any[] = [];
@@ -14,6 +14,10 @@ export class RelationshipSpaceAlpha implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.activitySpaces = this.area.activitypaces;
+    this.statesForAlpha = this.stateForEachAlpha();
+  }
+  ngOnChanges() {
     this.activitySpaces = this.area.activitypaces;
     this.statesForAlpha = this.stateForEachAlpha();
   }
@@ -26,18 +30,19 @@ export class RelationshipSpaceAlpha implements OnInit {
     }
     return states;
   }
-  getActivyAlphasRelationshipFor(activitySpace : ActivitySpaceMetadata) {
+  getActivyAlphasRelationshipFor(activitySpace: ActivitySpaceMetadata) {
     let states = this.stateForEachAlpha();
     let options: any[] = [];
     for (let state of states) {
       options.push({
-        "condition" : activitySpace.implicaThisState(state),
+        "condition": activitySpace.implicaThisState(state),
         "state": state,
-        "spcaeActivity": activitySpace});
+        "spcaeActivity": activitySpace
+      });
     }
     return options;
   }
-  showPractices(item){
-    console.log("item",item);
+  showPractices(item) {
+    console.log("item", item);
   }
 }
