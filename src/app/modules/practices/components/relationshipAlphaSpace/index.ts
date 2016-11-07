@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivitySpaceMetadata } from  '../../../../shared/models/kernel/kernel';
 @Component({
   selector: 'rel-space-alpha-for-area',
-  templateUrl: './relationship-space-alpha-for-area.html',
-  styleUrls: ['./relationship-space-alpha.scss']
+  templateUrl: 'index.html',
+  styleUrls: ['index.scss']
 })
 export class RelationshipSpaceAlpha implements OnInit {
   @Input()

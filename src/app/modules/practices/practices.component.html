@@ -1,18 +1,23 @@
 <div class="content">
-
-<div>
-  <h3>Essence Activity Space and Goal State</h3>
-  <div *ngFor="let area of areas">
-    <div class="row">
-    <rel-space-alpha-for-area [area]="area"> </rel-space-alpha-for-area>
+  <div>
+    <div class="center">
+      <span>Escoja una area de interes : </span>
+      <select name="test" id="test" class="area-select">
+      <option *ngFor="let area of areas" class ="option-select" value="{{area.name}}" selected="selected">{{area.name}}</option>
+  </select>
     </div>
-  </div>
-  <!-- TODO : CHANGE THIS FOR IMAGES
+    <h3>Essence Activity Space and Goal State</h3>
+    <div *ngFor="let area of areas">
+      <div class="row">
+        <rel-space-alpha-for-area [area]="area"> </rel-space-alpha-for-area>
+      </div>
+    </div>
+    <!-- TODO : CHANGE THIS FOR IMAGES
   <svg height="210" width="400">
     <g fill="none" stroke="black" stroke-width="4">
       <path stroke="green" fill="#f1f1f1" stroke-dasharray="5, 5" stroke-width="3" d="M0 0 L100 0 L130 50 L100 100 L0 100 Z" /> Sorry, your browser does not support inline SVG.
     </g>
   </svg>
   -->
-</div>
+  </div>
 </div>

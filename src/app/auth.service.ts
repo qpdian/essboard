@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from './shared/services/socket-io';
-import { Credential } from './shared/models/credential';
+import { Credentials } from './modules/users/model/credentials';
+import { User } from './modules/users/model/user';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
         return this._redirectURL ? this._redirectURL : '/me/projects';
     }
 
-    public login(credentials: Credential): Promise<User> {
+    public login(credentials: Credentials): Promise<User> {
         return this._app.authenticate({
             type: 'local',
             'email': credentials.email,
@@ -46,9 +47,8 @@ export class AuthService {
     }
 
     public get user(): User {
-        return {
-            credentials: JSON.parse(window.localStorage.getItem('user'))
-        };
+        return  JSON.parse(window.localStorage.getItem('user'));
+
     }
 
     public signup(user: any): Promise<void> {
@@ -61,6 +61,4 @@ export class AuthService {
     }
 }
 
-class User {
-    credentials: Credential;
-}
+

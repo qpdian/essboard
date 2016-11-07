@@ -1,8 +1,6 @@
 export class Credentials {
-    name:string;
-    password:string;
-
-    constructor(){
-        
+    email: string;
+    password: string;
+    constructor(email,password) {
     }
 }

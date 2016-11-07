@@ -11,4 +11,5 @@ export abstract class UserService {
     abstract delete(id: number | string);
     abstract search(email: string);
     abstract getByUsername(username:string);
+    abstract patch(data);
 }

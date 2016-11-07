@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Credentials } from '../../../../modules/users/model/credentials';
 
 import { AuthService } from '../../../../auth.service';
 import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
     private notification: NotificationsService,
     private validation: ValidationMessagesService,
     private fb: FormBuilder) {
-    }
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -33,21 +34,19 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50)
-        ]
+      ]
       ],
       'password': ['']
     });
 
     this.validation
-        .seeForErrors(this.loginForm)
-        .subscribe((errors: MessageBag) => this.errors = errors);
+      .seeForErrors(this.loginForm)
+      .subscribe((errors: MessageBag) => this.errors = errors);
   }
 
   onSubmit() {
-    this.auth.login({
-      email: this.loginForm.value['email'],
-      password: this.loginForm.value['password']
-    }).then(() => this.onSuccess())
+    this.auth.login(new Credentials(this.loginForm.value['email'], this.loginForm.value['password'])
+    ).then(() => this.onSuccess())
       .catch((error) => this.onError(error));
   }
 

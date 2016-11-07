@@ -43,7 +43,7 @@ export class UserSocketService extends UserService {
                 console.log('úers', items);
 
                 this.users = items.data.map((x) =>
-                    new User(x.id, x.email, x.avatar, x.cretedAt));
+                    this.toUser(x));
                 this.usersObserver.next(this.users);
             })
         });
@@ -60,12 +60,13 @@ export class UserSocketService extends UserService {
                 })
         });
     }
-    get(id: number | string) {
+    get(id: string) {
+        console.log(id);
         this._app.authenticate().then(data => {
             this.service.get(id,
                 (err, x: any) => {
                     if (err) return console.error(err);
-                    this.user = new User(x.id, x.email, x.avatar, x.createdAt);
+                    this.user = new User(x._id, x.username,x.email, x.avatar, x.createdAt);
                     this.userObserver.next(this.user);
                     console.log("item of server ", x);
                 })
@@ -80,7 +81,7 @@ export class UserSocketService extends UserService {
         }, (err, item: any) => {
             if (err) return console.error("error", err);
             console.log(item);
-            this.user = new User(item.data[0]._id, item.data[0].email, item.data[0].avatar, item.data[0].cretedAt);
+            this.user = this.toUser(item.data[0]);
             this.userObserver.next(this.user);
         })
 
@@ -98,6 +99,12 @@ export class UserSocketService extends UserService {
     }
     update(user: User) {
     }
+    patch(data){
+
+    }
+    private toUser(source){
+        return new User(source._id, source.email,source.username,source.avatar,source.cretedAt);
+    }
     search(email: string) {
         const key = new RegExp('^' + email, "i");
         // console.log(key,"ey");
@@ -111,7 +118,7 @@ export class UserSocketService extends UserService {
                 if (err) return console.error("eroo", err);
                 console.log("search", items);
                 this.users = items.data.map((x) =>
-                    new User(x._id, x.email, x.avatar, x.cretedAt));
+                        this.toUser(x));
                 this.usersObserver.next(this.users);
             })
         });
@@ -119,7 +126,7 @@ export class UserSocketService extends UserService {
     private onCreated(newItem: any) {
         console.log('Someone created a message', newItem);
         //TODO: add notifications 
-        this.users.push(new User(newItem.id, newItem.email, newItem.avatar, newItem.createdAt));
+        this.users.push( this.toUser(newItem));
         this.usersObserver.next(this.users);
     }
 
