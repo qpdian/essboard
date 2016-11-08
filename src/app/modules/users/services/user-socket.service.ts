@@ -66,7 +66,7 @@ export class UserSocketService extends UserService {
             this.service.get(id,
                 (err, x: any) => {
                     if (err) return console.error(err);
-                    this.user = new User(x._id, x.username,x.email, x.avatar, x.createdAt);
+                    this.user = new User(x._id, x.username, x.email, x.avatar, x.createdAt);
                     this.userObserver.next(this.user);
                     console.log("item of server ", x);
                 })
@@ -99,34 +99,29 @@ export class UserSocketService extends UserService {
     }
     update(user: User) {
     }
-    patch(data){
+    patch(data) {
 
     }
-    private toUser(source){
-        return new User(source._id, source.email,source.username,source.avatar,source.cretedAt);
+    private toUser(source) {
+        return new User(source._id, 'username', source.email, source.avatar, source.createdAt);
     }
     search(email: string) {
-        const key = new RegExp('^' + email, "i");
-        // console.log(key,"ey");
-        // const user = "57f66c52d00b465a84aaacbd";
         this._app.authenticate().then(data => {
             this.service.find({
                 query: {
                     email: { $regex: email, $options: 'igm' }
                 }
             }, (err, items: any) => {
-                if (err) return console.error("eroo", err);
-                console.log("search", items);
-                this.users = items.data.map((x) =>
-                        this.toUser(x));
+                if (err) { return console.error('error', err); }
+                this.users = items.data.map((x) => this.toUser(x));
                 this.usersObserver.next(this.users);
-            })
+            });
         });
     }
     private onCreated(newItem: any) {
         console.log('Someone created a message', newItem);
         //TODO: add notifications 
-        this.users.push( this.toUser(newItem));
+        this.users.push(this.toUser(newItem));
         this.usersObserver.next(this.users);
     }
 
