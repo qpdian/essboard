@@ -30,8 +30,7 @@ export class AuthService {
             window.localStorage.setItem('user', JSON.stringify(result.data));
             return this.user;
         }).catch(function (error) {
-            throw `Lo sentimos, Essboard no renoce
-                   a estas credenciales como un usuario.`;
+            throw error;
         });
     }
 
@@ -47,8 +46,8 @@ export class AuthService {
     }
 
     public get user(): User {
-        return  JSON.parse(window.localStorage.getItem('user'));
-
+        const data = JSON.parse(window.localStorage.getItem('user'));
+        return new User(data['_id'], 'username', data['email'], data['avatar'], data['createdAt']);
     }
 
     public signup(user: any): Promise<void> {
@@ -56,7 +55,7 @@ export class AuthService {
             email: user.email,
             password: user.password
         }).catch(function (error) {
-            console.error('Error create user!', error);
+            throw error;
         });
     }
 }

@@ -47,7 +47,10 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.auth.login(new Credentials(this.loginForm.value['email'], this.loginForm.value['password'])
     ).then(() => this.onSuccess())
-      .catch((error) => this.onError(error));
+     .catch((error) => this.onError(
+        `Lo sentimos, Essboard no renoce
+        a estas credenciales como un usuario.`
+        ));
   }
 
   private onSuccess() {

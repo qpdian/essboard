@@ -17,18 +17,18 @@ export class SignupComponent implements OnInit {
   private signupForm: FormGroup;
   errors = new MessageBag();
   options = notificationOptions;
-  
+
   constructor(
     private router: Router,
     private auth: AuthService,
     private fb: FormBuilder,
     private notification: NotificationsService,
-    private validation: ValidationMessagesService,) { }
-  
+    private validation: ValidationMessagesService ) { }
+
   ngOnInit(): void {
     this.buildForm();
   }
-  
+
   buildForm(): void {
     this.signupForm = this.fb.group({
       'email': ['', [
@@ -43,24 +43,24 @@ export class SignupComponent implements OnInit {
         Validators.maxLength(50),
       ]]
     });
-    
+
     this.validation
-        .seeForErrors(this.signupForm)
-        .subscribe((errors: MessageBag) => this.errors = errors);
+      .seeForErrors(this.signupForm)
+      .subscribe((errors: MessageBag) => this.errors = errors);
   }
-  
+
   onSubmit() {
     this.auth.signup(this.signupForm.value)
-             .then(() => this.login())
-             .catch((error) => this.onError(error));
+      .then(() => this.login())
+      .catch((error) => this.onError(`Ya existe un usuario para esa cuenta`));
   }
-  
+
   private login() {
     this.auth.login(this.signupForm.value)
-               .then(() => this.onSuccess())
-               .catch((error) => this.onError(error));
+      .then(() => this.onSuccess())
+      .catch((error) => this.onError(error));
   }
-  
+
   private onSuccess() {
     this.router.navigate([this.auth.redirectURL]);
   }
