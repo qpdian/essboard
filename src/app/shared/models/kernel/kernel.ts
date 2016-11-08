@@ -1,3 +1,5 @@
+
+
 export class AlphaMetadata {
   constructor(
     public identifier: number,
@@ -135,6 +137,7 @@ export class ActivitySpaceMetadata {
   entryCriterias: StateMetadata[];
   completionCriterias: StateMetadata[];
   constructor(
+    public identifier,
     public area: AreaMetadata,
     public name: string,
     public description: string,
@@ -207,20 +210,34 @@ export class Role {
 export class Method {
   practices: Practice[];
 }
+import { ACTIVITY_SPACES } from './mock-activity-spaces/mock';
+
 export class Practice {
   activities: Activity[];
   workProducts: WorkProduct[];
   roles: Role[];
+  constructor(name: string, description: string) {
+    this.activities = [];
+  }
+  addActivity(name: any, spacesActivityCode: any[]) {
+    let activity = new Activity(name);
+    activity.practice = this;
+    for (let code of spacesActivityCode) {
+      //activity.addStateAchaived(ACTIVITY_SPACES.find(ac => ac.identifier === code));
+    }
+    this.activities.push(activity);
+  }
 
 }
 export class Activity {
-  achaived: AchaivedTo[];
+  achaiveds: AchaivedTo[];
   name: string;
   practice: Practice;
   constructor(name: string) {
-
   }
-
+  addStateAchaived(spaceActivity) {
+    this.achaiveds.push(new AchaivedTo(spaceActivity));
+  }
 
 }
 export class AchaivedTo {

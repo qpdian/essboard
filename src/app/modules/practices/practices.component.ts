@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AREAS } from '../../shared/models/kernel/mock-areas';
 import { KernelService} from '../../shared/services/kernel.service';
 @Component({
   selector: 'practices',
@@ -13,11 +12,11 @@ export class PracticesComponent implements OnInit {
   constructor( public kernelService:KernelService) { }
 
   ngOnInit() {
-    this.areas = AREAS;
+    this.areas = this.kernelService.getAreas();
+    this.areaChoosen = this.kernelService.getArea("Cliente");
   }
   getAreChoosen(value){
     this.areaChoosen = this.kernelService.getArea(value);
-    console.log(this.areaChoosen);
   }
 
 
