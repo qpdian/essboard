@@ -213,3 +213,4 @@ export class Checkpoint {
     this.votes.push({"member":member,"content":content});
   }
 }
+

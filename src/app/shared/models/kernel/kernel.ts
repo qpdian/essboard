@@ -1,6 +1,6 @@
 export class AlphaMetadata {
   constructor(
-    public identifier:number,
+    public identifier: number,
     public area: AreaMetadata,
     public description: string,
     public name: string,
@@ -25,14 +25,22 @@ export class AlphaMetadata {
     state.dimension = this;
     state.num = tam++;
   }
-  getState(identifier:number){
-    return this.states.find( state => state.identifier === identifier);
+  getState(identifier: number) {
+    return this.states.find(state => state.identifier === identifier);
   }
-  getStateByIdentifier(identifier : number){
-    return this.states.find(state => state.identifier === (identifier + this.identifier*10));
+  getStateByIdentifier(identifier: number) {
+    return this.states.find(state => state.identifier === (identifier + this.identifier * 10));
   }
 }
+export class WorkProduct {
+  name: string;
+  alpha: AlphaMetadata;
+  constructor(name, alphaMetadata) {
+    this.name = name;
+    this.alpha = alphaMetadata;
+  }
 
+}
 export class AreaMetadata {
   dimensions: AlphaMetadata[];
   competences: CompetencyMetadata[];
@@ -41,7 +49,7 @@ export class AreaMetadata {
     public name: string,
     public description: string,
     public nameCSSClass: string,
-    public numberDimension : number
+    public numberDimension: number
   ) {
     this.dimensions = [];
     this.name = name;
@@ -59,7 +67,7 @@ export class AreaMetadata {
   addCompetence(competence: CompetencyMetadata) {
     this.competences.push(competence);
   }
-  getAlpha(identifier:number){
+  getAlpha(identifier: number) {
     return this.dimensions.find(dim => dim.identifier === identifier);
 
   }
@@ -79,8 +87,8 @@ export class StateMetadata {
     }
     this.next = next;
   }
-  getCheckPoint(identifier: string){
-    return this.checkList.find( check => check.identifier === identifier);
+  getCheckPoint(identifier: string) {
+    return this.checkList.find(check => check.identifier === identifier);
   }
   getMainChecklist() {
     let mainChecklist: CheckpointMetadata[] = [];
@@ -91,7 +99,7 @@ export class StateMetadata {
     }
     return mainChecklist;
   }
-    isAfterTo(state: StateMetadata) {
+  isAfterTo(state: StateMetadata) {
     if (state) {
       let pivot = state.next;
       while (pivot) {
@@ -99,7 +107,7 @@ export class StateMetadata {
         pivot = pivot.next;
       }
       return false;
-    }else{
+    } else {
       return true;
     }
   }
@@ -137,7 +145,7 @@ export class ActivitySpaceMetadata {
     this.entryCriterias = [];
     this.completionCriterias = [];
   }
-  addObjective(... objectives:string[]) {
+  addObjective(...objectives: string[]) {
     this.objectives = objectives;
   }
   addInput(input) {
@@ -149,7 +157,7 @@ export class ActivitySpaceMetadata {
   addCompletionCriteria(completionCriteria: StateMetadata) {
     this.completionCriterias.push(completionCriteria);
   }
-    implicaThisState(state: StateMetadata) {
+  implicaThisState(state: StateMetadata) {
     let start = this.entryCriterias.find(st => st.dimension === state.dimension);
     let end = this.completionCriterias.find(st => st.dimension === state.dimension);
     return state.isAfterTo(start) && state.isBeforeOrEqualTo(end);
@@ -188,6 +196,39 @@ export class CompetencyLevel {
       back.next = this;
     }
     this.back = back;
+  }
+}
+export class Role {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+export class Method {
+  practices: Practice[];
+}
+export class Practice {
+  activities: Activity[];
+  workProducts: WorkProduct[];
+  roles: Role[];
+
+}
+export class Activity {
+  achaived: AchaivedTo[];
+  name: string;
+  practice: Practice;
+  constructor(name: string) {
+
+  }
+
+
+}
+export class AchaivedTo {
+  spaceActivity: ActivitySpaceMetadata;
+  statesAchaived: StateMetadata[];
+  activityGoalList: CheckpointMetadata[];
+
+  constructor(spaceActivity: ActivitySpaceMetadata) {
   }
 }
 
