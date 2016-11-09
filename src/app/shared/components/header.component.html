@@ -6,9 +6,9 @@
             <button class="menu" routerLink="/signup">Registrate</button>
         </div>
         <div *ngIf="isLoggedIn" class="option-noLoggin">
-            <button md-icon-button [md-menu-trigger-for]="menu">
-                <md-icon>account_circle</md-icon>
-            </button>
+            <div [md-menu-trigger-for]="menu" class="avatar">
+                <img src="{{user.avatar(32)}}" alt="{{user.name}}">
+            </div>
             <md-menu class="menu-options" x-position="after" y-position="below" #menu="mdMenu">
                 <button md-menu-item routerLink="/me/projects"> Mis proyectos  </button>
                 <button md-menu-item routerLink="/me/projects"> Mis competencias </button>

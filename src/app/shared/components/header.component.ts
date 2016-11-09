@@ -9,11 +9,15 @@ import { AuthService } from '../../auth.service';
 })
 export class HeaderComponent {
     constructor(private auth: AuthService, private router: Router) { }
-    
+
     get isLoggedIn(): boolean {
         return this.auth.isLoggedIn;
     }
-    
+
+    get user() {
+        return this.auth.user;
+    }
+
     logout() {
         this.auth.logout().then(() => this.router.navigate(['/']));
     }
