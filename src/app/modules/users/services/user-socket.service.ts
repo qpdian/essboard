@@ -103,7 +103,8 @@ export class UserSocketService extends UserService {
 
     }
     private toUser(source) {
-        return new User(source._id, 'username', source.email, source.avatar, source.createdAt);
+        console.log(source);
+        return new User(source._id, source.name, source.email, source.avatar, source.createdAt);
     }
     search(email: string) {
         this._app.authenticate().then(data => {

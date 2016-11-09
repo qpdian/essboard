@@ -3,6 +3,11 @@
    <md-card class="content">
     <md-card-content>
        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <md-input type="name" formControlName="name" class="full-width" placeholder="Nombre de usuario" required dividerColor="{{ errors.name ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="errors.name" align="end">
+            <span>{{ errors.name  }}</span>
+          </md-hint>
+        </md-input>
         <md-input type="email" formControlName="email" class="full-width" placeholder="Correo electrónico" required dividerColor="{{ errors.email ? 'warn' : 'primary' }}">
           <md-hint *ngIf="errors.email" align="end">
             <span>{{ errors.email  }}</span>
