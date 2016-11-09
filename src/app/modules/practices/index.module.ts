@@ -5,9 +5,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';//ayudame aqui no esoty pon
 import { RelationshipSpaceAlpha } from './components/relationshipAlphaSpace/index';
 import { KernelService} from '../../shared/services/kernel.service';
 import { PracticesCatalog } from './components/catalog/index';
+import { KernelModule } from '../../shared/modules/kernel/kernel.module';
 @NgModule({
   imports: [
-    CommonModule,ChartsModule
+    CommonModule,ChartsModule,KernelModule
   ],
   declarations: [PracticesComponent,RelationshipSpaceAlpha,PracticesCatalog],
   providers : [ KernelService]

@@ -15,9 +15,8 @@ export class KernelService {
     getArea(areaName: string) {
         return this.areas.find(item => item.name === areaName);
     }
-    getAreas(){
+     getAreas(){
         return AREAS_SUMMARY;
     }
-    
 
 }

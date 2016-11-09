@@ -213,7 +213,7 @@ export class Role {
 export class Method {
   practices: Practice[];
 }
-import { ACTIVITY_SPACES } from './mock-activity-spaces/mock';
+//import { ACTIVITY_SPACES } from './mock-activity-spaces/mock';
 
 export class Practice {
   activities: Activity[];
