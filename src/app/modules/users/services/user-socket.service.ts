@@ -66,7 +66,7 @@ export class UserSocketService extends UserService {
             this.service.get(id,
                 (err, x: any) => {
                     if (err) return console.error(err);
-                    this.user = new User(x._id, x.username, x.email, x.avatar, x.createdAt);
+                    this.user = new User(x._id, x.username, x.email, x.createdAt);
                     this.userObserver.next(this.user);
                     console.log("item of server ", x);
                 })
@@ -104,7 +104,7 @@ export class UserSocketService extends UserService {
     }
     private toUser(source) {
         console.log(source);
-        return new User(source._id, source.name, source.email, source.avatar, source.createdAt);
+        return new User(source._id, source.name, source.email, source.createdAt);
     }
     search(email: string) {
         this._app.authenticate().then(data => {

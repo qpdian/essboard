@@ -5,7 +5,10 @@ export class User {
         public id: string,
         public name: string,
         public email: string,
-        public avatar: string,
         public createdAt: Date) {
+    }
+
+    public avatar(size = 400): string {
+        return `http://api.adorable.io/avatars/${size}/${this.name}`;
     }
 }
