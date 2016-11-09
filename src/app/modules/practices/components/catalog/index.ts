@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { PRACTICES } from '../../../../shared/models/kernel/mock-practices/mock';
+import { PracticeMockService } from '../../../../shared/modules/kernel/services/index';
 @Component({
   selector: 'practice-catalog',
   templateUrl: 'index.html',
@@ -10,9 +11,9 @@ export class PracticesCatalog implements OnInit, OnChanges {
   spaceActivity: any;
   @Input()
   state: any;
-  practices: any[] = [];
+  practices: any[];
   activities: any[] = [];
-  constructor() { }
+  constructor(public practiceService:PracticeMockService) { }
   getPractices(spaceActivity) {
    // this.practices = this.practicesBySpaceActivity(spaceActivity);
   }
@@ -24,11 +25,12 @@ export class PracticesCatalog implements OnInit, OnChanges {
     )));*/
   }
   ngOnInit() {
-    this.getPractices(this.spaceActivity);
-
+    //this.getPractices(this.spaceActivity);
+    this.practices = this.practiceService.all();
+    console.log(this.practices);
   }
   ngOnChanges() {
-    this.getPractices(this.spaceActivity);
+   // this.getPractices(this.spaceActivity);
   }
 
 }

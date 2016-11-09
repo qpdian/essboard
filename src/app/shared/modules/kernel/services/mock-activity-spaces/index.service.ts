@@ -6,10 +6,10 @@ import { ActivitySpaceMetadata } from '../../model/metadata/kernel';
 @Injectable()
 export class ActivitySpaceMockService {
     areas: any[];
-    activitySpaces: any[];
+    activitySpaces: ActivitySpaceMetadata[] = [];
     constructor(public areaService: AreaMockService, public alphaService: StateMockService) {
+        this.registerObjects();
     }
-
     registerObjects() {
         //customer
         this.registerObject("1-1", this.areaService.getCustomer(), 'Explore posibilities', ['Enable the right stakeholders to be involved', 'Understand the stakeholders’ needs',
@@ -28,13 +28,13 @@ export class ActivitySpaceMockService {
         this.registerObject("2-1", this.areaService.getSolution(), 'Understand the requeriments', [], [], [33]);
         this.registerObject("2-2", this.areaService.getSolution(), 'Shape the system', [], [33], [34, 41]);
         this.registerObject("2-3", this.areaService.getSolution(), 'Implement the system', [], [41], [44]);
-        this.registerObject("2-4", this.areaService.getSolution(), 'Test the system', [], [34, 45], [36, 46]);
+        this.registerObject("2-4", this.areaService.getSolution(), 'Test the system', [], [34, 41], [36, 44]);
         this.registerObject("2-5", this.areaService.getSolution(), 'Deploy the system', [], [44], [45]);
         this.registerObject("2-6", this.areaService.getSolution(), 'Operate the system', [], [45], [46]);
         //endeavor
         this.registerObject("3-1", this.areaService.getEndeavor(), 'Prepare do to work', [], [], [51, 62, 72]);
         this.registerObject("3-2", this.areaService.getEndeavor(), 'Coordinate activity', [], [51, 62], [52, 64]);
-        this.registerObject("3-3", this.areaService.getEndeavor(), 'Support the team', [], [52, 63], [53, 74]);
+        this.registerObject("3-3", this.areaService.getEndeavor(), 'Support the team', [], [52, 72], [53, 74]);
         this.registerObject("3-4", this.areaService.getEndeavor(), 'Track progress', [], [53, 63, 74], [54, 65, 75]);
         this.registerObject("3-5", this.areaService.getEndeavor(), 'Stop the work', [], [54, 65, 75], [55, 66, 76]);
 
@@ -52,6 +52,9 @@ export class ActivitySpaceMockService {
 
         }
         this.activitySpaces.push(activitySpace);
+    }
+    findByIdentifier(identifier) {
+        return this.activitySpaces.find(ac => ac.identifier === identifier);
     }
 
 }

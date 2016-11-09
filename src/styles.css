@@ -142,3 +142,9 @@ md-input.ng-pristine {
 .md-tab-active{
     border-bottom: solid 3px #5bbcce;
 }
+.center{
+    text-align:center;
+}
+.center img{
+    margin:auto;
+}

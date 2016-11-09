@@ -23,6 +23,7 @@ export class RelationshipSpaceAlpha implements OnInit, OnChanges {
   }
   stateForEachAlpha() {
     let states: any[] = [];
+
     for (let alpha of this.area.dimensions) {
       for (let state of alpha.states) {
         states.push(state);

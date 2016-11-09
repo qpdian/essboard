@@ -17,7 +17,6 @@ export class PracticesComponent implements OnInit {
     this.areaChoosen = this.areaService.getAreaComplete("Cliente");
   }
   getAreChoosen(value){
-    console.log(this.areaChoosen);
     this.areaChoosen = this.areaService.getAreaComplete(value);
   }
 
