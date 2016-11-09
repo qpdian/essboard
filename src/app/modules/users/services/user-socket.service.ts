@@ -72,20 +72,20 @@ export class UserSocketService extends UserService {
                 })
         });
     }
+
     getByUsername(username: string) {
         this.service.find({
             query: {
-                email: username,
+                name: username,
                 $limit: 1
             }
         }, (err, item: any) => {
             if (err) return console.error("error", err);
-            console.log(item);
             this.user = this.toUser(item.data[0]);
             this.userObserver.next(this.user);
-        })
-
+        });
     }
+
     delete(id: number | number) {
         this.users.splice(id, 1);
         this.usersObserver.next(this.users);
@@ -103,7 +103,6 @@ export class UserSocketService extends UserService {
 
     }
     private toUser(source) {
-        console.log(source);
         return new User(source._id, source.name, source.email, source.createdAt);
     }
     search(email: string) {
