@@ -11,7 +11,11 @@ import {
   AlphaConnections
 } from './components/kernel-views/index';
 import { StateBoard } from './components/state-board/index';
-
+//services
+import { ActivitySpaceMockService } from './services/mock-activity-spaces/index.service';
+import { AreaMockService } from './services/mock-areas/index.service';
+import { StateMockService } from './services/mock-states/index.service';
+import { AlphaMockService } from './services/mock-alphas/index.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +37,7 @@ import { StateBoard } from './components/state-board/index';
     KernelViewHolistic,
     AlphaConnections,
     StateBoard
-  ]
+  ],
+  providers : [ ActivitySpaceMockService,AreaMockService,AlphaMockService,StateMockService]
 })
 export class KernelModule { }
