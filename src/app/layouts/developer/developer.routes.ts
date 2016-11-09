@@ -29,10 +29,10 @@ export const DeveloperRoutes: Route[] = [
     ]
   },
   {
-    path: '',
+    path: 'profile',
     component: LayoutComponent,
     children: [
-      { path: '/:username', component: ProfileUserComponent }]
+      { path: ':username', component: ProfileUserComponent }]
   }];
 
 export const developerRouting: ModuleWithProviders = RouterModule.forChild(DeveloperRoutes);
