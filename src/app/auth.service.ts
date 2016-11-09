@@ -47,11 +47,12 @@ export class AuthService {
 
     public get user(): User {
         const data = JSON.parse(window.localStorage.getItem('user'));
-        return new User(data['_id'], 'username', data['email'], data['avatar'], data['createdAt']);
+        return new User(data['_id'], data['name'], data['email'], data['createdAt']);
     }
 
-    public signup(user: any): Promise<void> {
+    public signup(user: User): Promise<void> {
         return this._app.service('users').create({
+            name: user.name,
             email: user.email,
             password: user.password
         }).catch(function (error) {

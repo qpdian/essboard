@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 import { AuthService } from '../../../../auth.service';
 import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
 import { NotificationsService } from 'angular2-notifications';
@@ -31,12 +30,16 @@ export class SignupComponent implements OnInit {
 
   buildForm(): void {
     this.signupForm = this.fb.group({
+      'name': ['', [
+        Validators.required,
+        Validators.minLength(1), // like github
+        Validators.maxLength(25),
+      ]],
       'email': ['', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50),
-      ]
-      ],
+      ]],
       'password': ['', [
         Validators.required,
         Validators.minLength(6),

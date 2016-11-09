@@ -77,18 +77,19 @@ export class ProjectSocketService extends ProjectService {
     }
     public desinviteTo(user) {
         this._app.authenticate().then(() => {
+            console.log(user);
             this.service.patch(
                 this.project.id,
                 { $pull: { members: user.id } },
                 { query: { action: 'desinvite', data: user.id } }
             ).then((result) => {
                 console.log('Desinvitado');
-            })
-                .catch(function (error) {
-                    console.log(error, "Error al editar  tu proyecto");
-                });
+            }).catch(function (error) {
+                console.log(error, "Error al editar  tu proyecto");
+            });
         });
     }
+
     private onPatched(patchedItem: any) {
         this.project = ToProject.transformCompleteToProject(patchedItem);
         this.projectObserver.next(this.project);

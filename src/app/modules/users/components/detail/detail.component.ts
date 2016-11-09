@@ -1,11 +1,9 @@
 
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
-//import { md5 } from '../../../../shared/models/md5';
 
 @Component({
   selector: 'my-user-detail',
@@ -15,8 +13,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class UserDetailComponent implements OnInit, OnDestroy {
   user: User;
 
-  word : any;
-  hash : any= "68830aef4dbfad181162f9251a1da51b";
+  word: any;
+  hash: any = "68830aef4dbfad181162f9251a1da51b";
   private sub: Subscription;
   private subscription: Subscription;
   constructor(
@@ -43,10 +41,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   delete() {
     this.service.delete(this.user.id);
   }
-  viewIcon(){
-     // return md5('ffffff') ;
+  viewIcon() {
+    // return md5('ffffff') ;
   }
-   onKey(event:any) {
+  onKey(event: any) {
     //this.hash = md5(event.target.value);
     //this.hash= event.target.value;
   }
