@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { ACTIVITY_SPACES } from '../../shared/models/kernel/mock-activity-spaces/mock';
 import { AREAS } from '../models/kernel/mock-kernel';
+import { AREAS as AREAS_SUMMARY } from '../models/kernel/mock-areas';
 
 @Injectable()
 export class KernelService {
@@ -14,6 +14,9 @@ export class KernelService {
 
     getArea(areaName: string) {
         return this.areas.find(item => item.name === areaName);
+    }
+     getAreas(){
+        return AREAS_SUMMARY;
     }
 
 }

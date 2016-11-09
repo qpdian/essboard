@@ -2,17 +2,16 @@
   overflow:scroll;
   height: 600px;
 }
-.center{
-  text-align:center;
-}
+
 .area-select{
     text-align: center;
     margin: auto;
-    padding: 8px;
+    padding: 5px;
     border: solid 1px #58ce85;
     color: #59bbce;
     font-size: 15px;
     font-weight: 500;
+    border-radius: 10%;
 }
 select:focus{
   border: 1px solid #58ce85;
@@ -26,4 +25,10 @@ select option {
     background: transparent;
     color: #969693;
 } 
+rel-space-alpha-for-area{
+  margin:auto;
+}
+img{
+    width: 90%;
+}
 
