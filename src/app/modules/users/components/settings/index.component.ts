@@ -1,5 +1,5 @@
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
@@ -14,38 +14,37 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css'],
 })
-export class ProfileSettingsComponent implements OnInit, OnDestroy {
+export class ProfileSettingsComponent implements OnInit {
   userForm: FormGroup;
   errors = new MessageBag();
+  user: User;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private service: UserService,
-    private auth : AuthService, 
+    private auth: AuthService,
     private validation: ValidationMessagesService,
     private notification: NotificationsService,
     private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.service.currentUserOb.subscribe((item: User) => {
-      this.user = item;
-    });
-    let user = this.auth.user;
-    this.service.get(user.id);
+    // this.subscription = this.service.currentUserOb.subscribe((user: User) => {
+    //   this.user = user;
+    // });
+    // let user = this.auth.user;
+    // this.service.get(user.id);
+    this.user = this.auth.user;
     this.buildForm();
   }
 
   buildForm(): void {
     this.userForm = this.fb.group({
-      'username': ['', [
+      'name': [this.user.name, [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50)
       ]
-      ],
-      'password': ['']
+      ]
     });
 
     this.validation
@@ -54,48 +53,23 @@ export class ProfileSettingsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.service.patch({
-      email: this.userForm.value['username'],
-      password: this.userForm.value['password']
-    }).then(() => this.onSuccess())
+    console.log(this.user);
+
+    this.service.patch(
+      new User(
+        this.user.id,
+        this.userForm.value['name'],
+        this.user.email,
+        this.user.createdAt
+      )).then(() => this.onSuccess())
       .catch((error) => this.onError(error));
   }
 
   private onSuccess() {
-    
+    this.notification.success(':)', 'Usuario actualizado');
   }
 
   private onError(error: string) {
     this.notification.error('Upps!', error);
   }
-  user: User;
-
-  word: any;
-  hash: any = "68830aef4dbfad181162f9251a1da51b";
-  private sub: Subscription;
-  private subscription: Subscription;
-
-  public options: any = {
-    size: 100,
-    fontColor: '#FFFFFF',
-    border: "1px solid #d3d3d3",
-    isSquare: true,
-  };
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  //add confirmation esperar modal
-  delete() {
-    this.service.delete(this.user.id);
-  }
-  viewIcon() {
-    // return md5('ffffff') ;
-  }
-  onKey(event: any) {
-    //this.hash = md5(event.target.value);
-    //this.hash= event.target.value;
-  }
-
 }

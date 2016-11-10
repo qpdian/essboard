@@ -1,42 +1,13 @@
-<md-card class="content">
+<md-card>
+    <md-card-title>Perfil de usuario</md-card-title>
     <md-card-content>
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-            <md-input type="text" formControlName="username" class="full-width" placeholder="Username" required dividerColor="{{ errors.username ? 'warn' : 'primary' }}">
-                <md-hint *ngIf="errors.username" align="end">
-                    <span>{{ errors.username }}</span>
+            <md-input type="text" formControlName="name" class="full-width" placeholder="name" required dividerColor="{{ errors.name ? 'warn' : 'primary' }}">
+                <md-hint *ngIf="errors.name" align="end">
+                    <span>{{ errors.name }}</span>
                 </md-hint>
             </md-input>
-            <md-input type="password" formControlName="password" class="full-width" placeholder="Contraseña" required dividerColor="{{ errors.password ? 'warn' : 'primary' }}">
-                <md-hint *ngIf="errors.password" align="end">
-                    <span>{{ errors.password  }}</span>
-                </md-hint>
-            </md-input>
-            <button type="submit" [disabled]="!userForm.valid" md-raised-button class="main">Guardar</button>
+            <button type="submit" [disabled]="!userForm.valid" md-raised-button class="main">Actualizar perfil</button>
         </form>
     </md-card-content>
 </md-card>
-
-
-
-<div *ngIf="user">
-    <div class="row">
-        <div class="col-md-4">
-            <avatar-letter [text]="user.email" [options]="options">
-            </avatar-letter>
-            <p>{{user.email}}</p>
-            <p>Unido : {{user.createdAt}}</p>
-        </div>
-        <div class="col-md-8">
-            <md-progress-bar mode="determinate" value=40></md-progress-bar>
-            <md-progress-bar mode="indeterminate"></md-progress-bar>
-            <md-progress-bar mode="buffer" value=40 bufferValue="myBufferValue"></md-progress-bar>
-            <md-progress-bar mode="query"></md-progress-bar>
-            <md-slider></md-slider>
-            <md-slider min="1" max="5"></md-slider>
-            <md-slider min="1" max="5"></md-slider>
-            <md-slider step="5" value="25"></md-slider>
-            <md-slider step="5"></md-slider>
-
-        </div>
-    </div>
-</div>

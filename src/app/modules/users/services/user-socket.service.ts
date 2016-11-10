@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { User } from '../model/user';
-import { SocketService } from '../../../shared/services/socket-io';
+import { SocketService, FeathersApp, FeathersService } from '../../../shared/services/socket-io';
 
 @Injectable()
 export class UserSocketService extends UserService {
@@ -15,14 +15,13 @@ export class UserSocketService extends UserService {
     user: User;
     users: User[];
 
-    _app: any;
-    service: any;
+    _app: FeathersApp;
+    service: FeathersService;
 
     constructor(public socketService: SocketService, private router: Router) {
         super();
         this._app = this.socketService.init();
         this.service = this._app.service('users');
-        //listening events CRUD
         this.service.on('created', (newItem) => this.onCreated(newItem));
 
         this.usersOb = new Observable(observer => this.usersObserver = observer).share();
@@ -45,7 +44,7 @@ export class UserSocketService extends UserService {
                 this.users = items.data.map((x) =>
                     this.toUser(x));
                 this.usersObserver.next(this.users);
-            })
+            });
         });
     }
     add(user: User) {
@@ -54,9 +53,9 @@ export class UserSocketService extends UserService {
             this.service.create({ email: this.user.email, password: '121212' })
                 .then((result) => {
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.error('Error saving!', error);
-                    alert("Error al registrar un usuario");
+                    alert('Error al registrar un usuario');
                 })
         });
     }
@@ -68,7 +67,7 @@ export class UserSocketService extends UserService {
                     if (err) return console.error(err);
                     this.user = new User(x._id, x.username, x.email, x.createdAt);
                     this.userObserver.next(this.user);
-                    console.log("item of server ", x);
+                    console.log('item of server ', x);
                 })
         });
     }
@@ -80,7 +79,7 @@ export class UserSocketService extends UserService {
                 $limit: 1
             }
         }, (err, item: any) => {
-            if (err) return console.error("error", err);
+            if (err) return console.error('error', err);
             this.user = this.toUser(item.data[0]);
             this.userObserver.next(this.user);
         });
@@ -93,18 +92,25 @@ export class UserSocketService extends UserService {
             .then((result) => {
                 this.router.navigate(['admin/users']);
             })
-            .catch(function (error) {
-                alert("Error al eliminar  tu proyecto");
+            .catch(function(error) {
+                alert('Error al eliminar  tu proyecto');
             });
     }
-    update(user: User) {
-    }
-    patch(data) {
 
+    patch(user: User): Promise<void> {
+        return this._app.authenticate().then(data =>
+            this.service.patch(user.id, {
+                name: user.name,
+                email: user.email
+            }).catch(function(error) {
+                throw error;
+            }));
     }
+
     private toUser(source) {
         return new User(source._id, source.name, source.email, source.createdAt);
     }
+
     search(email: string) {
         this._app.authenticate().then(data => {
             this.service.find({
