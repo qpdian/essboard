@@ -1,5 +1,3 @@
-
-
 export class AlphaMetadata {
   constructor(
     public identifier: number,
