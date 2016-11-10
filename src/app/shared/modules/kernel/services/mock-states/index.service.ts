@@ -28,7 +28,7 @@ export class StateMockService {
     }
     private addStatesToStates(states) {
         for (let state of states) {
-            this.states.push(state);
+            this.states.unshift(state);
         }
     }
     private alpha1() {

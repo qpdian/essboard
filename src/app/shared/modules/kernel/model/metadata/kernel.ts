@@ -213,21 +213,20 @@ export class Role {
 export class Method {
   practices: Practice[];
 }
-//import { ACTIVITY_SPACES } from './mock-activity-spaces/mock';
 
 export class Practice {
   activities: Activity[];
   workProducts: WorkProduct[];
   roles: Role[];
+  name:string;
+  description:string;
   constructor(name: string, description: string) {
     this.activities = [];
+    this.name = name;
+    this.description = description;
   }
-  addActivity(name: any, spacesActivityCode: any[]) {
-    let activity = new Activity(name);
-    activity.practice = this;
-    for (let code of spacesActivityCode) {
-      //activity.addStateAchaived(ACTIVITY_SPACES.find(ac => ac.identifier === code));
-    }
+  addActivity(activity:Activity) {
+    activity.practice =this;
     this.activities.push(activity);
   }
 
@@ -237,6 +236,7 @@ export class Activity {
   name: string;
   practice: Practice;
   constructor(name: string) {
+    this.achaiveds = [];
   }
   addStateAchaived(spaceActivity) {
     this.achaiveds.push(new AchaivedTo(spaceActivity));

@@ -38,7 +38,9 @@ export class AreaMockService {
     getAreaComplete(name: string) {
         let area = this.areasSummary.find(ar => ar.name === name);
         for (let alpha of area.dimensions) {
-            alpha.states = this.getStatesForAlpha(alpha);
+            for(let state of this.getStatesForAlpha(alpha) ){
+                alpha.addState(state);
+            }
         }
         area.activitypaces = this.activitySpaces.filter(ac => ac.area === area);
         return area;
@@ -48,11 +50,9 @@ export class AreaMockService {
     }
     getAlphaComplete(alpha) {
         alpha.states = this.stateMockService.getStateForAlpha(alpha.identifier);
-        console.log("alpha", alpha);
         return alpha;
     }
     getStatesForAlpha(alpha){
-        console.log("states for alpha",this.stateMockService.getStateForAlpha(alpha.identifier));
         return this.stateMockService.getStateForAlpha(alpha.identifier);
     }
     registerAlphas() {
@@ -73,7 +73,7 @@ export class AreaMockService {
         this.registerSpaceActivity("1-1", this.customer, 'Explore posibilities', ['Enable the right stakeholders to be involved', 'Understand the stakeholders’ needs',
             'Identify opportunities for the use of the software system',
             'Understand why the software system is needed',
-            'Establish the value offered by the software system'], [], [11, 13]);
+            'Establish the value offered by the software system'], [], [11, 23]);
         this.registerSpaceActivity("1-2", this.customer, 'Understand Stakeholder Needs',
             ['Ensure the right solution is created', 'Collect feedback and generate input',
                 'Ensure that the solution produced provides benefit to the stakeholders',
@@ -86,7 +86,7 @@ export class AreaMockService {
         this.registerSpaceActivity("2-1", this.solution, 'Understand the requeriments', [], [], [33]);
         this.registerSpaceActivity("2-2", this.solution, 'Shape the system', [], [33], [34, 41]);
         this.registerSpaceActivity("2-3", this.solution, 'Implement the system', [], [41], [44]);
-        this.registerSpaceActivity("2-4", this.solution, 'Test the system', [], [34, 45], [36, 46]);
+        this.registerSpaceActivity("2-4", this.solution, 'Test the system', [], [34, 41], [36, 44]);
         this.registerSpaceActivity("2-5", this.solution, 'Deploy the system', [], [44], [45]);
         this.registerSpaceActivity("2-6", this.solution, 'Operate the system', [], [45], [46]);
         //endeavor
