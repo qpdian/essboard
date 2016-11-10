@@ -3,8 +3,7 @@ import { OptionGoTo } from '../../shared/models/option-go-to';
 
 @Component({
   selector: 'app-developer',
-  templateUrl: './layout-settings.component.html',
-  styleUrls: ['./developer.component.css']
+  templateUrl: './layout-settings.component.html'
 })
 export class LayoutSettingsComponent implements OnInit {
 
