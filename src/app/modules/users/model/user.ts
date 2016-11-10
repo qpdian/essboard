@@ -9,6 +9,6 @@ export class User {
     }
 
     public avatar(size = 400): string {
-        return `http://api.adorable.io/avatars/${size}/${this.name}`;
+        return `https://api.adorable.io/avatars/${size}/${this.name}`;
     }
 }
