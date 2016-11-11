@@ -9,14 +9,14 @@
             <div [md-menu-trigger-for]="menu" class="avatar">
                 <img src="{{user.avatar(32)}}" alt="{{user.name}}">
             </div>
-            <md-menu class="menu-options" x-position="after" y-position="below" #menu="mdMenu">
-                <button md-menu-item routerLink="/me/projects"> Mis proyectos  </button>
-                <button md-menu-item routerLink="/me/projects"> Mis competencias </button>
-                <button md-menu-item routerLink="/me/practices">Mis practicas</button>
-                <button md-menu-item> Ayuda </button>
-                <button md-menu-item  routerLink="/me/settings/profile"> Configuracion </button>
-                <button md-menu-item (click)="logout()"> Salir </button>
-            </md-menu>
         </div>
     </md-toolbar>
 </div>
+<md-menu class="menu-options" x-position="after" y-position="below" #menu="mdMenu">
+    <button md-menu-item routerLink="/me/projects"> Mis proyectos  </button>
+    <button md-menu-item routerLink="/me/projects"> Mis competencias </button>
+    <button md-menu-item routerLink="/me/practices">Mis practicas</button>
+    <button md-menu-item> Ayuda </button>
+    <button md-menu-item routerLink="/me/settings/profile"> Configuracion </button>
+    <button md-menu-item (click)="logout()"> Salir </button>
+</md-menu>
