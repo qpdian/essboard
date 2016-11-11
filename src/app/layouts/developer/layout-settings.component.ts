@@ -13,7 +13,7 @@ export class LayoutSettingsComponent implements OnInit {
       {
         name: 'Perfil',
         description: '',
-        icon: 'account circle',
+        icon: 'account_circle',
         route: '/me/settings/profile'
       },
       {

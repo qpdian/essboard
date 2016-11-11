@@ -28,7 +28,7 @@
             <div *ngIf="!(projects.length == 0)">
                 <div class="wrapper">
                     <div class="selectable project" *ngFor="let project of projects">
-                        <project-card [project]="project"></project-card>
+                        <project-card [project]="project" [user]="user"></project-card>
                     </div>
                 </div>
             </div>

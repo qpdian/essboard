@@ -1,5 +1,6 @@
 import { Alpha, Kernel } from './project-kernel';
 import { CheckpointMetadata } from '../../../shared/models/kernel/kernel';
+import { User } from '../../users/model/user';
 
 export class Project {
   public members: any[];
@@ -9,15 +10,19 @@ export class Project {
   public name: string;
   public description: string;
   public percent: number;
-  public lastSession : Session;
+  public lastSession: Session;
 
-  constructor(id: string, name: string, description: string, createdAt: Date) {
+  constructor(id: string, name: string, description: string, private ownerId: string, createdAt: Date = new Date()) {
     this.name = name;
     this.description = description;
     this.id = id;
     this.members = [];
     this.sessions = [];
     this.createdAt = createdAt;
+  }
+
+  isInvited(user: User): boolean {
+    return this.ownerId !== user.id;
   }
 
   public get currentKernel(): Kernel {
@@ -46,14 +51,14 @@ export class Project {
     return index != -1;
 
   }
-  
+
   getLastSession() {
     if (this.sessions.length > 0) {
       return this.sessions[this.sessions.length - 1];
     }
     return null;
   }
-  
+
   getLastSessionId() {
     if (this.sessions.length > 0) {
       console.log(this.sessions[this.sessions.length - 1].id);

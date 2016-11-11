@@ -29,9 +29,11 @@ export class ProjectsSocketService extends ProjectsService {
         this.project = null;
         this.projects = [];
     }
+
     private transformSourceToProject(obj: any) {
-        return new Project(obj._id, obj.name, obj.description, obj.createdAt);
+        return new Project(obj._id, obj.name, obj.description, obj.createdBy, obj.createdAt);
     }
+
     getProjects() {
         this._app.authenticate().then(() => {
             this.service.find({
@@ -40,12 +42,12 @@ export class ProjectsSocketService extends ProjectsService {
                         { createdBy: this._app.get('user')._id },
                         { members: this._app.get('user')._id }
                     ]
-                }          
+                }
             }, (err, items: any) => {
-                    if(err) return console.error(err);
-                    this.projects = items.data.map((obj) => this.transformSourceToProject(obj));
-                    this.projectsObserver.next(this.projects);
-                })
+                if (err) return console.error(err);
+                this.projects = items.data.map((obj) => this.transformSourceToProject(obj));
+                this.projectsObserver.next(this.projects);
+            })
         });
     }
     getProjectsSharedMe() {
@@ -65,7 +67,7 @@ export class ProjectsSocketService extends ProjectsService {
                 {
                     name: project.name,
                     description: project.description,
-                    members : []
+                    members: []
                 })
                 .then((result) => {
                 })
@@ -131,20 +133,8 @@ export class ProjectsSocketService extends ProjectsService {
         return foundIndex;
     }
     private onCreated(newItem: any) {
-        this.projects.unshift(new Project(newItem._id, newItem.name, newItem.description, newItem.createdAt));
+        this.projects.unshift(this.transformSourceToProject(newItem));
         this.projectsObserver.next(this.projects);
-    }
-    private onUpdated(updatedItem: any) {
-        console.log('edi');
-        const index = this.getIndex(updatedItem.id);
-        this.projects[index].name = updatedItem.name;
-        this.projects[index].description = updatedItem.description;
-        this.projects[index].percent = updatedItem.percent;
-        this.projectsObserver.next(this.projects);
-        this.projectObserver.next(this.projects[index]);
-    }
-    private onPatched(patchedItem: any) {
-        console.log('patched');
     }
 
     private onRemoved(removedItem) {
@@ -154,6 +144,4 @@ export class ProjectsSocketService extends ProjectsService {
 
         //this.itemsObserver.next(this.data);
     }
-
-
 }

@@ -1,10 +1,10 @@
 
 import { Project, Session } from '../model/project';
-import  { ToSession } from './to-session';
+import { ToSession } from './to-session';
 
 export class ToProject {
     public static transformCompleteToProject(obj: any) {
-        let p = new Project(obj._id, obj.name, obj.description, obj.createdAt);
+        let p = new Project(obj._id, obj.name, obj.description, obj.createdBy, obj.createdAt);
         for (let session of obj.sessions) {
             p.addSession(this.transformSourceToSession(session));
         }
@@ -14,6 +14,7 @@ export class ToProject {
         }
         return p;
     }
+
     public static transformSourceToSession(obj: any) {
         return new Session(obj._id, obj.nroOrder, obj.createdAt)
     }

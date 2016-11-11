@@ -8,7 +8,7 @@ import { ProjectsService } from '../../../services/projects.service';
 })
 export class ProjectFormComponent {
     @Output() onCloseForm = new EventEmitter<boolean>();
-    model = new Project("", '', '', new Date());
+    model = new Project('', '', '', '');
     submitted = false;
     active = true;
     constructor(private projectService: ProjectsService) { }

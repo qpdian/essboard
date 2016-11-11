@@ -1,10 +1,12 @@
-
 import { Project } from '../../model/project';
 import { ProjectsService } from '../../services/projects.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ALPHAS } from '../../../../shared/models/kernel/mock-kernel';
+
+import { AuthService } from '../../../../auth.service';
+import { User } from '../../../users/model/user';
 
 @Component({
     selector: 'my-app',
@@ -19,9 +21,17 @@ export class ProjectListComponent implements OnInit {
     projects: Project[] = [];
     sharedProjects: Project[] = [];
     private subscription: Subscription;
-    constructor(private router: Router, private projectsService: ProjectsService
-    ) { }
+
+    user: User;
+
+    constructor(
+        private router: Router,
+        private projectsService: ProjectsService,
+        private auth: AuthService) { }
+
     ngOnInit(): void {
+        this.user = this.auth.user;
+
         this.subscription = this.projectsService.items.subscribe((items: Project[]) => {
             this.projects = items;
             // this.ref.markForCheck();
@@ -35,10 +45,10 @@ export class ProjectListComponent implements OnInit {
     showForm(): void {
         this.hideForm = !this.hideForm;
     }
-    closeCreateForm(){
+    closeCreateForm() {
         this.hideForm = true;
     }
-    showALPHAS(){
+    showALPHAS() {
         console.log(ALPHAS);
     }
 
