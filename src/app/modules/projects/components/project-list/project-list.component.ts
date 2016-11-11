@@ -16,10 +16,7 @@ import { User } from '../../../users/model/user';
 export class ProjectListComponent implements OnInit {
     title = 'Mis proyectos';
     hideForm: boolean = true;
-    hideFormShare: boolean = true;
-    _isEmpty: boolean;
     projects: Project[] = [];
-    sharedProjects: Project[] = [];
     private subscription: Subscription;
 
     user: User;
@@ -36,19 +33,19 @@ export class ProjectListComponent implements OnInit {
             this.projects = items;
             // this.ref.markForCheck();
         });
-        this.subscription = this.projectsService.sharedMe.subscribe((shareds: Project[]) => {
-            this.sharedProjects = shareds;
-        });
-        this.projectsService.getProjectsSharedMe();
+
         this.projectsService.getProjects();
     }
+
     showForm(): void {
         this.hideForm = !this.hideForm;
     }
+
     closeCreateForm() {
         this.hideForm = true;
     }
-    showALPHAS() {
+
+    findProject() {
         console.log(ALPHAS);
     }
 
