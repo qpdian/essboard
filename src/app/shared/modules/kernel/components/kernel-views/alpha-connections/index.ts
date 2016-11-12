@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Kernel } from '../../../model/kernel';
 
 class SVG {
@@ -19,19 +19,17 @@ class AlphaView extends SVG {
 }
 
 class LineView extends SVG {
-
   constructor(positionx: number, positiony: number, draw: string) {
     super(positionx, positiony, draw);
   }
-
 }
 
 @Component({
-  selector: 'alpha-connections', 
+  selector: 'alpha-connections',
   templateUrl: 'index.html',
   styleUrls: ['index.css']
 })
-export class AlphaConnections {
+export class AlphaConnections implements OnInit {
   @Input()
   kernel: Kernel;
 
@@ -65,8 +63,10 @@ export class AlphaConnections {
     { name: 'Interesado', hightLight: true },
 
   ];
-  constructor() {
+  constructor() { }
 
+  ngOnInit() {
+    console.log('show', this.kernel);
   }
 
   test() {
@@ -76,9 +76,7 @@ export class AlphaConnections {
     let object = this.hightlights.find(alpha => alpha.name === nameAlpha);
     return object ? true : false;
   }
-  show() {
-    console.log('show', this.kernel);
-  }
+
   public radarChartLabels: string[] = ['Oportunity', 'Stakeholder', 'Requeriments', 'System Software', 'Team', 'Way Working', 'Work'];
 
   public radarChartData: any = [
@@ -86,6 +84,7 @@ export class AlphaConnections {
     { data: [1, 1, 1, 1, 1, 1, 5], label: 'Sesion 2' },
     { data: [2, 1, 2, 1, 1, 1, 6], label: 'Sesion 3' }
   ];
+
   public radarChartType: string = 'radar';
 
   public options: any = {
