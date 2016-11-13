@@ -14,7 +14,7 @@ export class SocketService {
     init() {
         this.socket = io(this._url);
         return feathers()
-            .configure(feathers.socketio(this.socket))
+            .configure(feathers.socketio(this.socket,{timeout:10000}))
             .configure(feathers.hooks())
             .configure(feathers.authentication({ storage: window.localStorage }));
     }

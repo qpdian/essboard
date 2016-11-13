@@ -28,10 +28,8 @@ export class ProjectListComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this.auth.user;
-
         this.subscription = this.projectsService.items.subscribe((items: Project[]) => {
             this.projects = items;
-            // this.ref.markForCheck();
         });
 
         this.projectsService.getProjects();
