@@ -57,7 +57,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   closeSharedForm(hide) {
     this.showShare = hide;
   }
-  //add confirmation esperar modal
   delete() {
     this.dialogRef = this.dialog.open(ConfirmationDialog, {
       disableClose: false
