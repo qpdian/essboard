@@ -1,4 +1,9 @@
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+@import 'loading-animation.css';
+
+
+
+
 
 body{
     margin: 0px;
@@ -18,7 +23,6 @@ body{
     opacity: 0.7;
 }
 .selectable:hover {
-    border-bottom: solid #82e1c2;
     opacity: 1;
     box-shadow: 0px 0px 1px #aabe8e;
 }
@@ -32,7 +36,7 @@ a.selectable:hover{
 .wrapper {
   display: flex;
   flex-flow: row wrap;
-      margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .item-wrapper{
   margin : 10px 5px 5px 5px;
@@ -117,9 +121,6 @@ md-input.ng-pristine {
     cursor: not-allowed;
 }
 
-.md-visually-hidden{
-  
-}
 .title{
     color: #87b890;
     text-align: center;
@@ -145,3 +146,7 @@ md-input.ng-pristine {
 .center img{
     margin:auto;
 }
+app-root{
+    z-index: 10000;
+}
+
