@@ -33,6 +33,7 @@ export class AuthService {
             throw error;
         });
     }
+   
 
     public get isLoggedIn(): boolean {
         return !!window.localStorage.getItem('user');

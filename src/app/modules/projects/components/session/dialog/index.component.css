@@ -1,0 +1,16 @@
+ .chat{   
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    width: 200px;
+    padding: 0px;
+ }
+ .messages{
+    height: 300px;
+    overflow-x: hidden;
+ }
+ .header{
+    background: #8ea998;
+    color: white;
+    padding: 10px;
+ }

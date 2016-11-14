@@ -6,6 +6,7 @@ import { SessionService } from './session.service';
 import { SocketService } from '../../../shared/services/socket-io';
 import { ToSession } from '../transforms/to-session';
 import { GetKeys } from '../model/util/get-keys-from-object';
+import { AuthService } from '../../../auth.service';
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -18,7 +19,7 @@ export class SessionSocketService extends SessionService {
     _app: any;
     service: any;
 
-    constructor(public socketService: SocketService, private router: Router) {
+    constructor(public socketService: SocketService,private auth:AuthService, private router: Router) {
         super();
         this._app = this.socketService.init();
         this.service = this._app.service('sessions');
@@ -45,7 +46,7 @@ export class SessionSocketService extends SessionService {
         });
 
     }
- 
+
     getSession(id: string) {
         this.service.get(id,
             (err, item: any) => {
@@ -80,15 +81,15 @@ export class SessionSocketService extends SessionService {
     }
     setCheckpointTo(id, dimensionMetadataId, stateMetadataId, checkpointMetadataId, condition) {
         let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId);
-        console.log("indices",indexs);
-        console.log("check",checkpointMetadataId);
-        console.log('condition',condition);
+        console.log("indices", indexs);
+        console.log("check", checkpointMetadataId);
+        console.log('condition', condition);
         let base = 'alphas.' + indexs.dimension + '.states.' + indexs.state + '.checklist';
-     
+
         let path = base + '.$.isAchieved';
-        console.log("path",path);
+        console.log("path", path);
         let search = base + '.metadataId';
-        console.log("search",search);
+        console.log("search", search);
         let params = { ["query"]: { [search]: checkpointMetadataId } };
         let setData = { [path]: condition };
         this.patch(id, setData, params);
@@ -100,7 +101,7 @@ export class SessionSocketService extends SessionService {
                 { '$set': data },
                 params)
                 .then((result) => {
-                    console.log("result",result.alphas);
+                    console.log("result", result.alphas);
                 })
                 .catch(function (error) {
                     console.log(error)
@@ -135,5 +136,18 @@ export class SessionSocketService extends SessionService {
 
         //this.itemsObserver.next(this.data);
     }
-
+    public joinChat(idSession) {
+        console.log("user", this.auth.user.id);
+        this._app.authenticate().then(() => {
+            this._app.service('users').patch(
+                 this.auth.user.id,
+                { $addToSet: { sessionsId: idSession } }
+            ).then((result) => {
+                console.log("result", result);
+            })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        });
+    }
 }

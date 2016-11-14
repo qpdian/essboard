@@ -10,4 +10,5 @@ export abstract class SessionService {
     abstract deleteSe();
     abstract setCheckpointTo(id,dimensionId,stateId,checkpointId,condition);
     abstract setStateAsWorking(id,dimensionConcept,stateName);
+    abstract joinChat(idSession);
 }

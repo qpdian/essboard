@@ -60,5 +60,6 @@ export class LoginComponent implements OnInit {
   private onError(error: string) {
     this.notification.error('Upps!', error);
   }
+
 }
 

@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { Project, Session } from '../../model/project';
 import { Alpha, State } from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
+import { DialogService } from '../../services/dialog.service';
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
@@ -23,10 +24,13 @@ export class SessionComponent implements OnInit, OnDestroy {
   statesSelecteds: StateMetadata[];
   workItems: any[] = [];
   session: Session;
+  comments: any[];
+  isJoined: boolean = false;
   private sub: Subscription;
   private subscription: Subscription;
   constructor(
-    private service: SessionService) {
+    private service: SessionService
+  ) {
     this.dimensionSelect = null;
     this.statesSelecteds = [];
   }
@@ -47,15 +51,13 @@ export class SessionComponent implements OnInit, OnDestroy {
     this.dimensionSelect = dimension;
     console.log(dimension);
   }
-  refreshDimensionSelected(event){
-    console.log("refreeshh");
+  refreshDimensionSelected(event) {
     this.dimensionSelect = this.session.kernel.dimensions.find(dim => dim === this.dimensionSelect);
     console.log(this.dimensionSelect);
   }
 
   getStatesGoal(states: StateMetadata[]) {
     this.statesSelecteds = states;
-    console.log('states selected for this sesion', states);
   }
   getWorkItems(workItems) {
     this.workItems = workItems;
@@ -63,6 +65,12 @@ export class SessionComponent implements OnInit, OnDestroy {
 
   delete() {
 
+  }
+  joinChat() {
+    if (!this.isJoined) {
+      this.service.joinChat(this.idSession);
+    }
+    this.isJoined = true;
   }
 
 }
