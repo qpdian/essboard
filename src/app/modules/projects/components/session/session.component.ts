@@ -1,7 +1,7 @@
 
 
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import {  Session } from '../../model/project';
+import { Session } from '../../model/project';
 import { Alpha, State } from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
 import { PrimaryKernelMockService } from '../../../../shared/modules/kernel/services/index';
@@ -13,7 +13,7 @@ import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/k
   templateUrl: 'session.component.html',
   styleUrls: ['session.component.css'],
 })
-export class SessionComponent implements OnInit {
+export class SessionComponent implements OnInit, OnChanges {
   @Input()
   idSession: string;
   session: Session;
@@ -26,12 +26,18 @@ export class SessionComponent implements OnInit {
   private subscription: Subscription;
   constructor(
     private service: SessionService,
-    public  kernel:PrimaryKernelMockService
+    public kernel: PrimaryKernelMockService
   ) {
     this.alphaSelect = null;
     this.statesSelecteds = [];
   }
   ngOnInit() {
+    this.subscription = this.service.currentSession.subscribe((session: Session) => {
+      this.session = session;
+    });
+    this.service.getSession(this.idSession);
+  }
+  ngOnChanges() {
     this.subscription = this.service.currentSession.subscribe((session: Session) => {
       this.session = session;
     });

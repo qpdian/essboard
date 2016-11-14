@@ -3,15 +3,15 @@
         <md-sidenav #start mode="side" (open)="true">
             <div class="menu-vertical">
                 <button class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
-                <div class="title-menu">Proyecto</div>
-                <div class="option selectable" (click)="showNetStates()">
+                <h3 class="title-menu">Proyecto</h3>
+                <div class="option selectable" (click)="showKernelViews()">
                     <p>
                         <md-icon class="md-24">visibility</md-icon>
                     </p>
                 </div>
-                <div class="title-menu">Sesiones</div>
+                <h3 class="title-menu">Sesiones</h3>
                 <button class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
-                <div class="option selectable" md-tooltip="Sesion: {{session.num}}" *ngFor="let session of project.sessions" (click)="showSessionDetail(session)">
+                <div class="option selectable" *ngFor="let session of project.sessions" (click)="showSessionDetail(session)">
                     <p>
                         <md-icon class="md-24">{{session.getIcon()}}</md-icon>
                     </p>
@@ -19,26 +19,28 @@
             </div>
         </md-sidenav>
         <md-toolbar class="project-detail">
-            <button class="transparent" md-tooltip="Ver las opciones" (click)="start.toggle()">
+            <button class="transparent" (click)="start.toggle()">
                   <md-icon class="md-24">chevron_right</md-icon>
             </button>
-            <span> Proyecto:</span>
-            <input md-tooltip="Edita el nomber de tu proyecto" [value]="project.name" #name (keyup.enter)="setName(name.value)" (blur)="setName(name.value);">
-            <span>Descripcion:</span>
-            <input [value]="project.description" #description (keyup.enter)="setDescription(description.value)" (blur)="setDescription(description.value);">
-            <span>Lo he creado el : {{ project.createdAt | date:'d/M/y' }}  </span>
+            <md-input placeholder="Nombre del proyecto" maxlength="200" [(ngModel)]="project.name" #name (keyup.enter)="setName(name.value)"
+                (blur)="setName(name.value);">
+            </md-input>
+            <md-input placeholder="Descripcion del proyecto" maxlength="350" [(ngModel)]="project.description" #description (keyup.enter)="setDescription(description.value)"
+                (blur)="setDescription(description.value);">
+            </md-input>
             <span class="fill-remaining"></span>
+            <span>Creado el: {{ project.createdAt | date:'d/M/y' }}  </span>
             <button md-icon-button md-tooltip="Elimina este proyecto" (click)="delete()"><md-icon class="md-24"  >delete_forever</md-icon></button>
             <button md-icon-button md-tooltip="Comparte este proyecto" (click)="share()"><md-icon class="md-24">share</md-icon></button>
         </md-toolbar>
         <div class="content">
             <div>
                 <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
-                <div *ngIf="!hiddenNetStates">
+                <div *ngIf="!hiddenKernelViews">
                     <h2 class="title">Tu proyecto holisticamente</h2>
                     <alpha-connections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-connections>
-                </div>         
-                <session *ngIf="selectedSession" [idSession]="selectedSession.id">
+                </div>
+                <session *ngIf="!hiddenSessionDetail" [idSession]="selectedSession.id">
                 </session>
             </div>
         </div>

@@ -48,13 +48,17 @@ a.selectable:hover{
     left: -40px;
     height: 100px;
 }
-/** A single overlay pane. */
 .md-overlay-pane {
   position: absolute;
   pointer-events: auto;
   box-sizing: border-box;
   z-index: 1000; 
 }
+.container-center-overlay {
+    margin: 50px 23%;
+    text-align: center;
+}
+/* buttons*/
 button{
     border: none;
     padding: 5px 10px;

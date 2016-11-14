@@ -3,8 +3,7 @@ import { Project } from '../../../model/project';
 import { ProjectsService } from '../../../services/projects.service';
 @Component({
     selector: 'project-form',
-    templateUrl: 'project-form.component.html',
-    styleUrls: ['form.component.css']
+    templateUrl: 'project-form.component.html'
 })
 export class ProjectFormComponent {
     @Output() onCloseForm = new EventEmitter<boolean>();

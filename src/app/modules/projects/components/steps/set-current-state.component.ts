@@ -1,5 +1,5 @@
-import { Component, OnInit, Input ,EventEmitter,Output} from '@angular/core';
-import { Alpha, State ,Checkpoint} from '../../model/project-kernel';
+import { Component, OnInit, Input, EventEmitter,ElementRef, Output, ViewChild } from '@angular/core';
+import { Alpha, State, Checkpoint } from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['style.component.css']
 })
 export class SetCurrentStateComponent implements OnInit {
+    @ViewChild('player') public playerContainer: ElementRef;
+
     @Input()
     dimension: Alpha;
     @Input()
@@ -26,7 +28,8 @@ export class SetCurrentStateComponent implements OnInit {
         if (this.isPosiblePutStateAsWorking(state)) {
             this.service.setStateAsWorking(this.idSession, this.dimension.metadataId, state.info.identifier);
         } else {
-            alert("Deshabilitado");
+             this.playerContainer.nativeElement.play();
+
         }
     }
     private isPosiblePutStateAsWorking(state: State): Boolean {
@@ -37,10 +40,10 @@ export class SetCurrentStateComponent implements OnInit {
             this.dimension.isTouched = true;
         }
     }
-    onSelectedCheckpoint(checkpoint:Checkpoint) {
+    onSelectedCheckpoint(checkpoint: Checkpoint) {
         this.service.setCheckpointTo(this.idSession,
-                                     this.dimension.metadataId, 
-                                     this.selectedState.info.identifier, 
-                                     checkpoint.info.identifier, !checkpoint.isAchieved);
+            this.dimension.metadataId,
+            this.selectedState.info.identifier,
+            checkpoint.info.identifier, !checkpoint.isAchieved);
     }
 }

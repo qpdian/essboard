@@ -10,7 +10,7 @@ import { UsersModule } from '../users/index.module';
 import { AvatarLetterModule } from '../../shared/modules/avatar-letter/index.module';
 
 import { ProjectListComponent } from './components/project-list/project-list.component';
-import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
+import { ProjectDetailComponent,ConfirmationDialog} from './components/project-detail/project-detail.component';
 import { SessionComponent } from './components/session/session.component';
 import { ProjectCardComponent } from './components/project-list/project-card/project-card.component';
 
@@ -59,13 +59,15 @@ import { DialogSocketService } from './services/dialog-socket.service';
     StateCard,
     HowReachGoals,
     ActOnWorkItems,
-    DialogComponent
+    DialogComponent,
+    ConfirmationDialog
   ],
+  entryComponents: [ConfirmationDialog],
   providers: [
     { provide: ProjectService, useClass: ProjectSocketService },
     { provide: ProjectsService, useClass: ProjectsSocketService },
     { provide: SessionService, useClass: SessionSocketService },
-    { provide: DialogService, useClass: DialogSocketService}
+    { provide: DialogService, useClass: DialogSocketService }
   ],
   exports: [
     ProjectListComponent,
