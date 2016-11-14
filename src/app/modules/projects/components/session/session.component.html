@@ -6,10 +6,7 @@
         <button md-icon-button>
             <md-icon class="md-24" (click)="delete()" >delete_forever</md-icon>
         </button>
-        <button md-icon-button>
-            <md-icon class="md-24">folder</md-icon>
-        </button>
-            <button md-icon-button (click)="joinChat()">
+        <button md-icon-button (click)="joinChat()">
             <md-icon class="md-24">chat</md-icon>
         </button>
     </md-toolbar>
@@ -42,34 +39,19 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="wrapper">
-                                        <md-card class="selectable dimension-name" *ngFor="let dimension of session.kernel.dimensions" (click)="chooseDimension(dimension)">
-                                            <md-card-title>{{dimension.info.name}}
+                                        <md-card class="selectable dimension-name" *ngFor="let alpha of kernel.alphasSummary" (click)="chooseAlpha(alpha)">
+                                            <md-card-title>{{alpha.name}}
                                             </md-card-title>
                                         </md-card>
                                     </div>
                                 </div>
                             </div>
-                            <set-current-state [dimension]="session.getDimension(dimensionSelect)" [idSession]="session.id"></set-current-state>
+                            <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
                         </div>
                         <h2 class="title">Observa como va quedando esta sesion</h2>
                         <div>
                             <state-board [kernel]="session.kernel" [isForSelected]=false></state-board>
                         </div>
-
-
-                        <!--
-                    <button class="arrow left">
-                        <svg width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
-                            <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
-                            45.63,75.8 0.375,38.087 45.63,0.375 "/>
-                        </svg>  
-                    </button>
-                    <button class="arrow right">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="80px" viewBox="0 0 50 80" xml:space="preserve">
-                            <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
-                            0.375,0.375 45.63,38.087 0.375,75.8 "/>
-                        </svg>
-                    </button>-->
                     </div>
                 </template>
             </md-tab>
@@ -105,6 +87,6 @@
         </md-tab-group>
     </div>
     <div>
-        <comments *ngIf="isJoined" [sessionId]="session.id"> </comments>
+        <comments *ngIf="isJoinedToChat" [sessionId]="session.id"> </comments>
     </div>
 </div>

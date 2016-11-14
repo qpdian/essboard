@@ -106,7 +106,7 @@ export class Session {
     this.kernel = kernel;
   }
   getDimension(alpha) {
-    if (!!alpha) { return this.kernel.dimensions.find(dim => dim.metadataId === alpha.metadataId); }
+    if (!!alpha) { return this.kernel.dimensions.find(dim => dim.metadataId === alpha.identifier); }
     return null;
   }
 }

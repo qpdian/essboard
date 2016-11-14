@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AreaMetadata, AlphaMetadata, ActivitySpaceMetadata } from '../../model/metadata/kernel';
-import { AlphaMockService } from '../mock-alphas/index.service';
 import { StateMockService } from '../mock-states/index.service';
 @Injectable()
-export class AreaMockService {
+export class PrimaryKernelMockService {
     areasSummary: AreaMetadata[] = [];
-    alphasSummary: AlphaMetadata[] = [];
+    _alphasSummary: AlphaMetadata[] = [];
     activitySpaces: ActivitySpaceMetadata[] = [];
     private customer = new AreaMetadata(
         'Cliente',
@@ -46,11 +45,14 @@ export class AreaMockService {
         return area;
     }
     getAlphasForArea(area) {
-        return this.alphasSummary.filter(a => a.area === area);
+        return this._alphasSummary.filter(a => a.area === area);
     }
     getAlphaComplete(alpha) {
         alpha.states = this.stateMockService.getStateForAlpha(alpha.identifier);
         return alpha;
+    }
+    get alphasSummary(){
+        return this._alphasSummary;
     }
     getStatesForAlpha(alpha){
         return this.stateMockService.getStateForAlpha(alpha.identifier);
@@ -66,7 +68,7 @@ export class AreaMockService {
         this.addToAlphas([a1, a2, a3, a4, a5, a6, a7]);
     }
     addToAlphas(alphas) {
-        this.alphasSummary = alphas;
+        this._alphasSummary = alphas;
     }
     registerSpacesActivity() {
         //customer

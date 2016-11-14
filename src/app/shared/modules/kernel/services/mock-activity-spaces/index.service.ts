@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AreaMockService } from '../mock-areas/index.service';
+import { PrimaryKernelMockService } from '../mock-primary-kernel/index.service';
 import { StateMockService } from '../mock-states/index.service';
 import { ActivitySpaceMetadata } from '../../model/metadata/kernel';
 
@@ -7,7 +7,7 @@ import { ActivitySpaceMetadata } from '../../model/metadata/kernel';
 export class ActivitySpaceMockService {
     areas: any[];
     activitySpaces: ActivitySpaceMetadata[] = [];
-    constructor(public areaService: AreaMockService, public alphaService: StateMockService) {
+    constructor(public areaService: PrimaryKernelMockService, public alphaService: StateMockService) {
         this.registerObjects();
     }
     registerObjects() {

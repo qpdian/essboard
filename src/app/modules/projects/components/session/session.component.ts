@@ -1,12 +1,10 @@
 
 
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { Project, Session } from '../../model/project';
+import {  Session } from '../../model/project';
 import { Alpha, State } from '../../model/project-kernel';
 import { SessionService } from '../../services/session.service';
-import { DialogService } from '../../services/dialog.service';
+import { PrimaryKernelMockService } from '../../../../shared/modules/kernel/services/index';
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
@@ -15,23 +13,22 @@ import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/k
   templateUrl: 'session.component.html',
   styleUrls: ['session.component.css'],
 })
-export class SessionComponent implements OnInit, OnDestroy {
+export class SessionComponent implements OnInit {
   @Input()
   idSession: string;
+  session: Session;
+  alphaSelect: AlphaMetadata;
+  isJoinedToChat: boolean = false;
 
-  dimensionSelect: Alpha;
-  selectedState: StateMetadata;
   statesSelecteds: StateMetadata[];
   workItems: any[] = [];
-  session: Session;
-  comments: any[];
-  isJoined: boolean = false;
-  private sub: Subscription;
+
   private subscription: Subscription;
   constructor(
-    private service: SessionService
+    private service: SessionService,
+    public  kernel:PrimaryKernelMockService
   ) {
-    this.dimensionSelect = null;
+    this.alphaSelect = null;
     this.statesSelecteds = [];
   }
   ngOnInit() {
@@ -40,21 +37,11 @@ export class SessionComponent implements OnInit, OnDestroy {
     });
     this.service.getSession(this.idSession);
   }
-  ngOnDestroy() {
-
-  }
-  ngOnChange() {
-
+  chooseAlpha(alpha: AlphaMetadata) {
+    this.alphaSelect = alpha;
   }
 
-  chooseDimension(dimension: Alpha) {
-    this.dimensionSelect = dimension;
-    console.log(dimension);
-  }
-  refreshDimensionSelected(event) {
-    this.dimensionSelect = this.session.kernel.dimensions.find(dim => dim === this.dimensionSelect);
-    console.log(this.dimensionSelect);
-  }
+
 
   getStatesGoal(states: StateMetadata[]) {
     this.statesSelecteds = states;
@@ -62,15 +49,14 @@ export class SessionComponent implements OnInit, OnDestroy {
   getWorkItems(workItems) {
     this.workItems = workItems;
   }
-
   delete() {
 
   }
   joinChat() {
-    if (!this.isJoined) {
+    if (!this.isJoinedToChat) {
       this.service.joinChat(this.idSession);
     }
-    this.isJoined = true;
+    this.isJoinedToChat = true;
   }
 
 }
