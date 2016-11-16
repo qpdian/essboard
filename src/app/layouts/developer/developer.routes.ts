@@ -4,7 +4,7 @@ import { AuthGuardService } from '../../auth-guard.service';
 import { LayoutComponent, LayoutSettingsComponent, DeveloperComponent } from './index';
 import { ProjectListComponent, ProjectDetailComponent } from '../../modules/projects/index';
 import { PracticesComponent } from '../../modules/practices/index';
-import { ProfileUserComponent, ProfileSettingsComponent } from '../../modules/users/index';
+import { ProfileUserComponent, ProfileSettingsComponent,TrelloSettingsComponent } from '../../modules/users/index';
 
 
 export const DeveloperRoutes: Route[] = [
@@ -22,7 +22,7 @@ export const DeveloperRoutes: Route[] = [
         component: LayoutSettingsComponent,
         children: [
           { path: 'profile', component: ProfileSettingsComponent },
-          { path: 'projects', component: ProfileSettingsComponent },
+          { path: 'trello', component: TrelloSettingsComponent },
           { path: 'competencies', component: ProfileSettingsComponent },
         ]
       }

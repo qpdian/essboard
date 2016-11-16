@@ -12,4 +12,5 @@ export abstract class UserService {
     abstract search(email: string);
     abstract getByUsername(username:string);
     abstract patch(data);
+    abstract setAppKeyTrello(data);
 }

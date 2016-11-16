@@ -17,10 +17,10 @@ export class LayoutSettingsComponent implements OnInit {
         route: '/me/settings/profile'
       },
       {
-        name: 'Proyectos',
+        name: 'Conexion-Trello ',
         description: '',
-        icon: 'folder',
-        route: '/me/settings/projects'
+        icon: 'dashboard',
+        route: '/me/settings/trello'
       },
       {
         name: 'Competencias',

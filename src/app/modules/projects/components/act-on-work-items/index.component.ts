@@ -1,21 +1,29 @@
 import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core';
-import { StateMetadata, CheckpointMetadata } from '../../../../shared/models/kernel/kernel';
-import { Alpha, State } from '../../model/project-kernel';
+import { AuthService } from '../../../../auth.service';
 @Component({
   selector: 'act-on-work-items',
-  templateUrl: 'state-card.component.html',
-  styleUrls: ['state-card.component.css']
+  templateUrl: 'index.component.html',
+  styleUrls: ['index.component.css']
 })
 export class ActOnWorkItems {
+  _workItems: any[] = [];
   @Output() onWorkItems = new EventEmitter<any>();
-  _workItems : any[] = [];
-
   @Input()
   set workItems(workItems: any) {
     this._workItems = workItems;
   }
+  apiKey: string;
+  isConectionInit: boolean = false;
+  constructor(private auth: AuthService, ) {
+
+  }
+
   get workItems() {
     return this._workItems;
+  }
+  initConectTrello() {
+    this.apiKey = this.auth.user.appKeyTrello;
+    this.isConectionInit = true;
   }
   /*
   save(description) {

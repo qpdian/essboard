@@ -27,13 +27,14 @@ export class AuthService {
             'email': credentials.email,
             'password': credentials.password
         }).then((result) => {
+            console.log(result);
             window.localStorage.setItem('user', JSON.stringify(result.data));
             return this.user;
         }).catch(function (error) {
             throw error;
         });
     }
-   
+
 
     public get isLoggedIn(): boolean {
         return !!window.localStorage.getItem('user');
@@ -48,9 +49,11 @@ export class AuthService {
 
     public get user(): User {
         const data = JSON.parse(window.localStorage.getItem('user'));
-        return new User(data['_id'], data['name'], data['email'], data['createdAt']);
+        return new User(data['_id'], data['name'], data['email'], data['createdAt'], data['appKeyTrello']);
     }
-
+    public set user(user: User) {
+        window.localStorage['user'] = JSON.stringify(user);
+    }
     public signup(user: User): Promise<void> {
         return this._app.service('users').create({
             name: user.name,

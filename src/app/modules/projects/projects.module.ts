@@ -21,9 +21,10 @@ import { SharedFormComponent } from './components/forms/shared-form/shared-form.
 /* steps for use essence*/
 import { StateCard } from './components/state-card/state-card.component';
 import { HowReachGoals } from './components/how-reach-goals/state-card.component';
-import { ActOnWorkItems } from './components/act-on-work-items/state-card.component';
+import { ActOnWorkItems } from './components/act-on-work-items/index.component';
 import { SetCurrentStateComponent } from './components/steps/set-current-state.component';
 import { DialogComponent } from './components/session/dialog/index.component';
+import { TrelloComponent } from './components/session/trello/index.component';
 
 
 import { ProjectService } from './services/project.service';
@@ -60,6 +61,7 @@ import { DialogSocketService } from './services/dialog-socket.service';
     HowReachGoals,
     ActOnWorkItems,
     DialogComponent,
+    TrelloComponent,
     ConfirmationDialog
   ],
   entryComponents: [ConfirmationDialog],

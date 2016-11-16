@@ -8,6 +8,7 @@ import { PrimaryKernelMockService } from '../../../../shared/modules/kernel/serv
 import { Subscription } from 'rxjs/Subscription';
 import { AlphaMetadata, StateMetadata } from '../../../../shared/models/kernel/kernel';
 
+
 @Component({
   selector: 'session',
   templateUrl: 'session.component.html',
@@ -22,6 +23,7 @@ export class SessionComponent implements OnInit, OnChanges {
 
   statesSelecteds: StateMetadata[];
   workItems: any[] = [];
+
 
   private subscription: Subscription;
   constructor(

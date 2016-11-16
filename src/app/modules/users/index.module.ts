@@ -8,7 +8,8 @@ import { ListComponent }    from './components/list/list.component';
 import { SearchComponent }    from './components/search/search.component';
 import { UserDetailComponent }  from './components/detail/detail.component';
 import { ProfileUserComponent } from './components/profile/index.component'; 
-import { ProfileSettingsComponent } from './components/settings/index.component';
+import { ProfileSettingsComponent } from './components/settings/profile/index.component';
+import { TrelloSettingsComponent } from './components/settings/trello-api/index.component';
 import { FormComponent }  from './components/form/form.component';
 
 import { indexRouting } from './index.routing';
@@ -30,14 +31,15 @@ import { UserSocketService } from './services/user-socket.service';
     FormComponent,
     SearchComponent,
     ProfileUserComponent,
-    ProfileSettingsComponent
+    ProfileSettingsComponent,
+    TrelloSettingsComponent
   ],
   providers: [
     { provide: UserService, useClass: UserSocketService } 
   ],
   exports:[
       ListComponent,UserDetailComponent,SearchComponent,ProfileUserComponent,
-      ProfileSettingsComponent
+      ProfileSettingsComponent,TrelloSettingsComponent
   ]
 })
 export class UsersModule {}

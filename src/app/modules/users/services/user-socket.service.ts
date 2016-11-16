@@ -39,8 +39,6 @@ export class UserSocketService extends UserService {
                 }
             }, (err, items: any) => {
                 if (err) return console.error(err);
-                console.log('úers', items);
-
                 this.users = items.data.map((x) =>
                     this.toUser(x));
                 this.usersObserver.next(this.users);
@@ -48,12 +46,11 @@ export class UserSocketService extends UserService {
         });
     }
     add(user: User) {
-        console.log('saving');
         this._app.authenticate().then(data => {
             this.service.create({ email: this.user.email, password: '121212' })
                 .then((result) => {
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error('Error saving!', error);
                     alert('Error al registrar un usuario');
                 })
@@ -92,7 +89,7 @@ export class UserSocketService extends UserService {
             .then((result) => {
                 this.router.navigate(['admin/users']);
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 alert('Error al eliminar  tu proyecto');
             });
     }
@@ -102,7 +99,16 @@ export class UserSocketService extends UserService {
             this.service.patch(user.id, {
                 name: user.name,
                 email: user.email
-            }).catch(function(error) {
+            }).catch(function (error) {
+                throw error;
+            }));
+    }
+    setAppKeyTrello(user: User): Promise<void> {
+        console.log(user);
+        return this._app.authenticate().then(data =>
+            this.service.patch(user.id, {
+                appKeyTrello: user.appKeyTrello
+            }).catch(function (error) {
                 throw error;
             }));
     }

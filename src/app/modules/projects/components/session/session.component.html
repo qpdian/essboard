@@ -29,7 +29,6 @@
                     <i class="material-icons">looks_two</i>
                     <span>Determina tu estado</span>
                 </template>
-
                 <div class="content">
                     <h2 class="title">Determina el estado de cualquier dimension</h2>
                     <div>
@@ -60,9 +59,9 @@
                     <i class="material-icons">looks_3</i>
                     <span>Establece las metas</span>
                 </template>
-
-                <state-board [kernel]="" [isForSelected]=true (onChooseStatesGoal)="getStatesGoal($event)"></state-board>
-
+                <div class="content">
+                    <state-board [kernel]="" [isForSelected]=true (onChooseStatesGoal)="getStatesGoal($event)"></state-board>
+                </div>
             </md-tab>
             <md-tab>
                 <template md-tab-label>
@@ -80,9 +79,9 @@
                     <i class="material-icons">looks_5</i>
                     <span>Actua</span>
                 </template>
-
-                <act-on-work-items [workItems]="workItems"></act-on-work-items>
-
+                <div class="content">
+                    <act-on-work-items [workItems]="workItems"></act-on-work-items>
+                </div>
             </md-tab>
         </md-tab-group>
     </div>

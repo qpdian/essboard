@@ -5,7 +5,8 @@ export class User {
         public id: string,
         public name: string,
         public email: string,
-        public createdAt = new Date()) {
+        public createdAt = new Date(),
+        public appKeyTrello?:string) {
     }
 
     public avatar(size = 400): string {

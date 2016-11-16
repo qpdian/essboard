@@ -2,7 +2,7 @@
     position: absolute;
     bottom: 18px;
     right: 18px;
-    width: 200px;
+    width: 300px;
     padding: 0px;
  }
  .messages{
@@ -13,4 +13,7 @@
     background: #8ea998;
     color: white;
     padding: 10px;
+ }
+ span{
+     font-size: 11px;
  }
