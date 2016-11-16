@@ -31,9 +31,7 @@ export class TrelloComponent implements OnInit, OnDestroy {
         };
 
         let newBoard =
-            {
-                name: "Essence",
-            };
+            { name: "Essence",};
 
         Trello.post('/boards/', newBoard, success, error);
     }
