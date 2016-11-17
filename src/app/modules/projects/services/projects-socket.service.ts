@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from '../model/project';
 import { Observable } from 'rxjs';
 import { ProjectsService } from './projects.service';
 import { SocketService } from '../../../shared/services/socket-io';
+import { Project } from '../../../shared/models/project';
 
 @Injectable()
 export class ProjectsSocketService extends ProjectsService {

@@ -1,5 +1,5 @@
 
-import { Project } from '../model/project';
+import { Project } from '../../../shared/models/project';
 import { Observable } from 'rxjs';
 
 export abstract class ProjectsService {

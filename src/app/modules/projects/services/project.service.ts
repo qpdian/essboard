@@ -1,5 +1,4 @@
 
-import { Project } from '../model/project';
 import { Observable } from 'rxjs';
 
 export abstract class ProjectService {

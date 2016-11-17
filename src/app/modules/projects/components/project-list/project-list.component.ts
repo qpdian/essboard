@@ -1,10 +1,8 @@
-import { Project } from '../../model/project';
-import { ProjectsService } from '../../services/projects.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ALPHAS } from '../../../../shared/models/kernel/mock-kernel';
-
+import { Project } from '../../../../shared/models/project';
+import { ProjectsService } from '../../services/projects.service';
 import { AuthService } from '../../../../auth.service';
 import { User } from '../../../users/model/user';
 
@@ -43,8 +41,5 @@ export class ProjectListComponent implements OnInit {
         this.hideForm = true;
     }
 
-    findProject() {
-        console.log(ALPHAS);
-    }
 
 }

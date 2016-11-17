@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { KernelService} from '../../shared/services/kernel.service';
 import { PrimaryKernelMockService } from '../../shared/modules/kernel/services/index';
 @Component({
   selector: 'practices',
@@ -10,7 +9,7 @@ export class PracticesComponent implements OnInit {
 
   areas: any = [];
   areaChoosen : any = null;
-  constructor( public kernelService:KernelService,public areaService:PrimaryKernelMockService) { }
+  constructor( public areaService:PrimaryKernelMockService) { }
 
   ngOnInit() {
     this.areas = this.areaService.getAreasSummary();

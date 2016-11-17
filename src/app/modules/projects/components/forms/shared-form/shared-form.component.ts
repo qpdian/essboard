@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Project } from '../../../model/project';
+import { Project } from '../../../../../shared/models/project';
 import { ProjectService } from '../../../services/project.service';
 
 @Component({

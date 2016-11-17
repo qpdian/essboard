@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project, Session } from '../model/project';
 import { Observable } from 'rxjs';
 import { ProjectService } from './project.service';
 import { SocketService } from '../../../shared/services/socket-io';
-import { ToProject } from '../transforms/to-project';
-import { BuildDataToServer } from '../model/util/build-data-to-server';
+import { Project, Session } from '../../../shared/models/project';
+import { ToProject } from '../../../shared/transforms/to-project';
+import { BuildDataToServer } from '../../../shared/util/build-data-to-server';
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {

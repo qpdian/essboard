@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Project } from '../../../model/project';
+import { Project } from '../../../../../shared/models/project';
 import { ProjectsService } from '../../../services/projects.service';
 @Component({
     selector: 'project-form',

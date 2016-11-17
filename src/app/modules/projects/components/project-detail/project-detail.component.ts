@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy,Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { MdDialog, MdDialogRef } from '@angular/material';
-import { Project, Session } from '../../model/project';
+import { Project,Session } from '../../../../shared/models/project';
 import { ProjectService } from '../../services/project.service';
 import { NotificationsService } from 'angular2-notifications';
 

@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Project } from '../../../model/project';
+import { Project } from '../../../../../shared/models/project';
 import { User } from '../../../../users/model/user';
 
 @Component({
