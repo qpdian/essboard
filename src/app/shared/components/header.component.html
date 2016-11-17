@@ -1,11 +1,11 @@
 <div class="header">
     <md-toolbar>
         <a class="brand" routerLink="/"><img src="assets/img/logos/logo-horizontal.png" alt="Essboard"></a>
-        <div *ngIf="!isLoggedIn" class="option-isLoggin">
+        <div *ngIf="!isLoggedIn" class="noLoggin">
             <button class="menu" routerLink="/login">Ingresa</button>
             <button class="menu" routerLink="/signup">Registrate</button>
         </div>
-        <div *ngIf="isLoggedIn" class="option-noLoggin">
+        <div *ngIf="isLoggedIn" class="isLogged">
             <div [md-menu-trigger-for]="menu" class="avatar">
                 <img src="{{user.avatar(32)}}" alt="{{user.name}}">
             </div>

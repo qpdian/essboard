@@ -104,9 +104,12 @@ md-input.ng-pristine {
   background-color: transparent;
 }
 /* buttons*/
+
+
 .main{
     background-color: #7cb987;
     color: white;
+    margin:auto;
 }
 
 /* essence color */

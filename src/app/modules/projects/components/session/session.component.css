@@ -1,10 +1,5 @@
 
 
-.main{
-    background-color: #7cb987;
-    color: white;
-    margin:auto;
-}
 .project-detail span{
     margin-right: 10px;
 }
@@ -32,6 +27,17 @@
     font-size: 13px;
     font-weight: 400;
     vertical-align: middle;
+}
+.dimension-name:visited{
+  background-color: red;
+}
+.dimension-name:focus{
+   background-color: green;
+  
+}
+.dimension-name:hover{
+   background-color: yellow;
+  
 }
 
 
@@ -102,5 +108,5 @@ state-card{
 }
 
 .content{
-
+  min-height: 400px;
 }

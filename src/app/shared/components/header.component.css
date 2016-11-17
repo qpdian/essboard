@@ -20,16 +20,17 @@
    height:100%;
 }
 
-.option-isLoggin{
-    right: 50px;
+.fill-remaining{
+    flex: 1 1 auto;
+}
+.isLogged{
+    right: 100px;
     position: absolute;
 }
-
-.option-noLoggin{
+.noLoggin{
     position: absolute;
-    right: 105px;
+    right: 30px;
 }
-
 .menu{
     margin: auto;
     background-color: transparent;

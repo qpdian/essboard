@@ -1,9 +1,8 @@
 
 
-import { Component, OnInit, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy, Input} from '@angular/core';
 
-
+declare var Trello: any;
 
 @Component({
     selector: 'trello',
